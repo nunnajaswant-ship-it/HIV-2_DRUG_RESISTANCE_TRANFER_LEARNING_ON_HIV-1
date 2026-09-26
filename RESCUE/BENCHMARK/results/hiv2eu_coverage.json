@@ -1,0 +1,108 @@
+{
+  "measured_panel": {
+    "n_rows": 160,
+    "n_sequences": 19,
+    "unscored_pct": 83.1,
+    "norule_drug_pct": 50.0,
+    "per_drug": {
+      "ATV/r": {
+        "n": 40,
+        "no_rule_pct": 0.0,
+        "norule_scope_pct": 100.0,
+        "resistant_n": 0,
+        "possible_n": 0
+      },
+      "DRV/r": {
+        "n": 40,
+        "no_rule_pct": 70.0,
+        "norule_scope_pct": 0.0,
+        "resistant_n": 10,
+        "possible_n": 2
+      },
+      "LPV/r": {
+        "n": 40,
+        "no_rule_pct": 62.5,
+        "norule_scope_pct": 0.0,
+        "resistant_n": 11,
+        "possible_n": 4
+      },
+      "SQV/r": {
+        "n": 40,
+        "no_rule_pct": 0.0,
+        "norule_scope_pct": 100.0,
+        "resistant_n": 0,
+        "possible_n": 0
+      }
+    },
+    "distinct_observed_mutations": 37,
+    "mutations_in_hiv2eu_vocab": 5,
+    "covered_list": [
+      "I54M",
+      "I82F",
+      "I84V",
+      "L90M",
+      "V47A"
+    ],
+    "coverage_pct": 13.5,
+    "uncovered_list": [
+      "A34E",
+      "A73G",
+      "A92E",
+      "A92S",
+      "E63N",
+      "F85L",
+      "G17D",
+      "G17N",
+      "I46V",
+      "I64V",
+      "I75M",
+      "I89L",
+      "I89V",
+      "K60H",
+      "K70R",
+      "K70T",
+      "M95I",
+      "N40D",
+      "N40P",
+      "N41D",
+      "N41Y",
+      "S43I",
+      "S43T",
+      "T12Q",
+      "T56V",
+      "T74N",
+      "V10I",
+      "V33I",
+      "V62I",
+      "V71I",
+      "Y14H",
+      "Y14R"
+    ]
+  },
+  "clinical_panel": {
+    "n_drugs": 8,
+    "drugs": [
+      "ATV/r",
+      "DRV/r",
+      "FPV/r",
+      "IDV/r",
+      "LPV/r",
+      "NFV",
+      "SQV/r",
+      "TPV/r"
+    ],
+    "drugs_with_hiv2eu_pi_rules": [
+      "DRV/r",
+      "LPV/r"
+    ],
+    "drugs_without_rules": [
+      "ATV/r",
+      "FPV/r",
+      "IDV/r",
+      "NFV",
+      "SQV/r",
+      "TPV/r"
+    ],
+    "pct_drugs_without_rules": 75.0
+  }
+}

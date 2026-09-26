@@ -1,0 +1,46 @@
+{
+  "n_rows": 160,
+  "n_sequences": 19,
+  "per_drug": {
+    "ATV/r": {
+      "n": 40,
+      "model_r": 0.6123,
+      "rule_r": 0.3907
+    },
+    "DRV/r": {
+      "n": 40,
+      "model_r": 0.8273,
+      "rule_r": 0.5406
+    },
+    "LPV/r": {
+      "n": 40,
+      "model_r": 0.544,
+      "rule_r": 0.3929
+    },
+    "SQV/r": {
+      "n": 40,
+      "model_r": 0.7046,
+      "rule_r": 0.5624
+    }
+  },
+  "pooled": {
+    "n": 160,
+    "model_r": 0.7018,
+    "rule_r": 0.4724,
+    "difference": 0.2293,
+    "boot_model_ci": [
+      0.5563,
+      0.7977
+    ],
+    "boot_rule_ci": [
+      0.2923,
+      0.6426
+    ],
+    "boot_diff_ci": [
+      0.0602,
+      0.4079
+    ],
+    "boot_p_diff_le_0": 0.001,
+    "n_boot": 1999
+  }
+}

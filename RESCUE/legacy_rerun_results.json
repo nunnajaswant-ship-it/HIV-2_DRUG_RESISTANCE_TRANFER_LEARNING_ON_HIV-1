@@ -1,0 +1,628 @@
+{
+  "pipeline": "RESCUE/rerun_legacy_numbers.py",
+  "timestamp": "2026-08-16 14:24:23",
+  "input_hashes": {
+    "STANFORD_HIV1_GENUINE.csv": "692e3d2b3ffcd43bd186458a97a9b572c7b6c9f0287ff9f51f3aeb75bcca9ab0",
+    "STANFORD_HIV1_SYNTHETIC_QUARANTINED.csv": "46afba37667bb6366fc6161e09d2e99766632bf6ca918a7fb0bf25d1b52f8d40",
+    "HIV2_PROTEASE_ML_READY_DATASET.csv": "7f34b7a2b467e5eadd2e02aa3ee141a749e93aa4cd99145858b9dafded9b093d"
+  },
+  "seed": 42,
+  "feature_space": "2079-D biochem (Z3+K10+VHSE8 x99, include_stats=False)",
+  "rf_params": {
+    "n_estimators": 600,
+    "max_depth": 20,
+    "min_samples_leaf": 2,
+    "min_samples_split": 5,
+    "max_features": "sqrt",
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "xgb_params": {
+    "n_estimators": 800,
+    "max_depth": 6,
+    "learning_rate": 0.03,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_alpha": 0.1,
+    "reg_lambda": 2.0,
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "wildtype_references": "opencode_shared/config.py (HIV2_WT ROD A92, HIV1_WT HXB2)",
+  "corpus": {
+    "genuine_rows_trained": 5683,
+    "synthetic_rows_excluded": 1500,
+    "hiv2_test_rows": 137
+  },
+  "within_species_grouped_cv": {
+    "rf": {
+      "mean_pearson_r": 0.7387,
+      "std_pearson_r": 0.0472,
+      "per_fold": [
+        0.8181,
+        0.7371,
+        0.7498,
+        0.7138,
+        0.6749
+      ]
+    },
+    "xgb": {
+      "mean_pearson_r": 0.7348,
+      "std_pearson_r": 0.0478,
+      "per_fold": [
+        0.8133,
+        0.7387,
+        0.7484,
+        0.702,
+        0.6718
+      ]
+    },
+    "note": "Grouped CV at 95% identity, seed 42. Legacy manuscript ceiling 0.759+-0.017 was UNGROUPED KFold(5) on the poisoned 7,183-row corpus."
+  },
+  "zero_shot_cross_species": {
+    "rf": {
+      "n": 137,
+      "pearson_r": 0.5163,
+      "pearson_p": 1.0655435727247067e-10,
+      "spearman_rho": 0.5247,
+      "rmse": 1.5986,
+      "mae": 1.2872,
+      "r2": -0.1096,
+      "transfer_ratio_vs_within": 0.699
+    },
+    "xgb": {
+      "n": 137,
+      "pearson_r": 0.5587,
+      "pearson_p": 1.2971433822894785e-12,
+      "spearman_rho": 0.5218,
+      "rmse": 1.7626,
+      "mae": 1.4238,
+      "r2": -0.3489,
+      "transfer_ratio_vs_within": 0.76
+    },
+    "simple_ensemble": {
+      "n": 137,
+      "pearson_r": 0.5467,
+      "pearson_p": 4.81635093689679e-12,
+      "spearman_rho": 0.5187,
+      "rmse": 1.6679,
+      "mae": 1.335,
+      "r2": -0.208
+    },
+    "ridge_meta_ensemble": {
+      "n": 137,
+      "pearson_r": 0.5818,
+      "pearson_p": 8.930152488794904e-14,
+      "spearman_rho": 0.5496,
+      "rmse": 1.3794,
+      "mae": 1.166,
+      "r2": 0.1739,
+      "ridge_alpha": 10.0
+    },
+    "legacy_values": {
+      "xgb_cross_species": 0.449,
+      "ensemble_cross_species": 0.458,
+      "stacked_xgb": 0.4893,
+      "stacked_simple": 0.5017,
+      "stacked_ridge": 0.4853,
+      "note": "Legacy ensemble numbers were computed on the poisoned 7,183-row corpus; legacy stacked used biochem+BERT (3103-D). Honest runs use genuine-only 2,079-D biochem (BERT unavailable: GENUINE BERT cols are all-null)."
+    }
+  },
+  "per_drug_zero_shot": {
+    "per_drug": {
+      "AMPRENAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.756,
+          "pearson_p": 0.0004471977985033615,
+          "spearman_rho": 0.6065,
+          "rmse": 2.0646,
+          "mae": 1.9656,
+          "r2": -4.546
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.7986,
+          "pearson_p": 0.00012112875992897898,
+          "spearman_rho": 0.7346,
+          "rmse": 2.3891,
+          "mae": 2.3286,
+          "r2": -6.4269
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.7886,
+          "pearson_p": 0.00016890520395618387,
+          "spearman_rho": 0.7038,
+          "rmse": 2.2218,
+          "mae": 2.1471,
+          "r2": -5.4227
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.8151,
+          "pearson_p": 6.716437928844243e-05,
+          "spearman_rho": 0.694,
+          "rmse": 1.2225,
+          "mae": 1.0218,
+          "r2": -0.9447
+        }
+      },
+      "ATAZANAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.4252,
+          "pearson_p": 0.08889761164079685,
+          "spearman_rho": 0.4951,
+          "rmse": 0.792,
+          "mae": 0.5781,
+          "r2": -0.0696
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.5621,
+          "pearson_p": 0.01884579472243786,
+          "spearman_rho": 0.5321,
+          "rmse": 0.9906,
+          "mae": 0.8127,
+          "r2": -0.6734
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.5126,
+          "pearson_p": 0.03537724448225456,
+          "spearman_rho": 0.5272,
+          "rmse": 0.8691,
+          "mae": 0.6536,
+          "r2": -0.288
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.548,
+          "pearson_p": 0.022766264155507088,
+          "spearman_rho": 0.5124,
+          "rmse": 0.868,
+          "mae": 0.7557,
+          "r2": -0.2848
+        }
+      },
+      "DARUNAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.6992,
+          "pearson_p": 0.0017877401663405814,
+          "spearman_rho": 0.672,
+          "rmse": 1.1672,
+          "mae": 1.0687,
+          "r2": 0.3037
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.723,
+          "pearson_p": 0.0010407775407657027,
+          "spearman_rho": 0.5794,
+          "rmse": 1.0631,
+          "mae": 0.9345,
+          "r2": 0.4224
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.7198,
+          "pearson_p": 0.0011222837436208831,
+          "spearman_rho": 0.593,
+          "rmse": 1.0942,
+          "mae": 1.0016,
+          "r2": 0.3881
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.7647,
+          "pearson_p": 0.0003498585429042578,
+          "spearman_rho": 0.6362,
+          "rmse": 1.6348,
+          "mae": 1.2832,
+          "r2": -0.3658
+        }
+      },
+      "Experimental PI / Analogue": {
+        "n": 1,
+        "note": "n<5, R not reported"
+      },
+      "INDINAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.6044,
+          "pearson_p": 0.010180032081592832,
+          "spearman_rho": 0.5436,
+          "rmse": 1.845,
+          "mae": 1.5301,
+          "r2": 0.0326
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.6329,
+          "pearson_p": 0.006398841738700867,
+          "spearman_rho": 0.4625,
+          "rmse": 1.9432,
+          "mae": 1.4962,
+          "r2": -0.0732
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.627,
+          "pearson_p": 0.007061358670657596,
+          "spearman_rho": 0.4367,
+          "rmse": 1.8818,
+          "mae": 1.4955,
+          "r2": -0.0064
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.6724,
+          "pearson_p": 0.003107337048277259,
+          "spearman_rho": 0.4945,
+          "rmse": 1.7093,
+          "mae": 1.5813,
+          "r2": 0.1697
+        }
+      },
+      "LOPINAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.5625,
+          "pearson_p": 0.018735976002718212,
+          "spearman_rho": 0.6843,
+          "rmse": 0.7222,
+          "mae": 0.4433,
+          "r2": 0.3011
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.7117,
+          "pearson_p": 0.0013536799233406782,
+          "spearman_rho": 0.8927,
+          "rmse": 0.7413,
+          "mae": 0.4628,
+          "r2": 0.2638
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.6587,
+          "pearson_p": 0.004037895258291227,
+          "spearman_rho": 0.8592,
+          "rmse": 0.6976,
+          "mae": 0.377,
+          "r2": 0.3481
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.6539,
+          "pearson_p": 0.004405772779136896,
+          "spearman_rho": 0.7637,
+          "rmse": 1.1346,
+          "mae": 1.09,
+          "r2": -0.7247
+        }
+      },
+      "NELFINAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.6762,
+          "pearson_p": 0.0028790317993153945,
+          "spearman_rho": 0.565,
+          "rmse": 1.8044,
+          "mae": 1.3568,
+          "r2": -0.4958
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.6975,
+          "pearson_p": 0.0018560058670118451,
+          "spearman_rho": 0.6352,
+          "rmse": 2.022,
+          "mae": 1.6731,
+          "r2": -0.8783
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.6951,
+          "pearson_p": 0.0019532519417359015,
+          "spearman_rho": 0.6636,
+          "rmse": 1.9035,
+          "mae": 1.4916,
+          "r2": -0.6646
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.7602,
+          "pearson_p": 0.00039703777292743325,
+          "spearman_rho": 0.7474,
+          "rmse": 1.3298,
+          "mae": 1.1479,
+          "r2": 0.1876
+        }
+      },
+      "SAQUINAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.5637,
+          "pearson_p": 0.01843694398466494,
+          "spearman_rho": 0.6102,
+          "rmse": 2.031,
+          "mae": 1.7494,
+          "r2": 0.0287
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.6036,
+          "pearson_p": 0.010304051451385021,
+          "spearman_rho": 0.5942,
+          "rmse": 2.1111,
+          "mae": 1.6919,
+          "r2": -0.0494
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.593,
+          "pearson_p": 0.012112512010096105,
+          "spearman_rho": 0.582,
+          "rmse": 2.0595,
+          "mae": 1.7143,
+          "r2": 0.0012
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.6479,
+          "pearson_p": 0.004916836973279715,
+          "spearman_rho": 0.6114,
+          "rmse": 1.899,
+          "mae": 1.826,
+          "r2": 0.1509
+        }
+      },
+      "TIPRANAVIR": {
+        "n": 17,
+        "rf": {
+          "n": 17,
+          "pearson_r": 0.6976,
+          "pearson_p": 0.0018492822361375117,
+          "spearman_rho": 0.5695,
+          "rmse": 1.7279,
+          "mae": 1.6264,
+          "r2": -3.8204
+        },
+        "xgb": {
+          "n": 17,
+          "pearson_r": 0.757,
+          "pearson_p": 0.000434292625868693,
+          "spearman_rho": 0.6495,
+          "rmse": 2.0549,
+          "mae": 1.9894,
+          "r2": -5.8174
+        },
+        "simple_ensemble": {
+          "n": 17,
+          "pearson_r": 0.74,
+          "pearson_p": 0.0006834440557008882,
+          "spearman_rho": 0.6382,
+          "rmse": 1.8855,
+          "mae": 1.8079,
+          "r2": -4.7398
+        },
+        "ridge_meta_ensemble": {
+          "n": 17,
+          "pearson_r": 0.7677,
+          "pearson_p": 0.0003204655949957669,
+          "spearman_rho": 0.6307,
+          "rmse": 0.91,
+          "mae": 0.6826,
+          "r2": -0.3371
+        }
+      }
+    },
+    "legacy_values": {
+      "per_drug_n": 40,
+      "source": "Tier5_per_drug_results.json / per_drug_results.csv (poisoned 7,183-row train, n=40 per drug on 321-row test)",
+      "example_AMP_legacy": {
+        "rf": 0.4621,
+        "xgb": 0.4462,
+        "simple": 0.4868,
+        "ridge": 0.4996
+      }
+    }
+  },
+  "pocket_zero_shot": {
+    "feature_dim": 336,
+    "pocket_residues": [
+      8,
+      23,
+      25,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      47,
+      48,
+      49,
+      50,
+      81,
+      82,
+      84
+    ],
+    "rf": {
+      "n": 137,
+      "pearson_r": 0.4056,
+      "pearson_p": 8.790397253146946e-07,
+      "spearman_rho": 0.4599,
+      "rmse": 1.5436,
+      "mae": 1.2858,
+      "r2": -0.0345
+    },
+    "xgb": {
+      "n": 137,
+      "pearson_r": 0.4288,
+      "pearson_p": 1.7198183854816307e-07,
+      "spearman_rho": 0.4636,
+      "rmse": 1.5872,
+      "mae": 1.3078,
+      "r2": -0.0938
+    },
+    "legacy": {
+      "tier2_pocket_rf_zero_shot": 0.3909,
+      "source": "Tier2_pocket_rf_xgboost_results.json, poisoned corpus, 321-row test"
+    }
+  },
+  "exp3_mutagenesis": {
+    "n_divergent_positions": 51,
+    "wildtype_dG_pred": -9.9851,
+    "top20_by_abs_deltadg": [
+      {
+        "position": 47,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "I",
+        "delta_dg": -0.2553
+      },
+      {
+        "position": 71,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "A",
+        "delta_dg": -0.1334
+      },
+      {
+        "position": 73,
+        "hiv2_aa": "A",
+        "to_hiv1_aa": "G",
+        "delta_dg": -0.085
+      },
+      {
+        "position": 93,
+        "hiv2_aa": "L",
+        "to_hiv1_aa": "I",
+        "delta_dg": 0.0802
+      },
+      {
+        "position": 20,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "K",
+        "delta_dg": -0.0622
+      },
+      {
+        "position": 43,
+        "hiv2_aa": "S",
+        "to_hiv1_aa": "K",
+        "delta_dg": -0.0487
+      },
+      {
+        "position": 89,
+        "hiv2_aa": "I",
+        "to_hiv1_aa": "L",
+        "delta_dg": -0.0404
+      },
+      {
+        "position": 82,
+        "hiv2_aa": "I",
+        "to_hiv1_aa": "V",
+        "delta_dg": -0.0316
+      },
+      {
+        "position": 39,
+        "hiv2_aa": "G",
+        "to_hiv1_aa": "P",
+        "delta_dg": 0.0305
+      },
+      {
+        "position": 58,
+        "hiv2_aa": "E",
+        "to_hiv1_aa": "Q",
+        "delta_dg": -0.0269
+      },
+      {
+        "position": 13,
+        "hiv2_aa": "A",
+        "to_hiv1_aa": "I",
+        "delta_dg": -0.0238
+      },
+      {
+        "position": 22,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "A",
+        "delta_dg": -0.0221
+      },
+      {
+        "position": 33,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "L",
+        "delta_dg": -0.0206
+      },
+      {
+        "position": 36,
+        "hiv2_aa": "I",
+        "to_hiv1_aa": "M",
+        "delta_dg": -0.0196
+      },
+      {
+        "position": 68,
+        "hiv2_aa": "N",
+        "to_hiv1_aa": "G",
+        "delta_dg": 0.0159
+      },
+      {
+        "position": 95,
+        "hiv2_aa": "M",
+        "to_hiv1_aa": "C",
+        "delta_dg": -0.0156
+      },
+      {
+        "position": 10,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "L",
+        "delta_dg": 0.0146
+      },
+      {
+        "position": 62,
+        "hiv2_aa": "V",
+        "to_hiv1_aa": "I",
+        "delta_dg": 0.0144
+      },
+      {
+        "position": 41,
+        "hiv2_aa": "N",
+        "to_hiv1_aa": "R",
+        "delta_dg": -0.0137
+      },
+      {
+        "position": 63,
+        "hiv2_aa": "E",
+        "to_hiv1_aa": "L",
+        "delta_dg": 0.013
+      }
+    ],
+    "legacy": {
+      "K7Q_legacy": 1.4871,
+      "source": "Tier5_comprehensive_results.json exp3_wildtype_substitution (poisoned corpus)"
+    }
+  },
+  "protbert_disposition": {
+    "decision": "NOT_RERUN",
+    "reason": "ProtBERT embeddings are unavailable on the honest corpora: (1) GENUINE.csv BERT_1..1024 columns are all-NULL (verified); (2) HIV2_PROTEASE_ML_READY_DATASET.csv has NO BERT columns (verified, 0 of 3639); (3) on-disk BERT_FEATURES CSVs are keyed by PDB IDs (e.g. 6B36_1|Chains) with no verified mapping to the corpus; (4) honest re-extraction requires Rostlab/prot_bert download + GPU/Colab inference (torch 2.10.0+cpu, cuda=False) -> D1-class infeasibility, documented, not rerun.",
+    "legacy_values": {
+      "cross_species_bert_only": 0.1632,
+      "within_species_bert_only": 0.617,
+      "combined_3103D": 0.4753
+    }
+  },
+  "gnn_dbpt_disposition": {
+    "decision": "NOT_RERUN (already D1 in metrics_reruns.json)",
+    "reason": "torch is CPU-only; GNN/DBPT+ are days of GPU compute. Legacy zero-shot values were already near-zero or negative (GNN R=-0.1709, DBPT+ R=0.2122)."
+  },
+  "run_seconds": 118.8
+}

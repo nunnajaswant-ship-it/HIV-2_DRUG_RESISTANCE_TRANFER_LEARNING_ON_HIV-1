@@ -1,0 +1,379 @@
+{
+  "version": "v3",
+  "data_stats": {
+    "hiv1_n": 5683,
+    "hiv2_chembl_n": 320,
+    "hiv2_common4_n": 160,
+    "common_drugs": [
+      "ATV/r",
+      "DRV/r",
+      "LPV/r",
+      "SQV/r"
+    ]
+  },
+  "biochem_dim": 2121,
+  "esm2_pocket_dim": 1280,
+  "part8_weighted_blend": {
+    "ATV/r": {
+      "n": 40,
+      "pearson_r": 0.5995108550491037,
+      "spearman_rho": 0.5646348938328144,
+      "rmse": 1.3328094822689553,
+      "mae": 1.1395242633652345,
+      "ci_pearson_lo": 0.3499598462451132,
+      "ci_pearson_hi": 0.7856447030397558,
+      "blend_weight_biochem_mean": 0.74
+    },
+    "DRV/r": {
+      "n": 40,
+      "pearson_r": 0.8119372393858182,
+      "spearman_rho": 0.7385979917292503,
+      "rmse": 1.0093262617475718,
+      "mae": 0.8486853226354096,
+      "ci_pearson_lo": 0.7333510908448495,
+      "ci_pearson_hi": 0.8831060389056796,
+      "blend_weight_biochem_mean": 0.4
+    },
+    "LPV/r": {
+      "n": 40,
+      "pearson_r": 0.5455656523038594,
+      "spearman_rho": 0.4897288943223479,
+      "rmse": 1.0390234335061082,
+      "mae": 0.9439973305010568,
+      "ci_pearson_lo": 0.31678861909664424,
+      "ci_pearson_hi": 0.6932527863545701,
+      "blend_weight_biochem_mean": 0.26000000000000006
+    },
+    "SQV/r": {
+      "n": 40,
+      "pearson_r": 0.7051589052143556,
+      "spearman_rho": 0.6066316411747312,
+      "rmse": 1.8821211452915596,
+      "mae": 1.3942849491209284,
+      "ci_pearson_lo": 0.48735655711030634,
+      "ci_pearson_hi": 0.8628730014483474,
+      "blend_weight_biochem_mean": 0.96
+    },
+    "MEAN": {
+      "n": 160,
+      "pearson_r": 0.696667005390746,
+      "spearman_rho": 0.7189014268608372,
+      "rmse": 1.3617149407647515,
+      "mae": 1.0816229664056576,
+      "ci_pearson_lo": 0.619116655136859,
+      "ci_pearson_hi": 0.7835528658037618
+    }
+  },
+  "part9_transfer_finetune_biochem": {
+    "ATV/r": {
+      "n": 40,
+      "pearson_r": 0.6125241227784359,
+      "spearman_rho": 0.5602115518859617,
+      "rmse": 1.317029870728524,
+      "mae": 1.1177882834362098,
+      "ci_pearson_lo": 0.3817093659869277,
+      "ci_pearson_hi": 0.7927538697215757
+    },
+    "DRV/r": {
+      "n": 40,
+      "pearson_r": 0.8272162442759051,
+      "spearman_rho": 0.7432952570035397,
+      "rmse": 0.9747549443141339,
+      "mae": 0.7968451503355009,
+      "ci_pearson_lo": 0.7498465415283583,
+      "ci_pearson_hi": 0.8949861774514759
+    },
+    "LPV/r": {
+      "n": 40,
+      "pearson_r": 0.5440045395407516,
+      "spearman_rho": 0.4706418317232432,
+      "rmse": 1.0471735964647817,
+      "mae": 0.9480728249594312,
+      "ci_pearson_lo": 0.3023814412800237,
+      "ci_pearson_hi": 0.6976411716180105
+    },
+    "SQV/r": {
+      "n": 40,
+      "pearson_r": 0.7047851255356992,
+      "spearman_rho": 0.5995870684274827,
+      "rmse": 1.8829096920192203,
+      "mae": 1.3942007389976145,
+      "ci_pearson_lo": 0.48923189146528906,
+      "ci_pearson_hi": 0.8578703701180518
+    },
+    "MEAN": {
+      "n": 160,
+      "pearson_r": 0.7018426290375417,
+      "spearman_rho": 0.7218051700005419,
+      "rmse": 1.3533880015805653,
+      "mae": 1.064226749432189,
+      "ci_pearson_lo": 0.6245993886058396,
+      "ci_pearson_hi": 0.7886910332252727
+    }
+  },
+  "part10_selection": {
+    "keep_0.25": {
+      "keep_frac": 0.25,
+      "k_selected": 850,
+      "biochem_dims_selected": 95,
+      "esm2_pocket_dims_selected": 755,
+      "full_dim": 3401
+    },
+    "keep_0.25_results": {
+      "ATV/r": {
+        "n": 40,
+        "pearson_r": 0.5901359492909888,
+        "spearman_rho": 0.4916026948805244,
+        "rmse": 1.3429408619280703,
+        "mae": 1.1460924423475598,
+        "ci_pearson_lo": 0.34297648629043964,
+        "ci_pearson_hi": 0.7763613201012394
+      },
+      "DRV/r": {
+        "n": 40,
+        "pearson_r": 0.8173025216017324,
+        "spearman_rho": 0.7370009215359921,
+        "rmse": 0.9975191293476596,
+        "mae": 0.8383947543111934,
+        "ci_pearson_lo": 0.7395113884747109,
+        "ci_pearson_hi": 0.8855036833296881
+      },
+      "LPV/r": {
+        "n": 40,
+        "pearson_r": 0.5550637145858293,
+        "spearman_rho": 0.5124829295390145,
+        "rmse": 1.027454066880694,
+        "mae": 0.9308202699150593,
+        "ci_pearson_lo": 0.34017268906659753,
+        "ci_pearson_hi": 0.6979768907615278
+      },
+      "SQV/r": {
+        "n": 40,
+        "pearson_r": 0.6659296266782408,
+        "spearman_rho": 0.5844647189300557,
+        "rmse": 1.981569088168522,
+        "mae": 1.4583549501476045,
+        "ci_pearson_lo": 0.44676931142608123,
+        "ci_pearson_hi": 0.8527503407472079
+      },
+      "MEAN": {
+        "n": 160,
+        "pearson_r": 0.677497426805639,
+        "spearman_rho": 0.703185155309139,
+        "rmse": 1.3947053884947644,
+        "mae": 1.0934156041803544,
+        "ci_pearson_lo": 0.5999920363255254,
+        "ci_pearson_hi": 0.7719120370792523
+      }
+    },
+    "keep_0.50": {
+      "keep_frac": 0.5,
+      "k_selected": 1700,
+      "biochem_dims_selected": 420,
+      "esm2_pocket_dims_selected": 1280,
+      "full_dim": 3401
+    },
+    "keep_0.50_results": {
+      "ATV/r": {
+        "n": 40,
+        "pearson_r": 0.5884361485466454,
+        "spearman_rho": 0.4725917358749025,
+        "rmse": 1.3444229205331717,
+        "mae": 1.1489515359238052,
+        "ci_pearson_lo": 0.3374862554465321,
+        "ci_pearson_hi": 0.7761202628300016
+      },
+      "DRV/r": {
+        "n": 40,
+        "pearson_r": 0.8156350278595066,
+        "spearman_rho": 0.7413224055883382,
+        "rmse": 1.0030893354943062,
+        "mae": 0.8383283703088829,
+        "ci_pearson_lo": 0.7348620882315918,
+        "ci_pearson_hi": 0.8826479164992191
+      },
+      "LPV/r": {
+        "n": 40,
+        "pearson_r": 0.5591541115415551,
+        "spearman_rho": 0.5166200268511357,
+        "rmse": 1.0214062436995826,
+        "mae": 0.9260289003282475,
+        "ci_pearson_lo": 0.3517275479220343,
+        "ci_pearson_hi": 0.6996801225867609
+      },
+      "SQV/r": {
+        "n": 40,
+        "pearson_r": 0.6627276602522889,
+        "spearman_rho": 0.5712209221652284,
+        "rmse": 1.988865426775083,
+        "mae": 1.4803942931272616,
+        "ci_pearson_lo": 0.44527566463594154,
+        "ci_pearson_hi": 0.8465989170495265
+      },
+      "MEAN": {
+        "n": 160,
+        "pearson_r": 0.6758930921192475,
+        "spearman_rho": 0.7013162645958007,
+        "rmse": 1.3975440605511402,
+        "mae": 1.0984257749220494,
+        "ci_pearson_lo": 0.601048236067184,
+        "ci_pearson_hi": 0.7720929935281166
+      }
+    }
+  },
+  "part11_onion_biochem_base": {
+    "n_rows": 160,
+    "n_structures": 19,
+    "feature_dim": 10478,
+    "base": {
+      "n": 160,
+      "pearson_r": 0.6824012898557283,
+      "spearman_rho": 0.679264652034486,
+      "rmse": 1.394353077085046,
+      "mae": 1.0543687245698412,
+      "ci_pearson_lo": 0.5796506619833505,
+      "ci_pearson_hi": 0.7690336749431657
+    },
+    "residual": {
+      "n": 160,
+      "pearson_r": 0.16319350889884018,
+      "spearman_rho": 0.2596298676547993,
+      "rmse": 1.3812000805160936,
+      "mae": 1.0140966155001616,
+      "ci_pearson_lo": -0.07036315687926083,
+      "ci_pearson_hi": 0.3966870039988545
+    },
+    "corrected": {
+      "n": 160,
+      "pearson_r": 0.691031353646395,
+      "spearman_rho": 0.70950970798612,
+      "rmse": 1.3812000805160936,
+      "mae": 1.0140966155001618,
+      "ci_pearson_lo": 0.5748562853042087,
+      "ci_pearson_hi": 0.7960113777369521
+    },
+    "per_drug_corrected": {
+      "ATV/r": {
+        "n": 40,
+        "pearson_r": 0.6633947596586052,
+        "spearman_rho": 0.7112425989783817,
+        "rmse": 1.2585094850024454,
+        "mae": 1.010357391928777,
+        "ci_pearson_lo": 0.5561315425749166,
+        "ci_pearson_hi": 0.7641166475429872
+      },
+      "DRV/r": {
+        "n": 40,
+        "pearson_r": 0.8712936371759595,
+        "spearman_rho": 0.82083018039437,
+        "rmse": 0.8460888651228318,
+        "mae": 0.7164238310332773,
+        "ci_pearson_lo": 0.8183993601414473,
+        "ci_pearson_hi": 0.9221084792390286
+      },
+      "LPV/r": {
+        "n": 40,
+        "pearson_r": 0.5780832757815269,
+        "spearman_rho": 0.5733507512371284,
+        "rmse": 1.2158244452316147,
+        "mae": 0.9362285930557495,
+        "ci_pearson_lo": 0.3544376898240202,
+        "ci_pearson_hi": 0.7579967253458118
+      },
+      "SQV/r": {
+        "n": 40,
+        "pearson_r": 0.6782486760304448,
+        "spearman_rho": 0.6504159849714625,
+        "rmse": 1.9628838673039035,
+        "mae": 1.3933766459828427,
+        "ci_pearson_lo": 0.3800698881463526,
+        "ci_pearson_hi": 0.9190617454932867
+      }
+    }
+  },
+  "part12_summary": [
+    {
+      "method": "Transfer fine-tune (biochem + HIV-1 meta)",
+      "mean_pearson_r": 0.7018426290375417,
+      "source": "v3-P9"
+    },
+    {
+      "method": "Fine-tuned biochem (RF)",
+      "mean_pearson_r": 0.7014833927642524,
+      "source": "v2"
+    },
+    {
+      "method": "Weighted blend bio+esm2_pocket (P8)",
+      "mean_pearson_r": 0.696667005390746,
+      "source": "v3-P8"
+    },
+    {
+      "method": "ONION corrected (biochem base)",
+      "mean_pearson_r": 0.691031353646395,
+      "source": "v3-P11"
+    },
+    {
+      "method": "ONION corrected (combined_pocket base)",
+      "mean_pearson_r": 0.6881980811170854,
+      "source": "v2"
+    },
+    {
+      "method": "Fine-tuned combined_pocket (RF)",
+      "mean_pearson_r": 0.6781098236403589,
+      "source": "v2"
+    },
+    {
+      "method": "Supervised (combined_pocket)",
+      "mean_pearson_r": 0.677944224977264,
+      "source": "v2"
+    },
+    {
+      "method": "Selection top-25% combined_pocket (P10)",
+      "mean_pearson_r": 0.677497426805639,
+      "source": "v3-P10"
+    },
+    {
+      "method": "Selection top-50% combined_pocket (P10)",
+      "mean_pearson_r": 0.6758930921192475,
+      "source": "v3-P10"
+    },
+    {
+      "method": "Fine-tuned esm2_pocket (RF)",
+      "mean_pearson_r": 0.6721909016226623,
+      "source": "v2"
+    },
+    {
+      "method": "Pooled zero-shot legacy-comparable (R=0.5163 manuscript)",
+      "mean_pearson_r": 0.516277429551644,
+      "source": "v2"
+    },
+    {
+      "method": "Pooled zero-shot combined_pocket",
+      "mean_pearson_r": 0.4663055117490785,
+      "source": "v2"
+    },
+    {
+      "method": "Zero-shot (combined_pocket)",
+      "mean_pearson_r": 0.24923553972591386,
+      "source": "v2"
+    }
+  ],
+  "baselines_v2": {
+    "zero_shot_combined_pocket": 0.24923553972591386,
+    "transfer_finetune_combined_pocket": 0.6801178777069539,
+    "supervised_combined_pocket": 0.677944224977264,
+    "biochem_finetuned": 0.7014833927642524,
+    "esm2_pocket_finetuned": 0.6721909016226623,
+    "combined_pocket_finetuned": 0.6781098236403589,
+    "onion_corrected_combined_pocket_base": 0.6881980811170854,
+    "pooled_zero_shot_legacy": 0.516277429551644,
+    "pooled_zero_shot_combined_pocket": 0.4663055117490785,
+    "pocket_top5_positions": [
+      54,
+      84,
+      28,
+      48,
+      26
+    ]
+  }
+}

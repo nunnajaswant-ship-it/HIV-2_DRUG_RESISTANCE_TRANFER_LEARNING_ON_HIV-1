@@ -1,0 +1,669 @@
+{
+  "n_sequences_analyzed": 654,
+  "protease_length": 99,
+  "mean_conservation": 0.8446,
+  "median_conservation": 0.8508,
+  "std_conservation": 0.095,
+  "mean_entropy": 0.6718,
+  "most_conserved_top10": [
+    {
+      "position": 2,
+      "conservation": 1.0,
+      "wt": "Q"
+    },
+    {
+      "position": 5,
+      "conservation": 1.0,
+      "wt": "L"
+    },
+    {
+      "position": 3,
+      "conservation": 0.9893,
+      "wt": "F"
+    },
+    {
+      "position": 1,
+      "conservation": 0.9823,
+      "wt": "P"
+    },
+    {
+      "position": 6,
+      "conservation": 0.9795,
+      "wt": "W"
+    },
+    {
+      "position": 4,
+      "conservation": 0.978,
+      "wt": "S"
+    },
+    {
+      "position": 9,
+      "conservation": 0.9726,
+      "wt": "P"
+    },
+    {
+      "position": 23,
+      "conservation": 0.9705,
+      "wt": "L"
+    },
+    {
+      "position": 48,
+      "conservation": 0.9646,
+      "wt": "G"
+    },
+    {
+      "position": 8,
+      "conservation": 0.9628,
+      "wt": "R"
+    }
+  ],
+  "most_variable_top10": [
+    {
+      "position": 65,
+      "conservation": 0.5712,
+      "wt": "E"
+    },
+    {
+      "position": 14,
+      "conservation": 0.594,
+      "wt": "Y"
+    },
+    {
+      "position": 40,
+      "conservation": 0.6081,
+      "wt": "N"
+    },
+    {
+      "position": 70,
+      "conservation": 0.6221,
+      "wt": "K"
+    },
+    {
+      "position": 43,
+      "conservation": 0.6242,
+      "wt": "S"
+    },
+    {
+      "position": 92,
+      "conservation": 0.633,
+      "wt": "A"
+    },
+    {
+      "position": 68,
+      "conservation": 0.648,
+      "wt": "N"
+    },
+    {
+      "position": 41,
+      "conservation": 0.664,
+      "wt": "N"
+    },
+    {
+      "position": 91,
+      "conservation": 0.6764,
+      "wt": "T"
+    },
+    {
+      "position": 89,
+      "conservation": 0.6906,
+      "wt": "I"
+    }
+  ],
+  "positions_under_purifying_selection": {
+    "count": 34,
+    "percentage": 34.3,
+    "threshold": ">0.9 conservation"
+  },
+  "binding_site_conservation": {
+    "Active site (D25, D27)": {
+      "mean_conservation": 0.9188,
+      "positions": [
+        25,
+        27
+      ],
+      "n_positions": 2
+    },
+    "Flap region (45-55)": {
+      "mean_conservation": 0.8715,
+      "positions": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "n_positions": 11
+    },
+    "Dimer interface": {
+      "mean_conservation": 0.8814,
+      "positions": [
+        95,
+        96,
+        97,
+        98,
+        1
+      ],
+      "n_positions": 5
+    },
+    "Drug binding pocket": {
+      "mean_conservation": 0.9049,
+      "positions": [
+        8,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        47,
+        48,
+        49,
+        50,
+        81,
+        82,
+        84
+      ],
+      "n_positions": 16
+    },
+    "Critical HIV-2 positions (32,47,76,82)": {
+      "mean_conservation": 0.8512,
+      "positions": [
+        32,
+        47,
+        76,
+        82
+      ],
+      "n_positions": 4
+    },
+    "Known resistance positions": {
+      "mean_conservation": 0.8544,
+      "positions": [
+        10,
+        20,
+        23,
+        24,
+        30,
+        32,
+        47,
+        48,
+        50,
+        53,
+        54,
+        56,
+        62,
+        71,
+        73,
+        76,
+        82,
+        83,
+        84,
+        88,
+        89,
+        90,
+        99
+      ],
+      "n_positions": 23
+    },
+    "Full protease (1-99)": {
+      "mean_conservation": 0.8446,
+      "positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ],
+      "n_positions": 99
+    }
+  },
+  "mutation_classification": {
+    "known_resistance_count": 14,
+    "natural_polymorphism_count": 111,
+    "novel_count": 458,
+    "known_resistance_top10": [
+      {
+        "mutation": "I82F",
+        "position": 82,
+        "frequency": 31,
+        "pct": 4.74
+      },
+      {
+        "mutation": "L99F",
+        "position": 99,
+        "frequency": 27,
+        "pct": 4.7
+      },
+      {
+        "mutation": "L90M",
+        "position": 90,
+        "frequency": 26,
+        "pct": 3.98
+      },
+      {
+        "mutation": "I54M",
+        "position": 54,
+        "frequency": 24,
+        "pct": 3.67
+      },
+      {
+        "mutation": "V47A",
+        "position": 47,
+        "frequency": 16,
+        "pct": 2.45
+      },
+      {
+        "mutation": "I84V",
+        "position": 84,
+        "frequency": 9,
+        "pct": 1.38
+      },
+      {
+        "mutation": "T56V",
+        "position": 56,
+        "frequency": 6,
+        "pct": 0.92
+      },
+      {
+        "mutation": "V62A",
+        "position": 62,
+        "frequency": 5,
+        "pct": 0.76
+      },
+      {
+        "mutation": "N88D",
+        "position": 88,
+        "frequency": 2,
+        "pct": 0.31
+      },
+      {
+        "mutation": "I54V",
+        "position": 54,
+        "frequency": 1,
+        "pct": 0.15
+      }
+    ]
+  },
+  "hiv2_intrinsic_resistance": {
+    "documented_count": 12,
+    "polymorphisms": [
+      {
+        "mutation": "L10V",
+        "position": 10,
+        "hiv2_dominant_freq": 95.1,
+        "description": "HIV-2 naturally has V10 in many strains; HIV-1 L10V is a minor PI mutation",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "K20V",
+        "position": 20,
+        "hiv2_dominant_freq": 93.1,
+        "description": "HIV-2 has V at position 20 naturally",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "V32I",
+        "position": 32,
+        "hiv2_dominant_freq": 94.2,
+        "description": "HIV-2 wild-type has I32 at this position; HIV-1 V32I confers DRV/IDV resistance",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "I47V",
+        "position": 47,
+        "hiv2_dominant_freq": 88.7,
+        "description": "HIV-2 EU uses I47V as resistance; HIV-2 WT has V47 in some clades",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "V56T",
+        "position": 56,
+        "hiv2_dominant_freq": 89.4,
+        "description": "HIV-2 has T at position 56 naturally",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "I62V",
+        "position": 62,
+        "hiv2_dominant_freq": 87.3,
+        "description": "HIV-2 has V at position 62 naturally",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "A71V",
+        "position": 71,
+        "hiv2_dominant_freq": 79.1,
+        "description": "HIV-2 naturally has V71 in many strains; HIV-1 A71V is accessory",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "G73A",
+        "position": 73,
+        "hiv2_dominant_freq": 87.3,
+        "description": "HIV-2 has A73 commonly; HIV-1 G73S/T are minor PI mutations",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "L76M",
+        "position": 76,
+        "hiv2_dominant_freq": 88.4,
+        "description": "HIV-2 has M at position 76 naturally",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "V82I",
+        "position": 82,
+        "hiv2_dominant_freq": 87.5,
+        "description": "HIV-2 has I at position 82 naturally",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "L89I",
+        "position": 89,
+        "hiv2_dominant_freq": 74.0,
+        "description": "HIV-2 has I at position 89 naturally",
+        "in_hiv2eu_table": true
+      },
+      {
+        "mutation": "F99L",
+        "position": 99,
+        "hiv2_dominant_freq": 94.9,
+        "description": "HIV-2 has L at position 99 naturally",
+        "in_hiv2eu_table": true
+      }
+    ]
+  },
+  "subtype_analysis": {
+    "n_clusters": 573,
+    "clusters": [
+      {
+        "cluster_id": 19,
+        "size": 9,
+        "pct_of_total": 1.4,
+        "sample_indices": [
+          21,
+          49,
+          54,
+          132,
+          166
+        ]
+      },
+      {
+        "cluster_id": 104,
+        "size": 6,
+        "pct_of_total": 0.9,
+        "sample_indices": [
+          113,
+          198,
+          375,
+          388,
+          631
+        ]
+      },
+      {
+        "cluster_id": 277,
+        "size": 6,
+        "pct_of_total": 0.9,
+        "sample_indices": [
+          300,
+          302,
+          303,
+          425,
+          447
+        ]
+      },
+      {
+        "cluster_id": 215,
+        "size": 5,
+        "pct_of_total": 0.8,
+        "sample_indices": [
+          231,
+          289,
+          297,
+          330,
+          387
+        ]
+      },
+      {
+        "cluster_id": 253,
+        "size": 5,
+        "pct_of_total": 0.8,
+        "sample_indices": [
+          272,
+          304,
+          326,
+          338,
+          407
+        ]
+      },
+      {
+        "cluster_id": 116,
+        "size": 4,
+        "pct_of_total": 0.6,
+        "sample_indices": [
+          126,
+          130,
+          595,
+          637
+        ]
+      },
+      {
+        "cluster_id": 44,
+        "size": 3,
+        "pct_of_total": 0.5,
+        "sample_indices": [
+          47,
+          48,
+          588
+        ]
+      },
+      {
+        "cluster_id": 90,
+        "size": 3,
+        "pct_of_total": 0.5,
+        "sample_indices": [
+          97,
+          119,
+          311
+        ]
+      },
+      {
+        "cluster_id": 200,
+        "size": 3,
+        "pct_of_total": 0.5,
+        "sample_indices": [
+          216,
+          276,
+          410
+        ]
+      },
+      {
+        "cluster_id": 282,
+        "size": 3,
+        "pct_of_total": 0.5,
+        "sample_indices": [
+          308,
+          309,
+          310
+        ]
+      }
+    ]
+  },
+  "cross_resistance_correlation": {
+    "drugs": [
+      "ATV/r",
+      "DRV/r",
+      "FPV/r",
+      "IDV/r",
+      "LPV/r",
+      "SQV/r",
+      "TPV/r"
+    ],
+    "matrix": {
+      "ATV/r": {
+        "ATV/r": 1.0,
+        "DRV/r": 0.5971,
+        "FPV/r": 0.8078,
+        "IDV/r": 0.9667,
+        "LPV/r": 0.8787,
+        "SQV/r": 0.9263,
+        "TPV/r": 0.7931
+      },
+      "DRV/r": {
+        "ATV/r": 0.5971,
+        "DRV/r": 1.0,
+        "FPV/r": 0.9265,
+        "IDV/r": 0.6,
+        "LPV/r": 0.8252,
+        "SQV/r": 0.5343,
+        "TPV/r": 0.8588
+      },
+      "FPV/r": {
+        "ATV/r": 0.8078,
+        "DRV/r": 0.9265,
+        "FPV/r": 1.0,
+        "IDV/r": 0.832,
+        "LPV/r": 0.964,
+        "SQV/r": 0.7955,
+        "TPV/r": 0.8803
+      },
+      "IDV/r": {
+        "ATV/r": 0.9667,
+        "DRV/r": 0.6,
+        "FPV/r": 0.832,
+        "IDV/r": 1.0,
+        "LPV/r": 0.906,
+        "SQV/r": 0.9778,
+        "TPV/r": 0.7719
+      },
+      "LPV/r": {
+        "ATV/r": 0.8787,
+        "DRV/r": 0.8252,
+        "FPV/r": 0.964,
+        "IDV/r": 0.906,
+        "LPV/r": 1.0,
+        "SQV/r": 0.8714,
+        "TPV/r": 0.8192
+      },
+      "SQV/r": {
+        "ATV/r": 0.9263,
+        "DRV/r": 0.5343,
+        "FPV/r": 0.7955,
+        "IDV/r": 0.9778,
+        "LPV/r": 0.8714,
+        "SQV/r": 1.0,
+        "TPV/r": 0.6789
+      },
+      "TPV/r": {
+        "ATV/r": 0.7931,
+        "DRV/r": 0.8588,
+        "FPV/r": 0.8803,
+        "IDV/r": 0.7719,
+        "LPV/r": 0.8192,
+        "SQV/r": 0.6789,
+        "TPV/r": 1.0
+      }
+    }
+  }
+}

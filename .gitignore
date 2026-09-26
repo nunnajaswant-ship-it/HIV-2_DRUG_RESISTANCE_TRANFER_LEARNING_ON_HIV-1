@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Notebooks / editors
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# Large / regenerable intermediates
+*.npz
+!data/*.csv
+
+# Build artefacts
+build/
+dist/

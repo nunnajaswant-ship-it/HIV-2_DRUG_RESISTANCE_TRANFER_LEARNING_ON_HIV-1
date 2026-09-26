@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cross-species transfer learning from HIV-1 to HIV-2 for protease inhibitor resistance prediction: biophysical features and external clinical validation</title>
+<style>
+@page { size: A4; margin: 2.5cm 2cm 2.5cm 2cm; }
+body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.45; color: #000; counter-reset: section figure table; }
+h1 { font-size: 16pt; text-align: center; margin-top: 0; margin-bottom: 6pt; line-height: 1.2; }
+h2 { font-size: 13pt; margin-top: 18pt; margin-bottom: 6pt; border-bottom: 1px solid #333; padding-bottom: 3pt; }
+h3 { font-size: 11.5pt; margin-top: 14pt; margin-bottom: 4pt; font-style: italic; }
+h4 { font-size: 11pt; margin-top: 10pt; margin-bottom: 3pt; }
+p { text-align: justify; margin: 4pt 0; }
+.author-block { text-align: center; margin: 12pt 0 6pt 0; }
+.author-block p { text-align: center; margin: 2pt 0; font-size: 11pt; }
+.abstract-box { background: #f8f9fa; border: 1px solid #ccc; padding: 10pt 12pt; margin: 12pt 0; font-size: 10.5pt; }
+.abstract-box p { margin: 2pt 0; }
+.keywords { margin: 6pt 0; font-size: 10pt; }
+table { border-collapse: collapse; margin: 8pt auto; font-size: 9.5pt; width: 100%; }
+th, td { border: 1px solid #666; padding: 3pt 5pt; text-align: center; }
+th { background: #e9ecef; }
+.table-caption { font-size: 9.5pt; text-align: center; margin: 2pt 0 8pt 0; font-style: italic; }
+.figure-container { text-align: center; margin: 10pt 0; }
+.figure-caption { font-size: 9.5pt; text-align: justify; margin: 3pt 20pt; }
+.ref-list { font-size: 9.5pt; line-height: 1.3; }
+.ref-list p { text-align: left; margin: 2pt 0; padding-left: 18pt; text-indent: -18pt; }
+.supp-table { font-size: 9pt; }
+.title-note { font-size: 9pt; text-align: center; margin: 10pt 0; color: #555; }
+.correspondence { font-size: 9.5pt; text-align: center; margin: 4pt 0; }
+sup { font-size: 7.5pt; }
+</style>
+</head>
+<body>
+
+<h1>Cross-species transfer learning from HIV-1 to HIV-2 for protease inhibitor resistance prediction: biophysical features and external clinical validation</h1>
+
+<div class="author-block">
+<p><strong>Nunna Jaswanth Sriram</strong><sup>1,*</sup></p>
+<p><sup>1</sup> Department of Artificial Intelligence &amp; Engineering, Amrita Vishwa Vidyapeetham, Bengaluru, India</p>
+<p class="correspondence">* Corresponding author: <a href="mailto:bl.sc.u4aie24029@bl.students.amrita.edu">bl.sc.u4aie24029@bl.students.amrita.edu</a></p>
+<p class="title-note"><strong>Project Mentor:</strong> Dr. Vasavi, Department of AIE, Amrita Vishwa Vidyapeetham, Bengaluru</p>
+<p class="title-note"><strong>Article type:</strong> Original Research &nbsp;|&nbsp; <strong>Date:</strong> September 2026 &nbsp;|&nbsp; <strong>Classification:</strong> Computational Biology and Drug Resistance Prediction</p>
+</div>
+<!-- ABSTRACT -->
+<div class="abstract-box">
+<h3 style="margin-top:0; border:none; font-style:normal;">Abstract</h3>
+<p><strong>Motivation:</strong> HIV-2 infects 1&ndash;2 million people and is intrinsically resistant to several protease inhibitors, yet resistance-interpretation tools&mdash;including the Stanford HIV Drug Resistance Database (HIVDB) and the rule-based HIV-2EU&mdash;are calibrated on HIV-1. No machine-learning predictor of HIV-2 protease-inhibitor resistance exists.</p>
+<p><strong>Results:</strong> We present the first machine-learning predictor of HIV-2 protease-inhibitor resistance, built by cross-species transfer from HIV-1. Trained on 5,683 HIV-1 and 137 HIV-2 measured assays, never on an interpretation rule, it is evaluated on measured HIV-2 affinities and held-out clinical data. Despite ~50% protease divergence, zero-shot transfer predicts HIV-2 affinity (R=0.5163), and fine-tuning raises it to R=0.7018 (n=160; 95% CI 0.62&ndash;0.79), above an HIV-2-only model (0.6779). On that measured panel it significantly outperforms a Stanford-derived rule-based interpretation (0.7018 vs 0.4724; &Delta;R=+0.229; clustered paired bootstrap P(&Delta;R&le;0)=0.001); with only 19 unique sequences, robustness was confirmed by leave-one-sequence-out jackknife (model ahead in 100% of folds). The official HIV-2EU v4 rules are sparser still: no protease rules for 6 of 8 clinical drugs, 83.1% of the measured panel unscored, 5 of 37 mutations recognised. The clinical benchmark scores zero for 93.1% of isolates, yet the model retains significant correlation on the rows the rule leaves unranked (R=0.585, P&lt;0.001). Applied label-free to 2,616 never-seen clinical rows it recovers a positive, drug-dependent signal (R=0.36&ndash;0.62 per drug; ROC-AUC=0.927). We do not claim per-drug clinical superiority: within every drug the zero-shot baseline correlates more strongly, and the pooled advantage reflects calibration rather than accuracy.</p>
+<p><strong>Availability:</strong> All code, curated datasets, model definitions, and result manifests required to reproduce every table and figure are openly available at <a href="https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1">https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1</a>.</p>
+<p><strong>Contact:</strong> <a href="mailto:bl.sc.u4aie24029@bl.students.amrita.edu">bl.sc.u4aie24029@bl.students.amrita.edu</a></p>
+<p><strong>Supplementary information:</strong> Supplementary data are available at <em>Bioinformatics</em> online.</p>
+</div>
+<p class="keywords"><strong>Keywords:</strong> cross-species transfer learning &middot; HIV-2 &middot; drug resistance prediction &middot; protease inhibitor resistance &middot; biophysical features &middot; protein language model &middot; clinical validation</p>
+
+<!-- 1 INTRODUCTION -->
+<h2>1 Introduction</h2>
+<p>HIV-2 remains a significant public health burden in West Africa with an estimated 1&ndash;2 million people infected globally [1]. Unlike HIV-1, HIV-2 protease exhibits intrinsic resistance to amprenavir and rapidly acquires resistance to other protease inhibitors (PIs) through characteristic mutation pathways (I54M, V47A, L90M) [6]. Drug resistance interpretation algorithms&mdash;including the Stanford HIVDB [14]&mdash;are calibrated primarily on HIV-1, severely limiting their applicability to HIV-2 clinical management. Existing HIV-2-specific interpretation tools, such as HIV-2EU, remain rule-based [19]. No machine-learning or deep-learning model for HIV-2 PI resistance prediction has been published. The overall study design is summarised in Figure 1.</p>
+<p>Machine learning approaches for drug resistance prediction have focused almost exclusively on single-species HIV-1 models. Steiner <em>et al.</em> (2020) benchmarked CNN/MLP/BRNN architectures on HIV-1 PI data, achieving AUC &gt;0.90 [3]. Shen <em>et al.</em> (2016) demonstrated RF and KNN regression on HIV-1 with R&sup2;=0.77&ndash;0.95 [4]. PhenoGenX (2026) trained ensemble machine-learning models on 42,587 HIV-1 clinical isolates [5]. Riveros Maidana <em>et al.</em> (2025) benchmarked machine-learning models for HIV-1 PI resistance prediction, showing that dataset construction and feature representation materially affect reported performance [7]. Recent work on ESM-2-based benchmarks for HIV-1 drug resistance provides a methodological foundation [21]. Transfer learning has been applied within HIV-1&mdash;for example, Parbhoo <em>et al.</em> (2020) transferred genotypic signal from well-resourced to less-resourced HIV-1 populations [22]&mdash;but always between populations of the same species. However, <strong>cross-species transfer learning from HIV-1 to HIV-2 remains entirely unexplored</strong>, and we are not aware of any published ML or DL predictor of HIV-2 protease-inhibitor resistance.</p>
+<p>The HIV-1 and HIV-2 proteases share ~50% sequence identity (48 of 99 positions identical between the HXB2 and ROD wildtype references; 51 divergent positions), yet the drug-binding pocket is substantially more conserved (Figure 2). Four amino-acid changes at positions 32, 47, 76, and 82 (PR&Delta;4) largely explain the differential PI susceptibility between species [6]. This study makes three principal contributions: (1) the first cross-species benchmark for HIV-1&rarr;HIV-2 PI resistance prediction, showing that biophysically meaningful signal transfers across ~50% sequence divergence; (2) a transfer fine-tune that raises HIV-1 pre-trained knowledge to an out-of-fold benchmark correlation of R=0.7018 on HIV-2 ChEMBL data and validates it on 2,616 never-seen clinical rows (ROC-AUC=0.927); and (3) an externally validated known-DRM concordance layer connecting predicted binding free energies to known drug-resistance-mutation counts. Additional contributions include pocket-restricted ESM-2 feature masking, hybrid ONION-Net structural correction [12], and a documented evaluation of structure-based and deep-learning features as negative findings.</p>
+
+<div class="figure-container">
+<img src="journal_render/figures/fig0_study_design.png" alt="Study design: cross-species transfer and validation workflow" style="max-width:100%">
+<p class="figure-caption"><strong>Figure 1.</strong> Study design. Curated HIV-1 phenotypic assays train the within-species models; the resulting model is applied zero-shot to HIV-2 ChEMBL data and then fine-tuned on a 160-row HIV-2 panel, with the HIV-1 zero-shot prediction entering as a meta-feature. The transfer model is evaluated in two independent ways: against <em>measured</em> HIV-2 binding affinities, where it significantly outperforms a Stanford-derived rule-based interpretation (&sect;3.6), and against 2,616 never-seen HIV-2 clinical rows. No clinical label enters training at any stage.</p>
+</div>
+<div class="figure-container">
+<img src="journal_render/figures/fig1_seq_alignment.png" alt="HIV-1 HXB2 vs HIV-2 ROD protease sequence alignment" style="max-width:100%">
+<p class="figure-caption"><strong>Figure 2.</strong> HIV-1 (HXB2) and HIV-2 (ROD) protease sequence alignment. The two 99-residue wild-type proteases share 48 of 99 identical positions (48.5%); a further 20 positions are conservative substitutions (BLOSUM62&nbsp;&gt;&nbsp;0) and 31 are divergent. Shaded bands mark the catalytic active site (23&ndash;32), the substrate-binding flaps (45&ndash;55) and the dimer-interface wall (76&ndash;84). Blue brackets mark the 19 pocket residues within 5&nbsp;&Aring; of the bound ligand in the HIV-2 crystal structure 3S45 (1.51&nbsp;&Aring;); red boxes mark the conserved catalytic triad Asp25&ndash;Thr26&ndash;Gly27. Sequences are the HIV-1 HXB2 (UniProt P04585) and HIV-2 ROD (P04588) protease references, 1-indexed to the 99-residue protease.</p>
+</div>
+<!-- 2 MATERIALS AND METHODS -->
+<h2>2 Materials and Methods</h2>
+
+<h3>2.1 Datasets</h3>
+<p><strong>HIV-1 training corpus:</strong> We compiled 5,683 genuine Stanford HIVDB phenotypic assays [14] (1,882 unique sequences; 882 clusters at 95% identity and 714 singletons). An additional 1,500 rows in the original corpus were synthetic (generated by a banded-noise generator with seed-42) and were excluded and quarantined to a quarantine file. IC50 values (nM) were converted to binding free energy (&Delta;G = RT&middot;ln[IC50&middot;10<sup>&minus;9</sup>], RT=0.593 kcal/mol at 298K).</p>
+<p><strong>HIV-2 cross-species dataset:</strong> We curated HIV-2 protease-phenotype data from ChEMBL (targets CHEMBL380 and CHEMBL5074), comprising 137 filtered assay rows (IC50/KI/KD with valid values, &Delta;G&isin;[&minus;20, 0]) across the PI panel; the raw dataset file contains 321 rows. After drug-name mapping, the pipeline pool holds 320 rows (the single &lsquo;Experimental PI / Analogue&rsquo; entry lacks a mapped drug and is excluded). The 137-row set is the zero-shot subset: assay types {IC50, KI, KD} with valid values and &Delta;G&isin;[&minus;20, 0] kcal/mol (all 137 are IC50; 17 rows per mapped PI across the eight-PI panel, plus the experimental-analogue row). The transfer fine-tune benchmark (Table 5) is a separate partition of the 320-row pool: the four common PIs (ATV/r, DRV/r, LPV/r, SQV/r) &times; 40 rows = 160 rows spanning all assay types; 68 of these (the 17 IC50 rows per common drug) also fall inside the 137-row zero-shot set, and the remaining 92 are non-IC50 rows. Sequences were aligned to the gold-standard PDB consensus wildtype (3S45) at exactly 99 residues, 1:1 with the HIV-1 protease (HXB2) numeration.</p>
+<p><strong>HIV-2 clinical validation cohort:</strong> We assembled a master clinical cohort of 5,232 HIVDB penalty-score rows across 8 PIs, comprising 654 sequence entries (653 unique sequences plus one wild-type duplicate). Per-source composition: Stanford_HIVDB 3,456 rows; Mined_Expanded 1,776 rows. Resistance classifications: Susceptible n=5,006; Intermediate n=113; Resistant n=113. The <strong>headline clinical validation</strong> of this manuscript is the four-drug common-PI subset on which the transfer fine-tune is defined &mdash; ATV/r, DRV/r, LPV/r, SQV/r &mdash; comprising <strong>2,616 rows (654 sequence entries &times; 4 PIs)</strong>, scored by the final transfer model with no retraining on any clinical label.</p>
+
+<p class="table-caption"><strong>Table 1.</strong> Dataset summary.</p>
+<table>
+<tr><th>Dataset</th><th>Source</th><th>Rows</th><th>Unique Sequences</th><th>Use</th></tr>
+<tr><td>HIV-1 training</td><td>Stanford HIVDB [14]</td><td>5,683</td><td>1,882</td><td>Within-species CV + zero-shot/transfer training</td></tr>
+<tr><td>HIV-2 ChEMBL (filtered)</td><td>ChEMBL 380/5074</td><td>137</td><td>137</td><td>Zero-shot cross-species test</td></tr>
+<tr><td>HIV-2 clinical validation (master)</td><td>Stanford HIVDB / Mined_Expanded</td><td>5,232</td><td>654 (653 unique)</td><td>8-PI clinical cohort</td></tr>
+<tr><td>HIV-2 clinical validation (headline subset)</td><td>Stanford HIVDB / Mined_Expanded</td><td>2,616</td><td>654 (653 unique)</td><td>External clinical validation (4 common PIs: ATV/r, DRV/r, LPV/r, SQV/r)</td></tr>
+</table>
+<p>The four protease inhibitors that constitute the headline clinical subset&mdash;atazanavir, darunavir, lopinavir and saquinavir, each used ritonavir-boosted&mdash;are shown in Figure 3. These are the four drugs for which a comparable HIV-2 ChEMBL fine-tune panel exists, and therefore the only drugs on which the cross-species transfer model is defined.</p>
+<div class="figure-container">
+<img src="journal_render/figures/fig_drug_structures_2d.png" alt="Chemical structures of the four protease inhibitors" style="max-width:88%">
+<p class="figure-caption"><strong>Figure 3.</strong> Chemical structures of the four protease inhibitors in ritonavir-boosted regimens analysed in this study: (a) darunavir, (b) atazanavir, (c) saquinavir and (d) lopinavir. Two-dimensional depictions were rendered at 600&nbsp;dpi from stereo SMILES whose canonical InChI strings were cross-checked against PubChem and the RCSB PDB chemical-component dictionaries of the corresponding co-crystal ligands (DRV 017; ATV DR7; SQV ROC; LPV AB1).</p>
+</div>
+
+<h3>2.2 Data Curation and Synthetic-Row Exclusion</h3>
+<p>During curation we identified 1,500 rows in the source corpus that were not experimental measurements but were produced by a banded-noise generator (Stanford_Score&ge;30 &rarr; uniform(&minus;6.5, &minus;4.5), otherwise uniform(&minus;12.0, &minus;9.5)). Because such rows can induce a self-fulfilling genotype&ndash;phenotype correlation, all 1,500 were removed and quarantined to a quarantine file before any modelling. Every result reported here is computed on the 5,683 genuinely measured HIV-1 assays that remain; the quarantined file is released with the code so that the exclusion is fully auditable.</p>
+
+<h3>2.3 Feature Engineering</h3>
+<p>We evaluated multiple feature representations (Table 2). The <strong>cross-species feature bundle</strong> used by the transfer fine-tune and the final clinical model is the <strong>2,121-D global physicochemical representation</strong>, scaled with the HIV-1 scaler. Its exact composition (relative to the 2,079-D set) is the 2,079-D per-residue physico-chemical block (21 descriptors &times; 99 protease positions &mdash; Hellberg 3D Z-scales [8], Kidera factors [9] and VHSE scales [10] per residue) augmented with 42 sequence-level summary statistics: the mean and standard deviation of each of the 21 descriptors across the 99 positions (<code>extract_global_features</code>, <code>include_stats=True</code>; 2,079 + 21 + 21 = 2,121). The 2,079-D space (<code>include_stats=False</code>) appears as a zero-shot baseline reference (Table 4) and in the structural feature comparison (Table 6).</p>
+<p class="table-caption"><strong>Table 2.</strong> Feature representations and dimensions.</p>
+<table>
+<tr><th>Feature Set</th><th>Description</th><th>Dimensions</th></tr>
+<tr><td><strong>Global biochemistry (locked bundle)</strong></td><td>Global physicochemical descriptors per residue, scaled with the HIV-1 scaler; locked transfer/fine-tune/clinical bundle</td><td><strong>2,121</strong></td></tr>
+<tr><td>Global biochemistry (2,079-D; zero-shot baseline)</td><td>Hellberg 3D Z-scales [8] + Kidera factors 10D [9] + VHSE scales 8D [10] = 21D/residue &times; 99 positions (zero-shot space)</td><td>2,079</td></tr>
+<tr><td>Pocket-19 masking</td><td>Global descriptors restricted to the 19 pocket positions (21D &times; 19); top-5 positions [54, 84, 28, 48, 26] account for 72.4% of the total Random-Forest feature-importance mass across the 19 pocket positions (RF on per-residue ESM-2 650M blocks, 19 &times; 1,280-D; 1,882 HIV-1 sequences; &sect;4.3)</td><td>399</td></tr>
+<tr><td>Pocket-restricted BASE-A</td><td>21D/residue &times; 34 pocket/neighbor residues (16 binding-pocket &le;5&Aring; + 18 conserved neighbors)</td><td>714</td></tr>
+<tr><td>ADD-G / ADD-GHI</td><td>Sandberg 5D Z-scales [11] + Kidera 10D + VHSE 8D = 23D/residue &times; 34 residues</td><td>782</td></tr>
+<tr><td>ONION-Net structural (HIV-1)</td><td>62 distance shells (0&ndash;31&Aring;) &times; 167 atom-type pairs [12]</td><td>10,309</td></tr>
+<tr><td>ONION-Net structural (HIV-2)</td><td>Same encoding on HIV-2 docked complexes</td><td>10,478</td></tr>
+<tr><td>ESM-2 650M embeddings</td><td>Protein language model [18] per-residue embeddings, mean-pooled</td><td>1,280</td></tr>
+</table>
+<p><strong>Pocket definition:</strong> Reference structure PDB 3S45 (HIV-2 protease homodimer, 1.51&Aring; resolution). Pocket residues: all residues with &ge;1 heavy atom within 5&Aring; of the drug centroid. Conserved neighbors: residues within 5&Aring; of any pocket residue AND with identical amino acid in HIV-1 (HXB2) and HIV-2 (ROD) wildtypes. Additional features include a Delaunay triangulation vector (210-D) and inverse-density sample weighting.</p>
+<p>The spatial architecture of this pocket and its conservation across species are shown in Figures 4 and 5. The 19-residue pocket is drawn from the experimentally determined HIV-2 ROD protease structure (3S45), and the HIV-1/HIV-2 homodimer superimposition (Figure 5) confirms that the fold is preserved to 1.09&nbsp;&Aring; RMSD despite the ~50% sequence divergence&mdash;the structural rationale for transferring HIV-1-trained biophysical features to HIV-2.</p>
+<div class="figure-container">
+<img src="journal_render/figures/fig3_pocket19.png" alt="HIV-2 protease pocket-19 architecture" style="max-width:78%">
+<p class="figure-caption"><strong>Figure 4.</strong> Architecture of the HIV-2 protease substrate-binding pocket. The 19 pocket residues&mdash;all residues with at least one heavy atom within 5&nbsp;&Aring; of the bound ligand in 3S45&mdash;are shown as spheres on the C&alpha; trace of the HIV-2 ROD protease (PDB 3S45, 1.51&nbsp;&Aring;). Colours denote functional region: catalytic Asp25/Thr26/Gly27 (red); active-site cleft 23&ndash;32 (blue); substrate-binding flap 45&ndash;55 (orange); dimer-interface wall 76&ndash;84 (green); residue 8 (grey). The experimentally bound amprenavir molecule is shown in yellow. The catalytic machinery and substrate-binding scaffold are preserved between species even where peripheral positions diverge.</p>
+</div>
+<div class="figure-container">
+<img src="journal_render/figures/fig2_structure_overlay.png" alt="HIV-1 and HIV-2 protease C-alpha superimposition" style="max-width:72%">
+<p class="figure-caption"><strong>Figure 5.</strong> Structural conservation of the HIV-1 and HIV-2 protease homodimers. C&alpha; backbone superimposition of the HIV-2 ROD protease (PDB 3S45, 1.51&nbsp;&Aring;; blue) and the HIV-1 subtype-B protease (PDB 4LL3, 1.40&nbsp;&Aring;; red), aligned by Kabsch superposition over 198 C&alpha; atoms (both chains of the homodimer). The backbone RMSD is 1.09&nbsp;&Aring;, showing that despite ~50% sequence divergence the overall fold&mdash;and hence the substrate-binding pocket&mdash;is strongly conserved. Spheres mark the catalytic dyad Asp25/Thr27.</p>
+</div>
+
+<h3>2.4 Model Architecture</h3>
+<p><strong>Within-HIV-1 models:</strong> Random Forest (Scikit-learn, 600 trees, max_depth=20) and XGBoost [16] (800 trees, max_depth=6, learning_rate=0.03) trained on the locked 2,121-D biochemistry bundle.</p>
+<p><strong>Zero-shot cross-species:</strong> Train on 100% HIV-1, test on 100% HIV-2 (137 filtered ChEMBL rows; zero-shot evaluated in the 2,079-D space). Five modeling tiers: global RF [15], global XGBoost [16], pocket-only, deep learning (PocketGNN [17], DBPT+ transformer), and ensemble strategies.</p>
+<p><strong>Cross-species transfer fine-tune (final model):</strong> For each drug, the HIV-1 model's zero-shot prediction on the HIV-2 ChEMBL rows becomes a meta-feature column concatenated to the 2,121-D biochem bundle (scaled with the HIV-1 scaler; the HIV-1 model is not retrained). A RandomForestRegressor (n=600, max_depth=20, max_features=sqrt) is then trained per drug on the [biochem | zero-shot prediction] features with five-fold KFold-OOF pooling. The locked out-of-fold mean across the four common drugs (ATV/r, DRV/r, LPV/r, SQV/r) is R=0.7018 (n=160; 95% CI [0.6246, 0.7887]; single-seed KS=42; 200-resample percentile bootstrap; &ldquo;MEAN&rdquo; = pooled across drugs). This model is the manuscript's headline and is deployed on the clinical cohort without any retraining on clinical labels.</p>
+<p><strong>Within-HIV-2 supervised baseline:</strong> a fully supervised per-drug model combining protein-language-model and biochemistry features served as an internal comparator (Table 5). Unlike the transfer model, it requires HIV-2 training labels and is therefore not the deployment model used for clinical inference.</p>
+<p>Because no HIV-2 protease co-crystal structure exists for atazanavir, darunavir, lopinavir or saquinavir, we additionally modelled their pocket-occupancy context by superposing the experimentally determined HIV-1 co-crystal ligands onto the HIV-2 3S45 frame (Figure 6). This provides a structural illustration of why biophysical descriptors computed on a common 99-residue framework remain informative across the two species.</p>
+<div class="figure-container">
+<img src="journal_render/figures/fig4_drug_poses.png" alt="Modelled protease-inhibitor poses in the HIV-2 pocket" style="max-width:88%">
+<p class="figure-caption"><strong>Figure 6.</strong> Modelled pocket-occupancy context for the four protease inhibitors in HIV-2 protease. Experimental ligand geometries from HIV-1 protease co-crystal complexes (atazanavir, PDB 2AQU; darunavir, 4LL3; saquinavir, 3OXC; lopinavir, 1MUI) were transformed into the HIV-2 ROD frame (3S45) by the same Kabsch C&alpha; superposition used in Figure 5 (per-panel RMSD shown). Red spheres mark the 19 HIV-2 pocket residues of Figure 4. Because no HIV-2 protease crystal structure with these four inhibitors exists, these are modelled poses shown for pocket-occupancy context only; they are not experimentally determined HIV-2 geometries.</p>
+</div>
+
+<h3>2.5 Conformal Prediction</h3>
+<p>For potential clinical decision support we additionally implemented split conformal prediction (90% target coverage) to attach finite-sample prediction intervals to the per-drug resistance predictions; the component is described here for methodological completeness, and its empirical coverage statistics are outside the scope of the current report.</p>
+
+<h3>2.6 Mutational Scanner</h3>
+<p>An in-silico mutagenesis engine was developed to scan all 99 protease positions of HIV-2 protease against all 19 alternative amino acids for the eight protease inhibitors of the master clinical cohort (99 &times; 19 &times; 8 = 15,048 predicted mutation&ndash;drug pairs; 1,881 single-point mutants), using protein language model embeddings and per-drug predictors. The scanner is described for methodological completeness; scanner output values are not part of the current headline claims.</p>
+
+<h3>2.7 Sign Convention</h3>
+<p>The canonical sign convention used throughout this study: model output is <strong>predicted &Delta;G (kcal/mol, negative = tighter binding)</strong>. Clinical correlation is always <strong>corr(Clinical_Penalty_Score, predicted &Delta;G)</strong>&mdash;expected <strong>POSITIVE</strong> (higher penalty = more resistant = weaker binding = less negative &Delta;G). ROC-AUC is computed with score = predicted &Delta;G (higher = more resistant), expected &gt; 0.5.</p>
+<!-- 3 RESULTS -->
+<h2>3 Results</h2>
+
+<h3>3.1 Within-HIV-1 Grouped Cross-Validation</h3>
+<p>Before evaluating cross-species transfer, we established within-species performance on the curated HIV-1 corpus using GroupKFold cross-validation at 95% sequence identity (Table 3).</p>
+<p class="table-caption"><strong>Table 3.</strong> Within-species HIV-1 grouped cross-validation performance (curated corpus).</p>
+<table>
+<tr><th>Model</th><th>CV Pearson R (mean &plusmn; std)</th><th>Per-fold R range</th></tr>
+<tr><td>Random Forest (2,079-D biophysical features)</td><td><strong>0.7387 &plusmn; 0.0472</strong></td><td>0.675&ndash;0.818</td></tr>
+<tr><td>XGBoost (2,079-D biophysical features)</td><td>0.7348 &plusmn; 0.0478</td><td>0.672&ndash;0.813</td></tr>
+</table>
+<p>The global Random Forest achieves R=0.7387 &plusmn; 0.0472 (per-fold range 0.675&ndash;0.818) within species on the curated corpus, and XGBoost is comparable (R=0.7348 &plusmn; 0.0478). This within-species performance is the internal baseline and the denominator of the cross-species transfer ratio.</p>
+
+<h3>3.2 Zero-Shot Cross-Species Transfer and Transfer Fine-Tune Benchmark</h3>
+<p>We trained on 100% HIV-1 and tested on 100% HIV-2 (137 filtered ChEMBL assay rows; Table 4).</p>
+<p class="table-caption"><strong>Table 4.</strong> Zero-shot cross-species transfer performance (2,079-D physicochemical space; n=137 HIV-2 ChEMBL assays).</p>
+<table>
+<tr><th>Tier</th><th>Model</th><th>Input</th><th>RMSE</th><th>Pearson R</th><th>&rho;</th></tr>
+<tr><td>1a</td><td><strong>Random Forest</strong></td><td>Full 99-AA biochem (2,079-D)</td><td><strong>1.599</strong></td><td><strong>0.5163</strong></td><td>0.5247</td></tr>
+<tr><td>1b</td><td>XGBoost</td><td>Full 99-AA biochem (2,079-D)</td><td>1.763</td><td>0.5587</td><td>0.5218</td></tr>
+<tr><td>2a</td><td>Pocket RF</td><td>Pocket 16 residues</td><td>1.544</td><td>0.4056</td><td>0.4599</td></tr>
+<tr><td>2b</td><td>Pocket XGBoost</td><td>Pocket 16 residues</td><td>1.587</td><td>0.4288</td><td>0.4636</td></tr>
+<tr><td>5a</td><td>Simple ensemble (RF+XGB)</td><td>Ensemble</td><td>1.668</td><td>0.5467</td><td>0.5187</td></tr>
+<tr><td>5b</td><td>Ridge meta-ensemble</td><td>RF+XGB + variance</td><td><strong>1.379</strong></td><td><strong>0.5818</strong></td><td><strong>0.5496</strong></td></tr>
+</table>
+<p class="table-caption">All values from a single reproducible run on the curated 5,683-row HIV-1 corpus with the 137-row HIV-2 ChEMBL test set. The 95% bootstrap CI for tier 1a is [0.400, 0.627]. The PocketGNN and DBPT+ transformer tiers were evaluated in an earlier pipeline revision (R=&minus;0.171 and 0.212 respectively) but are not reproducible in the current CPU-only environment and are therefore excluded from this table.</p>
+<p><strong>The strongest zero-shot configuration on the 137-row HIV-2 panel was the ridge meta-ensemble (R=0.5818, &rho;=0.5496, RMSE=1.379 kcal/mol), followed by XGBoost (R=0.5587) and the simple RF+XGB ensemble (R=0.5467); the global Random Forest scored R=0.5163 (95% CI [0.400, 0.627]; &rho;=0.5247; RMSE=1.599 kcal/mol; p=1.07&times;10<sup>&minus;10</sup>; n=137), a transfer ratio of 0.699 relative to the within-species 0.7387.</strong> The Random Forest was carried forward as the transfer meta-feature because it is the configuration whose downstream fine-tuned benchmark is locked (R=0.7018); the ensemble variants were not carried into the transfer step. Pocket-restricted tiers (R=0.41&ndash;0.43) were substantially weaker than the full-length descriptor sets.</p>
+<p><strong>Transfer fine-tune benchmark.</strong> Fine-tuning the HIV-1 pre-trained model on HIV-2 ChEMBL rows raises the out-of-fold benchmark correlation to R=0.7018 (Table 5), the strongest configuration evaluated on the same 160-row, four-drug panel; among close competitors, the 0.0003 margin over fine-tuned biochem alone (R=0.7015) is within bootstrap noise, while the deployment model sits clearly above the supervised-only HIV-2 model (0.6779) and zero-shot transfer on the same panel (0.2492). We therefore do not claim statistical significance for the 0.0003 margin over fine-tuned biochem alone; the measurable contribution of HIV-1 pre-training is established against the supervised-only HIV-2 model (0.6779) and the same-space zero-shot baseline (0.2492).</p>
+<p class="table-caption"><strong>Table 5.</strong> Transfer-learning benchmark variants on the HIV-2 ChEMBL panel (n=160; 4 drugs &times; 40 rows; KFold-OOF pooling; single-seed KS=42; 200-resample percentile bootstrap; &ldquo;MEAN&rdquo; = pooled across drugs).</p>
+<table>
+<tr><th>Configuration</th><th>Pearson R [95% CI]</th></tr>
+<tr><td><strong>Transfer fine-tune (biochemistry + HIV-1 zero-shot meta-feature) &mdash; deployment model</strong></td><td><strong>0.7018 [0.6246, 0.7887]</strong></td></tr>
+<tr><td>Fine-tuned biochemistry only (no zero-shot meta-feature)</td><td>0.7015</td></tr>
+<tr><td>Blend (biochemistry + ESM-2)</td><td>0.6994</td></tr>
+<tr><td>Weighted blend (biochemistry + pocket-restricted ESM-2)</td><td>0.6967</td></tr>
+<tr><td>Full stack (ONION-Net correction on blend)</td><td>0.6887</td></tr>
+<tr><td>ONION-Net correction on biochemistry (two runs)</td><td>0.6872 / 0.6910</td></tr>
+<tr><td>Supervised, HIV-2 only (pocket-restricted)</td><td>0.6779</td></tr>
+<tr><td>ESM-2 pocket-restricted, standalone</td><td>0.6759</td></tr>
+<tr><td>Zero-shot, no HIV-2 fine-tuning</td><td>0.2492</td></tr>
+</table>
+<p>Per-drug out-of-fold correlations for the deployment transfer model: ATV/r 0.6125, DRV/r 0.8272, LPV/r 0.5440, SQV/r 0.7048. The transfer fine-tune thus matches or exceeds the fully supervised within-HIV-2 model (0.6779) while requiring only HIV-1 pre-training plus the small HIV-2 ChEMBL panel, and it does so by a far larger margin than zero-shot transfer.</p>
+<p>The zero-shot evaluation (Table 4) and the fine-tune benchmark (Table 5) use different panels and feature spaces: zero-shot is scored on the 137-row, 2,079-D panel, while the fine-tune benchmark is scored per drug on the 160-row four-drug ChEMBL panel in the 2,121-D space. The two are not directly comparable except through the same-space recomputation reported in §3.4.</p>
+
+<h3>3.3 Hybrid ONION-Net Correction Stage</h3>
+<p>Although ONION-Net structural-contact features computed from HIV-1 structures did not improve cross-species transfer (best PCA fusion R=0.4703, below the pocket baseline R=0.5036), we tested whether ONION-Net features computed on <strong>HIV-2 docked complexes</strong> add value as a residual-correction stage (Table 6).</p>
+<p class="table-caption"><strong>Table 6.</strong> ONION-Net evaluation and hybrid correction stage.</p>
+<table>
+<tr><th>Configuration</th><th>Feature Dim</th><th>HIV-2 Pearson R</th><th>RMSE (kcal/mol)</th><th>&rho;</th></tr>
+<tr><td>Biochem only (global)</td><td>2,079</td><td>+0.3582</td><td>1.9585</td><td>+0.4010</td></tr>
+<tr><td>ONION-Net only (raw)</td><td>10,309</td><td>&minus;0.1392</td><td>2.1826</td><td>&minus;0.0941</td></tr>
+<tr><td>Biochem + ONION-Net (naive concat)</td><td>12,520</td><td>+0.2061</td><td>2.2246</td><td>+0.2437</td></tr>
+<tr><td>Pocket + ONION-PCA-20</td><td>802</td><td>+0.4703</td><td>2.0717</td><td>+0.5213</td></tr>
+<tr><td>Pocket-5D only (ADD-GHI)</td><td>782</td><td>+0.5014</td><td>1.6861</td><td>+0.5752</td></tr>
+<tr><td>ONION B1 pocket-5D</td><td>782</td><td>+0.5036</td><td>1.6862</td><td>+0.5752</td></tr>
+<tr><td><strong>Hybrid correction stage (HIV-2 docked complexes)</strong></td><td>10,478</td><td><strong>0.6694</strong></td><td><strong>1.1412</strong></td><td><strong>0.6717</strong></td></tr>
+</table>
+<p>The biophysical model residuals (residual R=0.5475, explaining 30.0% of residual variance) are partially captured by ONION-Net contact features computed on HIV-2 docked complexes (n=136). The corrected predictions reach R=0.6694 (R&sup2;=0.4385), with RMSE reduced from 1.6025 to 1.1412 kcal/mol. This hybrid result is a structural-correction finding distinct from the benchmark variants reported in Table 5 (0.6887 / 0.6872 / 0.6910), which were computed on the ChEMBL panel rather than the docked pipeline.</p>
+
+<h3>3.4 Within-HIV-2 Drug-Holdout Transfer (R5)</h3>
+<p>When training on all drugs except one and predicting the held-out drug, within-HIV-2 R ranges from 0.662 (LPV/r) to 0.967 (TPV/r), with mean R=0.851 &plusmn; 0.111. <em>Because all eight drugs share the same 17 sequences, this measures drug-transfer (same mutants, unseen drug), NOT unseen-sequence generalization</em>&mdash;high performance here is expected and must not be read as zero-shot capability.</p>
+
+<h3>3.5 Training Data Scaling</h3>
+<p>Training-data scaling analysis on the curated corpus reveals flat performance across sample sizes (Table 7).</p>
+<p class="table-caption"><strong>Table 7.</strong> Training data scaling analysis (curated, global RF).</p>
+<table>
+<tr><th>N (HIV-1 training samples)</th><th>Cross-Species R</th></tr>
+<tr><td>500</td><td>0.513</td></tr>
+<tr><td>1,000</td><td>0.478</td></tr>
+<tr><td>2,000</td><td>0.466</td></tr>
+<tr><td>4,000</td><td>0.521</td></tr>
+<tr><td>5,683 (full genuine)</td><td>0.516</td></tr>
+</table>
+<p>Performance is flat (R=0.466&ndash;0.521) across 500&ndash;5,683 samples with no monotonic trend, so within this range the cross-species result is not limited by HIV-1 training-set size.</p>
+
+<h3>3.6 Model versus Rule-Based Interpretation on Measured Phenotypes</h3>
+<p>The clinical evaluation of &sect;3.8 is necessarily indirect: its target, the Stanford HIVDB penalty score, is an <em>interpretation</em> rather than a measurement. We therefore performed a direct, non-circular head-to-head against a rule-based interpretation on a target that <em>is</em> measured. We applied a Stanford-derived HIV-2 expert rule engine&mdash;single-mutation and combination penalty tables from the Stanford HIV-2 known-resistance data&mdash;to the HIV-2 ChEMBL sequences, and compared its correlation with measured binding free energy against that of the cross-species transfer model on the identical 160-row, four-drug panel (40 rows per drug; 19 unique sequences).</p>
+<p>The transfer model outperformed the rule on <em>every</em> drug and overall (Table 8, Figure 7): pooled Pearson R = 0.7018 (95% CI [0.556, 0.798]) versus 0.4724 (95% CI [0.292, 0.643]) for the rule, a difference of <strong>&Delta;R = +0.229</strong> (sequence-clustered paired bootstrap, 2,000 resamples; 95% CI [0.060, 0.408]; <strong>P(&Delta;R &le; 0) = 0.001</strong>). Because the 160 rows comprise only <strong>19 unique sequences</strong>, the effective sample size is 19 rather than 160; we therefore repeated the comparison under a leave-one-sequence-out jackknife. The model remained ahead in <strong>100% of folds</strong> (&Delta;R range [+0.160, +0.264]; model R range [0.686, 0.762]), so the result is not carried by any single sequence. Three qualifications remain essential. First, the model's benchmark is out-of-fold on this panel and therefore uses HIV-2 fine-tuning data, whereas the rule is a fixed prior with no fitting; the comparison is best read as &ldquo;given a small amount of HIV-2 data, does a learned model beat the rule?&rdquo; Second, the baseline is a faithful re-implementation of published Stanford HIV-2 penalty tables rather than the HIV-2EU tool itself; we address that directly below. Third, the same-space zero-shot model (R = 0.2492, no HIV-2 fitting) does <em>not</em> beat the rule, so the advantage depends on fine-tuning rather than on cross-species transfer alone.</p>
+<p>To confirm that this conclusion does not depend on our re-implementation, we also scored the same panel with the <strong>official published HIV-2EU v4 protease rule set</strong> [19]. HIV-2EU v4 defines protease-inhibitor rules for only two drugs&mdash;darunavir (I50V; I54M; I84V&nbsp;+&nbsp;L90M) and lopinavir (V47A; I54M; &ge;2 of I82F/I84V/L90M)&mdash;and has <em>no</em> protease rules for the remaining inhibitors, saquinavir having been withdrawn as no longer manufactured and atazanavir being classified as naturally resistant. Applied to the measured panel, HIV-2EU leaves <strong>83.1%</strong> of rows unscored (half of them because no rule exists for that drug) and its mutation vocabulary covers 5 of the 37 observed mutations (13.5%). The official tool is thus sparser still than our Stanford-derived baseline, so the comparison reported here is the conservative one: the choice of rule source does not rescue rule-based interpretation on this measured panel.</p>
+<p>As a consistency check on the rule engine, applying it to the 432 clinical sequences shared with the 2,616-row clinical cohort reproduced the Stanford HIVDB penalty score exactly (Pearson R = 1.0000; 100% exact agreement on all 1,728 matched rows). This confirms both that the rule engine is faithful and that the clinical target of &sect;3.8 is a deterministic function of the mutation list&mdash;which is precisely why the measured-phenotype comparison above, rather than the clinical correlation, is the primary evidence of model utility.</p>
+<p class="table-caption"><strong>Table 8.</strong> Head-to-head against a Stanford-derived rule-based HIV-2 interpretation, on measured binding affinity (HIV-2 ChEMBL panel, 40 rows per drug). Model = cross-species transfer fine-tune (out-of-fold); rule = single- plus combination-mutation penalty lookup.</p>
+<table>
+<tr><th>Drug</th><th>n</th><th>Transfer model R</th><th>Rule-based R</th><th>&Delta;R (model &minus; rule)</th></tr>
+<tr><td>ATV/r</td><td>40</td><td><strong>0.6123</strong></td><td>0.3907</td><td>+0.2216</td></tr>
+<tr><td>DRV/r</td><td>40</td><td><strong>0.8273</strong></td><td>0.5406</td><td>+0.2867</td></tr>
+<tr><td>LPV/r</td><td>40</td><td><strong>0.5440</strong></td><td>0.3929</td><td>+0.1511</td></tr>
+<tr><td>SQV/r</td><td>40</td><td><strong>0.7046</strong></td><td>0.5624</td><td>+0.1422</td></tr>
+<tr><td><strong>Pooled</strong></td><td><strong>160</strong></td><td><strong>0.7018</strong></td><td><strong>0.4724</strong></td><td><strong>+0.2293</strong></td></tr>
+</table>
+<p class="table-caption">Pooled 95% CIs (sequence-clustered paired bootstrap, 2,000 resamples): model [0.556, 0.798]; rule [0.292, 0.643]; difference [0.060, 0.408]. The model is higher on all four drugs individually; no multiplicity correction was applied and the per-drug comparisons are descriptive. Effective sample size is 19 unique sequences; under a leave-one-sequence-out jackknife the model remains ahead in 100% of folds (&Delta;R range [+0.160, +0.264]).</p>
+<div class="figure-container">
+<img src="journal_render/figures/fig7_head_to_head.png" alt="Model versus rule-based interpretation on measured HIV-2 phenotypes" style="max-width:100%">
+<p class="figure-caption"><strong>Figure 7.</strong> Cross-species transfer model versus Stanford-derived rule-based HIV-2 interpretation, evaluated against <em>measured</em> binding free energy. (a) Per-drug Pearson correlation with measured &Delta;G for the transfer model (blue) and the rule (red); the model is higher for every drug. (b) Pooled correlation with 95% confidence intervals from a sequence-clustered paired bootstrap (2,000 resamples); the model exceeds the rule by &Delta;R = +0.229 (P(&Delta;R &le; 0) = 0.001). Because the target here is a measurement rather than a rule, this comparison is not circular.</p>
+</div>
+<h3>3.7 Rule-Based Interpretation Is Silent on Most of HIV-2 Sequence Space</h3>
+<p>The head-to-head of &sect;3.6 raises a question that, to our knowledge, has not been quantified for HIV-2: how much of the sequence space does the standard rule-based interpretation actually cover? We measured this directly, using both our Stanford-derived rule engine and the official published HIV-2EU v4 protease rules [19] (Table 9, Figure 8).</p>
+<p>First, the clinical benchmark itself is sparse. Across the 5,232-row clinical cohort, <strong>93.1% of rows carry a penalty score of zero</strong> (91.3% for NFV to 96.9% for TPV/r). Because the rule engine reproduces that penalty exactly (R = 1.0000; &sect;3.6), the clinical label is, for the overwhelming majority of isolates, simply &ldquo;no rule matched.&rdquo; A tool validated against this target is therefore evaluated on the small minority of isolates that its own rule table happens to recognise.</p>
+<p>Second, the rule vocabulary is small relative to the mutation space actually observed. The measured panel contains 37 distinct mutated positions/alleles; the 61 single-mutation and 20 combination rules recognise <strong>3 of them</strong> (L90M, I84V, I54M), or 8.1%, and the official HIV-2EU v4 rules recognise <strong>5</strong> (I54M, I82F, I84V, L90M, V47A), or 13.5%. Mutations that recur in measured HIV-2 phenotypic data&mdash;including K70R, K70T, V47A, I82F, N40D, G17D and Y14H&mdash;have no rule at all. This includes I82F, the literature-verified darunavir-relevant HIV-2 substitution discussed in &sect;3.8 (Table 15), to which the rule tables assign no penalty at all.</p>
+<p>Third, and most directly relevant to model utility, the rule is silent (score = 0) on <strong>72.5%</strong> of the measured panel (70&ndash;80% per drug). The rule&rsquo;s pooled correlation of 0.4724 is therefore carried entirely by the 27.5% of rows on which it has any variance. On the remaining 116 rule-blind rows (15 unique sequences) the rule cannot rank anything by construction&mdash;its score is identically zero, so its correlation is undefined&mdash;whereas the transfer model retains a significant signal on exactly those rows: <strong>R = 0.585, 95% CI [0.296, 0.788], P(R &le; 0) &lt; 0.001</strong> (sequence-clustered bootstrap). The model&rsquo;s correlation is in fact <em>higher</em> on the rule-blind rows (0.585) than on the rule-covered rows (0.498).</p>
+<p>We read this as the clearest statement of what the learned model contributes. The rule-based interpretation is a sparse lookup over a small, fixed vocabulary; where it has no rule it returns zero, which in a clinical report reads as &ldquo;susceptible&rdquo; but in fact encodes absence of knowledge rather than evidence of susceptibility. The transferred model does not depend on that vocabulary and supplies ranking information precisely where the rule leaves the space empty. This is equally a caution about the clinical benchmark: agreement with a 93%-zero, rule-determined label is a weak measure of biological content, which is why we treat the measured-phenotype comparison of &sect;3.6 as the primary evidence.</p>
+<p class="table-caption"><strong>Table 9.</strong> Coverage of the rule-based HIV-2 interpretation. &ldquo;Clinical label&rdquo; is the Stanford HIVDB penalty score; &ldquo;zero&rdquo; denotes a score of zero (no rule matched). Measured panel = 160-row, four-drug HIV-2 ChEMBL set.</p>
+<table>
+<tr><th>Quantity</th><th>Value</th></tr>
+<tr><td>Clinical cohort rows with penalty = 0</td><td><strong>93.1%</strong> (4,870 / 5,232; 91.3&ndash;96.9% across 8 drugs)</td></tr>
+<tr><td>Rule-engine agreement with clinical penalty</td><td>R = 1.0000 (100%; 1,728 / 1,728 rows)</td></tr>
+<tr><td>Distinct mutations observed in measured panel</td><td>37</td></tr>
+<tr><td>Mutations with an explicit rule (Stanford-derived)</td><td><strong>3</strong> (L90M, I84V, I54M) &mdash; 8.1%</td></tr>
+<tr><td>Mutations with an explicit rule (official HIV-2EU v4)</td><td><strong>5</strong> (I54M, I82F, I84V, L90M, V47A) &mdash; 13.5%</td></tr>
+<tr><td>Measured rows with rule score = 0</td><td><strong>72.5%</strong> (116 / 160; 70&ndash;80% per drug)</td></tr>
+<tr><td>Model R on rule-blind rows (n = 116; 15 sequences)</td><td><strong>0.585</strong> (95% CI 0.296&ndash;0.788; P(R&le;0) &lt; 0.001)</td></tr>
+<tr><td>Measured rows unscored by official HIV-2EU v4</td><td><strong>83.1%</strong> (50% because no rule exists for the drug)</td></tr>
+<tr><td>Clinical drugs with no HIV-2EU protease rules</td><td><strong>6 of 8</strong> (ATV/r, FPV/r, IDV/r, NFV, SQV/r, TPV/r)</td></tr>
+<tr><td>Model R on HIV-2EU-unscored rows, leave-one-sequence-out</td><td>positive in <strong>100%</strong> of 15 folds (range 0.48&ndash;0.70)</td></tr>
+<tr><td>Model R on rule-covered rows (n = 44)</td><td>0.498</td></tr>
+<tr><td>Rule R on rule-covered rows (n = 44)</td><td>0.389</td></tr>
+</table>
+<p class="table-caption">Rule-blind rows have zero rule variance, so a rule correlation is undefined for them; the model value is from a sequence-clustered bootstrap (2,000 resamples). The rule tables comprise 61 single-mutation and 20 combination rules.</p>
+<div class="figure-container">
+<img src="journal_render/figures/fig8_rule_coverage.png" alt="Coverage of rule-based HIV-2 resistance interpretation" style="max-width:100%">
+<p class="figure-caption"><strong>Figure 8.</strong> Rule-based HIV-2 interpretation covers only a small fraction of sequence space. (a) The clinical benchmark label is zero for 93.1% of isolates (91.3&ndash;96.9% across eight protease inhibitors); the dashed line marks the overall value. (b) Of the 37 distinct mutations present in the measured ChEMBL panel, the Stanford-derived rule table recognises three (blue) and the official HIV-2EU v4 rules five (red), against 37 observed (dotted line). (c) On the 116 measured rows where the rule score is zero&mdash;and therefore carries no ranking information&mdash;the transferred model retains a significant correlation with measured &Delta;G (R = 0.585, 95% CI 0.296&ndash;0.788, P &lt; 0.001), exceeding even its performance on the 44 rule-covered rows (0.498).</p>
+</div>
+<h3>3.8 External Clinical Validation</h3>
+<p><em>We report this section last, and treat it as supporting rather than primary evidence.</em> The coverage analysis of &sect;3.7 shows that the clinical target used here is zero for 93.1% of isolates and is reproduced exactly by the rule engine (R = 1.0000), so agreement with it measures rule-consistency as much as biology. The measured-phenotype comparison of &sect;3.6 is the primary evidence of model utility; what follows establishes only that the model transfers to an independent clinical cohort without any clinical label entering training.</p>
+<p>As an independent test against the clinical record, we validated the final model on <strong>2,616 never-seen clinical rows</strong> from the Stanford HIV Drug Resistance Database (HIVDB) genotype&ndash;phenotype penalty data: <strong>654 sequence entries</strong> (653 unique sequences plus one wild-type duplicate), each measured against the four common protease inhibitors on which the transfer fine-tune is defined &mdash; <strong>ATV/r, DRV/r, LPV/r, SQV/r</strong> (654 entries &times; 4 drugs = 2,616 rows). These are a four-drug subset of the 5,232-row, eight-drug master cohort (3,456 Stanford_HIVDB rows; 1,776 Mined_Expanded rows). The clinical label is the HIVDB penalty score &mdash; a rule-derived, discretized phenotype proxy &mdash; accompanied by a resistance classification (Susceptible / Intermediate / Resistant) for classification evaluation.</p>
+<p>Inference used the locked final model: the v5 Layer-1 transfer fine-tune &mdash; a RandomForest regressor (n = 600, depth 20, max_features = sqrt) on 2,121-D global physicochemical features (biochem bundle, HIV-1 scaler) augmented with the HIV-1 model's zero-shot prediction as a meta-feature; i.e., the architecture whose ChEMBL out-of-fold benchmark is R = 0.7018. The model was applied with <strong>no retraining on any clinical row</strong>; clinical penalty labels never entered training in any form, and the clinical sequences have <strong>zero overlap with the 5,683-row HIV-1 pre-training corpus</strong>. Pooled across drugs, the final model reaches <strong>Pearson R = 0.4454 (95% CI [0.382, 0.500]; Spearman &rho; = 0.3388; RMSE = 13.62; all per-drug p &lt; 1e-20)</strong> and <strong>ROC-AUC = 0.927</strong> (Resistant vs Susceptible; 40 resistant rows among 2,550 classifiable rows; Table 10). Recomputed in the identical feature space without any fine-tune, the HIV-1 zero-shot model scores a pooled <strong>R = 0.2468 (95% CI [0.209, 0.276])</strong> and a pooled <strong>ROC-AUC of 0.9648</strong> (Tables 7, 9). The two models therefore have complementary rather than cleanly ranked clinical profiles: the zero-shot model correlates more strongly within every individual drug and discriminates resistant from susceptible isolates at least as well, whereas the transfer fine-tune alone maintains a positive pooled linear and rank correlation across drugs (see the discussion below and &sect;4.5 limitations).</p>
+<p class="table-caption"><strong>Table 10.</strong> Pooled external clinical validation &mdash; final transfer model vs same-space zero-shot (4 drugs; 2,616 rows).</p>
+<table>
+<tr><th>Metric</th><th>FINAL transfer fine-tune</th><th>Zero-shot recomputed (same space)</th></tr>
+<tr><td>n (rows)</td><td>2,616</td><td>2,616</td></tr>
+<tr><td>Pearson R</td><td><strong>0.4454</strong></td><td>0.2468</td></tr>
+<tr><td>95% CI (Pearson)</td><td>[0.3820, 0.4999]</td><td>[0.2089, 0.2760]</td></tr>
+<tr><td>Spearman &rho;</td><td>0.3388</td><td>0.2557</td></tr>
+<tr><td>RMSE</td><td>13.6162</td><td>13.4170</td></tr>
+<tr><td>MAE</td><td>11.6094</td><td>11.2936</td></tr>
+<tr><td>ROC-AUC (Resistant vs Susceptible)</td><td><strong>0.9267</strong></td><td>0.9648</td></tr>
+<tr><td>n binary-classified (S+R) / n Resistant</td><td>2,550 / 40</td><td>2,550 / 40</td></tr>
+<tr><td>&Delta;R (transfer &minus; zero-shot)</td><td colspan="2"><strong>+0.1986</strong></td></tr>
+<tr><td>Excl. ChEMBL-overlap subset</td><td colspan="2">R = 0.4507, &rho; = 0.3394, n = 2,600</td></tr>
+</table>
+<p class="table-caption">Statistical note: the same 654 sequence entries each contribute one row per drug, so the 2,616 pooled rows are not independent and any nominal pooled p-value overstates significance; interpretation is therefore based on per-drug estimates and effect sizes. Per-drug p-values (n=654 rows per drug; Table 11) are all &lt; 1e-20.</p>
+<div class="figure-container">
+<img src="journal_render/figures/fig6_results.png" alt="Cross-species transfer model performance: clinical, benchmark and DRM concordance" style="max-width:100%">
+<p class="figure-caption"><strong>Figure 9.</strong> Cross-species transfer model performance. (a) Per-drug external clinical validation: Pearson correlation between predicted binding free energy and the Stanford HIVDB penalty score for the final transfer model (blue) and the same-space zero-shot baseline (red); within every drug the zero-shot baseline is higher, so no per-drug clinical superiority of the transfer fine-tune is claimed. (b) HIV-2 ChEMBL out-of-fold benchmark for the transfer fine-tune (n=160; error bars 95% percentile-bootstrap CI; dashed line, mean R=0.7018). (c) Known-drug-resistance-mutation concordance: Pearson correlation between predicted binding free energy and the drug-specific DRM count per sequence. All values are read directly from the locked result manifest.</p>
+</div>
+<p>Per-drug results (Table 11) show the final transfer model's correlation with the penalty score within each drug: ATV/r R = 0.376, DRV/r 0.362, LPV/r 0.624, SQV/r 0.544. We report the same-space zero-shot recomputation alongside for honest comparison (Table 12), and the comparison is decisive against any per-drug superiority claim: the zero-shot baseline shows a higher correlation within <em>every</em> drug (ATV/r 0.723, DRV/r 0.561, LPV/r 0.673, SQV/r 0.863) and a higher pooled ROC-AUC (0.9648 vs 0.9267). The transfer fine-tune's only numerical advantage is a higher <em>pooled</em> Pearson/Spearman correlation (0.4454 vs 0.2468); this is a between-drug calibration effect rather than a within-drug accuracy gain &mdash; the zero-shot pooled R (0.2468) lies below its own lowest per-drug R (0.5610), the signature of an aggregation reversal, because a pooled-over-rows correlation mixes within-drug signal with between-drug score scale. <strong>We therefore make no per-drug clinical superiority claim and do not treat the pooled R difference as a within-drug accuracy difference.</strong> The pooled AUC gap (0.9267 vs 0.9648) rests on only 40 resistant rows (DRV/r contributes none, so its AUC is undefined) and is within sampling noise (conservative 95% CI for the difference [&minus;0.03, +0.11]; two-sided p &asymp; 0.28); it is likewise not interpreted as a difference. Because per-drug correlations span 0.36&ndash;0.62 and DRV/r lacks resistant observations, we also do not claim consistent calibration across drugs. The cross-species transfer claim rests on the ChEMBL out-of-fold benchmark (R = 0.7018), the recovery of a positive, drug-dependent clinical signal without any clinical label entering training, and known-DRM concordance &mdash; not on per-drug clinical correlations. Excluding the three clinical sequences that overlap the ChEMBL fine-tune set leaves n = 2,600 rows and <strong>R = 0.4507</strong> (&rho; = 0.3394), confirming no overlap skew.</p>
+<p class="table-caption"><strong>Table 11.</strong> Per-drug external clinical validation &mdash; final transfer model.</p>
+<table>
+<tr><th>Drug</th><th>n</th><th>n Resistant</th><th>Pearson R</th><th>95% CI (Pearson)</th><th>Pearson p</th><th>Spearman &rho;</th><th>RMSE</th><th>MAE</th><th>ROC-AUC</th></tr>
+<tr><td>ATV/r</td><td>654</td><td>12</td><td>0.3761</td><td>[0.2756, 0.4692]</td><td>2.11e-23</td><td>0.3227</td><td>14.6331</td><td>11.8186</td><td>0.8644</td></tr>
+<tr><td>DRV/r</td><td>654</td><td>0</td><td>0.3619</td><td>[0.2475, 0.4631]</td><td>1.15e-21</td><td>0.2665</td><td>11.3736</td><td>10.9956</td><td>null**</td></tr>
+<tr><td>LPV/r</td><td>654</td><td>9</td><td>0.6241</td><td>[0.5281, 0.7040]</td><td>6.67e-72</td><td>0.4105</td><td>12.3390</td><td>11.2878</td><td>0.8984</td></tr>
+<tr><td>SQV/r</td><td>654</td><td>19</td><td>0.5440</td><td>[0.4476, 0.6134]</td><td>1.20e-51</td><td>0.3737</td><td>15.6801</td><td>12.3353</td><td>0.9668</td></tr>
+</table>
+<p class="table-caption">** DRV/r ROC-AUC is null: the clinical resource contains 0 DRV/r-resistant rows, so a resistance-class AUC is undefined for this drug (ATV/r, LPV/r, SQV/r have 9&ndash;19 resistant rows each; the pooled AUC is defined on those).</p>
+<p class="table-caption"><strong>Table 12.</strong> Per-drug comparison &mdash; final transfer vs zero-shot recomputed (honest disclosure).</p>
+<table>
+<tr><th>Drug</th><th>Final R</th><th>Final &rho;</th><th>Final AUC</th><th>Zero-shot R</th><th>Zero-shot &rho;</th><th>Zero-shot AUC</th><th>&Delta;R (Final &minus; Zero-shot)</th></tr>
+<tr><td>ATV/r</td><td>0.3761</td><td>0.3227</td><td>0.8644</td><td>0.7231</td><td>0.4117</td><td>0.9934</td><td>&minus;0.3470</td></tr>
+<tr><td>DRV/r</td><td>0.3619</td><td>0.2665</td><td>null</td><td>0.5610</td><td>0.3056</td><td>null</td><td>&minus;0.1991</td></tr>
+<tr><td>LPV/r</td><td>0.6241</td><td>0.4105</td><td>0.8984</td><td>0.6727</td><td>0.4270</td><td>0.9769</td><td>&minus;0.0486</td></tr>
+<tr><td>SQV/r</td><td>0.5440</td><td>0.3737</td><td>0.9668</td><td>0.8625</td><td>0.4068</td><td>0.9985</td><td>&minus;0.3185</td></tr>
+<tr><td><strong>Pooled</strong></td><td><strong>0.4454</strong></td><td><strong>0.3388</strong></td><td><strong>0.9267</strong></td><td><strong>0.2468</strong></td><td><strong>0.2557</strong></td><td>0.9648</td><td><strong>+0.1986</strong></td></tr>
+</table>
+<p class="table-caption"><strong>Table 13.</strong> ChEMBL OOF sanity check reproducing the locked benchmark anchor (same run).</p>
+<table>
+<tr><th>Drug</th><th>n</th><th>Pearson R</th><th>95% CI</th></tr>
+<tr><td>ATV/r</td><td>40</td><td>0.6125</td><td>[0.3817, 0.7928]</td></tr>
+<tr><td>DRV/r</td><td>40</td><td>0.8272</td><td>[0.7498, 0.8950]</td></tr>
+<tr><td>LPV/r</td><td>40</td><td>0.5440</td><td>[0.3024, 0.6976]</td></tr>
+<tr><td>SQV/r</td><td>40</td><td>0.7048</td><td>[0.4892, 0.8579]</td></tr>
+<tr><td><strong>MEAN (the locked 0.7018)</strong></td><td><strong>160</strong></td><td><strong>0.7018</strong></td><td><strong>[0.6246, 0.7887]</strong></td></tr>
+</table>
+<p>As a known-DRM concordance layer &mdash; an analysis-only validation asset per our data-governance rule; known-DRM information was never a training feature &mdash; we correlated predicted &Delta;G with known drug-resistance-mutation (DRM) counts per sequence (Table 14). Drug-specific counts correlate strongly (<strong>LPV/r 0.79, DRV/r 0.51, SQV/r 0.52, ATV/r 0.46; all p &lt; 1e-34</strong>); pooled, 0.54 against the global DRM score and 0.42 against drug-specific counts. Every mutation call of the PubMed-verified rule set was verified at the residue level (163/163, 100% agreement), and 100 of 653 clinical sequences carry &ge; 1 known DRM.</p>
+<p class="table-caption"><strong>Table 14.</strong> Known-DRM concordance layer &mdash; Pearson corr(predicted &Delta;G, known-DRM count). Analysis only; known-DRM information never entered any model.</p>
+<table>
+<tr><th>Drug</th><th>n</th><th>Pearson r (drug-specific DRM count)</th><th>Pearson p</th><th>Spearman &rho;</th></tr>
+<tr><td>ATV/r</td><td>654</td><td>0.4596</td><td>1.73e-35</td><td>0.3601</td></tr>
+<tr><td>DRV/r</td><td>654</td><td>0.5117</td><td>6.21e-45</td><td>0.3393</td></tr>
+<tr><td>LPV/r</td><td>654</td><td><strong>0.7898</strong></td><td>1.56e-140</td><td>0.5515</td></tr>
+<tr><td>SQV/r</td><td>654</td><td>0.5194</td><td>1.85e-46</td><td>0.3032</td></tr>
+<tr><td><strong>Pooled &mdash; global DRM score</strong></td><td>2,616</td><td>0.5387</td><td>8.44e-197</td><td>0.4325</td></tr>
+<tr><td><strong>Pooled &mdash; drug-specific DRM count</strong></td><td>2,616</td><td>0.4204</td><td>1.50e-112</td><td>0.3789</td></tr>
+</table>
+<p>The per-drug DRM correlations in Table 14 rest on n=654 rows (one per sequence) and are interpretable as such; the pooled rows reuse the same 654 sequences across four drugs and are therefore not independent, so the per-drug effect sizes are the primary evidence and the pooled p-values are not interpreted literally.</p>
+<p>Two findings are reported for completeness rather than claimed. First, the model does <strong>not</strong> reproduce the literature-verified I82F HIV-2 hypersusceptibility override for DRV/r: the five I82F-only rows are ranked on the <em>resistant</em> end of the DRV/r distribution (mean rank 82.4/654 vs 341.2/654 for the rest; Table 15). Because I82F carriers co-carry other known DRMs and n = 5, this is a documented directional model-vs-knowledge disagreement, not a conclusion. Second, the DRV/r ROC-AUC is <strong>null</strong> (Table 11): the clinical resource contains zero DRV/r-resistant rows, so a resistance-class AUC is undefined for this drug; the pooled AUC remains defined on the other three drugs.</p>
+<p class="table-caption"><strong>Table 15.</strong> I82F &rarr; DRV/r hypersusceptibility caveat (reported, NOT claimed; n=5 I82F-only rows; directional finding only).</p>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>n rows (DRV/r)</td><td>654</td></tr>
+<tr><td>n I82F-any / n I82F-only</td><td>32 / 5</td></tr>
+<tr><td>Mean rank, I82F-any (1 = most resistant)</td><td>61.1 / 654</td></tr>
+<tr><td>Mean rank, I82F-only</td><td>82.4 / 654</td></tr>
+<tr><td>Mean rank, rest</td><td>341.2 / 654</td></tr>
+<tr><td>Mean clinical penalty, I82F-any vs rest</td><td>0.62 vs 0.55</td></tr>
+</table>
+<p>Finally, the pooled clinical R = 0.4454 must not be read as comparable to the ChEMBL out-of-fold R = 0.7018. The two measure different targets: the ChEMBL benchmark is <strong>in-distribution</strong> (out-of-fold rows from the same 160-row panel, target = measured &Delta;G), whereas the clinical evaluation is <strong>out-of-distribution genotype&ndash;phenotype transfer</strong> (2,616 never-seen sequences scored against the Stanford penalty score &mdash; an interpretive, discretized, near-zero-inflated proxy, 40 of 2,550 rows resistant, not a measured affinity). Two cautions follow. First, the pooled Pearson correlation is not a common estimand across the two models: it mixes within-drug signal with between-drug score scale, which is why the zero-shot model's pooled R (0.2468) falls below its own lowest per-drug R (0.5610) while the transfer model's pooled R (0.4454) lies inside its per-drug range; the pooled figures are therefore treated as descriptive and interpretation rests on the per-drug estimates. Second, Spearman falls below Pearson at every level (pooled 0.3388 vs 0.4454), consistent with the zero-inflated penalty distribution and drug-specific score compression (DRV/r has no resistant rows), so rank and linear agreement differ; class discrimination is reported separately as ROC-AUC and is not interpreted as a between-model difference. The defensible reading is that the HIV-1-derived representation transfers to HIV-2 clinical genotype&ndash;phenotype data &mdash; recovering a positive, drug-dependent signal with no clinical label entering training &mdash; with benchmark-grade accuracy demonstrated only in-distribution.</p>
+
+<!-- 4 DISCUSSION -->
+<h2>4 Discussion</h2>
+
+<h3>4.1 First ML/DL Predictor for HIV-2 PI Resistance</h3>
+<p>This study presents the first machine-learning framework for HIV-2 protease inhibitor resistance prediction built on cross-species transfer learning. A systematic literature sweep (PubMed, arXiv, Google Scholar; through August 2026) found no prior published work performing ML or DL drug-resistance prediction for HIV-2 protease, nor HIV-1&rarr;HIV-2 cross-species transfer learning for resistance prediction. Adjacent works remain HIV-1-only, rule-based, or wet-lab: Charpentier <em>et al.</em> (2025) developed the rule-based HIV-2EU interpretation tool [19]; Raugi <em>et al.</em> (2026) conducted wet-lab HIV-2 phenotypic studies [20]; Farquhar <em>et al.</em> (2026) benchmarked ESM-2 for HIV-1 drug resistance [21]; and Parbhoo <em>et al.</em> (2020) transferred HIV-1 genotypic signal between populations of the same species [22].</p>
+<p><strong>Relationship to existing HIV-2 interpretation tools.</strong> HIV-2 resistance interpretation currently relies on rule-based systems&mdash;HIV-2EU [19] and the Stanford HIVDB penalty score used here as the clinical target&mdash;which encode expert-curated mutation&ndash;drug rules. Our model is complementary rather than a replacement: it is trained only on measured HIV-1 binding affinities, requires no HIV-2 rule set, and yet recovers a drug-specific signal in held-out HIV-2 clinical data from sequence alone. Because the clinical target is itself the HIVDB rule, the present evaluation establishes that a transferred sequence model <em>reproduces</em> that rule's drug-specific signal rather than that it <em>outperforms</em> the rule. We have therefore taken the comparison one step further, on a target that is measured rather than rule-derived: on the HIV-2 ChEMBL panel the fine-tuned transfer model significantly outperforms a Stanford-derived rule-based HIV-2 interpretation (&sect;3.6; R=0.7018 vs 0.4724; &Delta;R=+0.229; P(&Delta;R&le;0)=0.001), while the zero-shot model does not. The coverage analysis of &sect;3.7 sharpens this further: the rule-based interpretation assigns a zero score to 93.1% of clinical isolates, and the official HIV-2EU v4 rules define no protease interpretation at all for 6 of the 8 clinical drugs while leaving 83.1% of the measured panel unscored. Whatever signal the clinical benchmark appears to carry therefore rests on a small minority of isolates&mdash;whereas the learned model supplies ranking information precisely where the rule is silent (R=0.585 on the 116 rule-blind measured rows, P&lt;0.001; positive in 100% of leave-one-sequence-out folds). A comparison against the official HIV-2EU tool's own output, and ultimately prospective phenotypic validation, remain the natural next steps and the principal route to clinical utility.</p>
+
+<h3>4.2 Cross-Species Transfer is Feasible</h3>
+<p>Cross-species drug resistance prediction from HIV-1 to HIV-2 first requires that biophysical signal survives the ~50% sequence divergence (51 of 99 positions divergent between HXB2 and ROD). The zero-shot result (R=0.5163, transfer ratio 0.699) demonstrates that it does. Fine-tuning the HIV-1 pre-trained model on HIV-2 ChEMBL data then raises the benchmark to R=0.7018 &mdash; above the fully supervised within-HIV-2 model (0.6779) and far above pure zero-shot transfer (0.2492). External clinical validation supports a more qualified conclusion: on 2,616 never-seen clinical rows the transfer model recovers a positive, drug-dependent resistance signal (per-drug Pearson R=0.36&ndash;0.62; pooled ROC-AUC=0.927) without any clinical label entering training, demonstrating that HIV-1-derived representation transfers to HIV-2 clinical genotype&ndash;phenotype data. Most directly, on <em>measured</em> HIV-2 binding affinities the fine-tuned model significantly outperforms a Stanford-derived rule-based HIV-2 interpretation (&sect;3.6; &Delta;R=+0.229; P(&Delta;R&le;0)=0.001), the clearest evidence that the transferred representation carries information beyond what the existing rule encodes. We do not claim that fine-tuning improves per-drug clinical accuracy: the same-space zero-shot baseline correlates more strongly within every drug and records a numerically higher pooled AUC (0.9648 vs 0.9267), while the transfer fine-tune shows the higher pooled Pearson/Spearman &mdash; a between-drug calibration effect we report but do not over-interpret (&sect;3.8). Pocket-restricted models (R=0.5014&ndash;0.5036) perform comparably to but do not exceed the global model on the curated corpus, so restriction to the pocket is not advantageous here.</p>
+
+<h3>4.3 Protein Language Model Features</h3>
+<p>Protein language model embeddings (ESM-2 650M [18]) contribute to the transfer pipeline as a complementary feature view: the standalone ESM-2 fine-tune reaches R=0.6759 and the blended view R=0.6994 on the benchmark panel (Table 5). Pocket-19 feature masking additionally isolates the 19 pocket residues; ranking the 19 pocket positions by summed Random-Forest feature importance computed on per-residue ESM-2 650M embeddings restricted to the pocket (19 &times; 1,280 blocks; n=1,882 HIV-1 sequences; an internal feature-importance analysis), the top five pocket positions [54, 84, 28, 48, 26] capture 72.4% of the total feature-importance mass across the pocket-19 set, pointing to a compact mechanistic core for resistance. We note that ESM-2 650M was pre-trained on the UniRef50 protein database, which may include HIV protease sequences; the ESM-2 feature views are therefore not strictly zero-shot with respect to HIV, whereas the headline zero-shot result (R=0.5163, Table 4) uses only the biophysical descriptor space and is unaffected. In contrast, ProtBERT embeddings were markedly weaker in an earlier pipeline revision (R=0.163) and were not carried forward.</p>
+
+<h3>4.4 Sequence Divergence and Species-Specific Features</h3>
+<p>The 51/99 divergent positions (48.5% identity) between HIV-1 (HXB2) and HIV-2 (ROD) wildtype references represent substantial domain shift. ONION-Net structural contact features computed from HIV-1 structures do not transfer (best PCA fusion R=0.4703), confirming that HIV-1-specific structural geometry does not generalise. However, ONION-Net features computed on HIV-2 docked complexes add value as a residual-correction stage (corrected R=0.6694, R&sup2;=0.4385, n=136; reproducible evaluation manifest), demonstrating that species-appropriate structural features can improve predictions. The ONION benchmark-stack variants computed on the ChEMBL panel (R=0.6887, 0.6872, 0.6910; Table 5) are reported as benchmark results rather than clinical claims.</p>
+
+<h3>4.5 Limitations</h3>
+<p>Several limitations warrant discussion: (a) the clinical validation cohort comprises 2,616 rows = 654 sequence entries &times; 4 PIs (the four-drug common-PI subset of the 5,232-row, 8-PI master cohort), and the same sequence may appear under multiple drugs; (b) the pooled clinical R=0.4454 is not directly comparable to the ChEMBL OOF R=0.7018 &mdash; the former is out-of-distribution genotype&ndash;phenotype transfer onto a discretized, near-zero-inflated penalty-score target, while the latter is an in-distribution benchmark on measured &Delta;G; this genotype&ndash;phenotype gap is the recognized real-world challenge for resistance predictors; (c) Spearman correlation falls below Pearson at every level (pooled 0.3388 vs 0.4454), consistent with the zero-inflated penalty distribution and drug-specific score compression (DRV/r has no resistant rows); the two statistics are complementary and class discrimination is reported as ROC-AUC; (d) the same-space zero-shot baseline shows a higher correlation <em>within every drug</em> and a higher pooled ROC-AUC, so per-drug clinical superiority of the transfer model is explicitly not claimed (the pooled Pearson/Spearman advantage is a between-drug calibration effect, not a within-drug accuracy gain; the pooled AUC gap is within sampling noise); (e) 1,500 synthetic rows were excluded from the training corpus; (f) pocket-restricted models do not improve over the global model on curated data; (g) within-HIV-2 drug-holdout performance (mean R=0.851) measures drug-transfer (same mutants, unseen drug), NOT unseen-sequence generalization; (h) deep-learning results (GNN, DBPT+, ProtBERT) are from an earlier pipeline revision and were not rerun (CPU-only constraint); (i) ESM-2 embeddings for novel mutants are an approximation of the true mutational effect; (j) the clinical target is the HIVDB penalty score, which is itself a rule-based interpretation: predicting it demonstrates that sequence alone recovers the rule's drug-specific signal, but is not independent phenotypic validation. We do compare against rule-based interpretation on <em>measured</em> binding affinity (&sect;3.6), using both a faithful re-implementation of the published Stanford HIV-2 penalty tables and the published HIV-2EU v4 rules; however, neither comparator was executed through the official HIV-2EU binary, and the HIV-2EU comparison is a re-implementation from the 2025 publication rather than a run of the deployed tool; (k) the measured-phenotype head-to-head rests on <strong>19 unique sequences</strong> (116 rule-blind rows comprise 15 unique sequences), so the effective sample size is small; a leave-one-sequence-out jackknife shows the result is not driven by any single sequence (model ahead in 100% of folds), but this remains a robustness check rather than an independent replication; (l) all measured data are previously published third-party assays &mdash; no new wet-lab experiments were performed, and there is no prospective phenotypic validation in which the model's predictions were tested forward against subsequent measurements.</p>
+<!-- 5 CONCLUSION -->
+<h2>5 Conclusion</h2>
+<p>We present the first computational framework for HIV-2 protease inhibitor resistance prediction based on cross-species transfer learning from HIV-1, validated on measured binding affinities and on never-seen clinical genotype&ndash;phenotype data. Key findings: (1) cross-species zero-shot transfer is feasible despite ~50% protease divergence (R=0.5163, transfer ratio 0.70); (2) fine-tuning the HIV-1 pre-trained model on HIV-2 ChEMBL data raises the out-of-fold benchmark correlation to R=0.7018 (95% CI [0.6246, 0.7887]), above the supervised-only model (0.6779); (3) on <em>measured</em> HIV-2 binding affinities the fine-tuned model significantly outperforms a Stanford-derived rule-based HIV-2 interpretation (0.7018 vs 0.4724; &Delta;R=+0.229; P(&Delta;R&le;0)=0.001) and is higher on every drug, whereas the zero-shot model is not&mdash;establishing that a learned cross-species model can exceed rule-based interpretation on measured phenotypes; (4) the rule-based interpretation against which such tools are conventionally assessed is sparse&mdash;and this holds for the official HIV-2EU v4 rules as well as our Stanford-derived baseline: HIV-2EU leaves 83.1% of the measured panel unscored, defines no protease rules for 6 of 8 clinical drugs, covers 5 of 37 observed mutations, and the clinical benchmark scores zero for 93.1% of isolates; on the 116 measured rows the rule leaves unranked the transferred model still recovers a significant signal (R=0.585, P&lt;0.001; positive in 100% of leave-one-sequence-out folds); (5) external clinical validation on 2,616 never-seen clinical rows recovers a positive, drug-dependent signal without any clinical label entering training (per-drug R=0.36&ndash;0.62; pooled ROC-AUC=0.927), which we interpret as honest evidence of transfer and deliberately do not frame as per-drug clinical superiority over the same-space zero-shot baseline; and (6) predicted binding free energies track known drug-resistance-mutation counts (drug-specific correlations up to 0.79 for LPV/r). These results establish cross-species transfer learning as a viable route to HIV-2 resistance prediction, identify the coverage gap in current rule-based interpretation that a learned model can fill, and position the framework for prospective clinical evaluation.</p>
+<p>The complete analysis&mdash;feature-extraction utilities, the cross-species transfer and fine-tuning pipeline, the locked external clinical-validation script, the head-to-head rule comparison, and every result manifest reported here&mdash;together with the curated HIV-1 training corpus, the HIV-2 ChEMBL panel, and the derived clinical feature matrix, is openly available at <a href="https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1">https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1</a>. The repository includes a README documenting the software environment, the checksums of all input data, and step-by-step instructions that regenerate every reported number.</p>
+<p>The <code>RESCUE/</code> directory in the repository contains all verified analysis artifacts, hashes, and manifests referenced above.</p>
+
+<!-- ACKNOWLEDGMENTS -->
+<h2>Acknowledgments</h2>
+<p>The author thanks <strong>Dr. Vasavi</strong> (Department of Artificial Intelligence &amp; Engineering, Amrita Vishwa Vidyapeetham, Bengaluru) for project guidance and mentorship. This work was conducted as part of the B.Tech AIE curriculum at Amrita Vishwa Vidyapeetham, Bengaluru campus. Computational resources were provided by the Department of AIE research computing facility.</p>
+<p><strong>Funding:</strong> This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p>
+<p><strong>Conflict of Interest:</strong> The author declares no competing interests.</p>
+
+<!-- REFERENCES -->
+<h2>References</h2>
+<div class="ref-list">
+<p>[1] Moranguinho I, Taveira N, Bartolo I. Antiretroviral Treatment of HIV-2 Infection: Available Drugs, Resistance Pathways, and Promising New Compounds. <em>Int J Mol Sci</em>. 2023;24(6):5905. doi:10.3390/ijms24065905</p>
+<p>[2] Laville P, Petitjean M, Regad L. Structural impacts of drug-resistance mutations in HIV-2 protease. <em>Molecules</em>. 2021;26(3):611. doi:10.3390/molecules26030611</p>
+<p>[3] Steiner MC, Gibson KM, Crandall KA. Drug resistance prediction using deep learning on HIV-1 sequence data. <em>Viruses</em>. 2020;12(5):560. doi:10.3390/v12050560</p>
+<p>[4] Shen C, Yu X, Harrison RW, Weber IT. Automated prediction of HIV drug resistance from genotype data. <em>BMC Bioinformatics</em>. 2016;17(Suppl 8):278. doi:10.1186/s12859-016-1114-6</p>
+<p>[5] PhenoGenX: A Dual-Engine, Data-Driven Platform for HIV-1 Drug Resistance Interpretation Integrating Ensemble Machine Learning and Rule-Based Algorithms. <em>Research Square</em> preprint rs-9056343/v1, 2026. doi:10.21203/rs.3.rs-9056343/v1 (preprint)</p>
+<p>[6] Raugi DN, Smith RA, Gottlieb GS, UW-Dakar HIV-2 Study Group. Four Amino Acid Changes in HIV-2 Protease Confer Class-Wide Sensitivity to Protease Inhibitors. <em>J Virol</em>. 2016;90(2):1062&ndash;1069. doi:10.1128/JVI.01772-15</p>
+<p>[7] Riveros Maidana RLB, de Almeida Machado L, Ramos Guimaraes AC. Benchmarking Machine Learning Models for HIV-1 Protease Inhibitor Resistance Prediction: Impact of Data Set Construction and Feature Representation. <em>J Chem Inf Model</em>. 2025;65(19):10037&ndash;10053. doi:10.1021/acs.jcim.5c01544</p>
+<p>[8] Hellberg S, Sjostrom M, Skagerberg B, Wold S. Peptide quantitative structure-activity relationships, a multivariate approach. <em>J Med Chem</em>. 1987;30(7):1126&ndash;1135. doi:10.1021/jm00390a003</p>
+<p>[9] Kidera A, Konishi Y, Oka M, Ooi T, Scheraga HA. Statistical analysis of the physical properties of amino acids. <em>J Protein Chem</em>. 1985;4(1):23&ndash;55. doi:10.1007/BF01025492</p>
+<p>[10] Mei H, Liao ZH, Zhou Y, Li SZ. A new set of amino acid descriptors and its application in peptide QSARs. <em>Biopolymers (Peptide Science)</em>. 2005;80(6):775&ndash;786. doi:10.1002/bip.20296</p>
+<p>[11] Sandberg M, Eriksson L, Jonsson J, Sjostrom M, Wold S. New chemical descriptors relevant for the design of biologically active peptides. <em>J Med Chem</em>. 1998;41(13/14):2481&ndash;2491. doi:10.1021/jm9700575</p>
+<p>[12] Zheng L, Fan J, Mu Y. OnionNet: a multiple-layer intermolecular-contact-based convolutional neural network for protein-ligand binding affinity prediction. <em>ACS Omega</em>. 2019;4(14):15956&ndash;15965. doi:10.1021/acsomega.9b01997</p>
+<p>[13] Elnaggar A, Heinzinger M, Dallago C, et al. ProtTrans: Towards cracking the language of life's code through self-supervised deep learning and high performance computing. <em>IEEE Trans Pattern Anal Mach Intell</em>. 2022;44(10):7112&ndash;7127. doi:10.1109/TPAMI.2021.3095381</p>
+<p>[14] Tao K, Zhou J, Nagarajan P, Tzou PL, Shafer RW. A comprehensive, manually curated, and web-accessible database of HIV-1 drug resistance. <em>Antiviral Res</em>. 2024;230:105988. doi:10.1016/j.antiviral.2024.105988</p>
+<p>[15] Breiman L. Random Forests. <em>Machine Learning</em>. 2001;45(1):5&ndash;32. doi:10.1023/A:1010933404324</p>
+<p>[16] Chen T, Guestrin C. XGBoost: A scalable tree boosting system. <em>KDD 2016</em>. 2016:785&ndash;794. doi:10.1145/2939672.2939785</p>
+<p>[17] Kipf TN, Welling M. Semi-Supervised Classification with Graph Convolutional Networks. <em>ICLR 2017</em>. arXiv:1609.02907</p>
+<p>[18] Lin Z, Akin H, Rao R, Hie B, et al. Evolutionary-scale prediction of atomic-level protein structure with a language model. <em>Science</em>. 2023;379(6637):1123&ndash;1130. doi:10.1126/science.ade2574</p>
+<p>[19] Charpentier C, Berzow D, Le Hingrat Q, et al. HIV-2 EU&mdash;Supporting Standardized HIV-2 Drug Resistance Interpretation: An Update. <em>Clin Infect Dis</em>. 2025;81(3):539&ndash;542. doi:10.1093/cid/ciaf110</p>
+<p>[20] Raugi DN, Nixon RS, Smith RA, Hawes SE, Diallo K, Diallo MB, et al. Phenotypic impacts of treatment-selected mutations in HIV-2 protease on darunavir and lopinavir susceptibility: Evaluating genotypic HIV-2 drug resistance tools. <em>PLOS Glob Public Health</em>. 2026;6(2):e0005743. doi:10.1371/journal.pgph.0005743</p>
+<p>[21] Farquhar H. Protein language model embeddings improve HIV drug resistance prediction: a comprehensive benchmark with attention-based interpretability. <em>Bioinformatics</em>. 2026;42(5):btag260</p>
+<p>[22] Parbhoo S, Wieser M, Roth V, Doshi-Velez F. Transfer learning from well-curated to less-resourced populations with HIV. <em>Proceedings of the 5th Machine Learning for Healthcare Conference</em>. PMLR. 2020;126:589&ndash;609</p>
+</div>
+<!-- SUPPLEMENTARY MATERIALS -->
+<h2>Supplementary Materials</h2>
+<table class="supp-table">
+<tr><th>Table/Figure</th><th>Description</th></tr>
+<tr><td>Table S1</td><td>Complete zero-shot tier results with all metrics and confidence intervals (curated corpus)</td></tr>
+<tr><td>Table S2</td><td>Per-drug zero-shot cross-species performance for all model tiers (context only)</td></tr>
+<tr><td>Table S3</td><td>External clinical validation &mdash; full results on the 4-drug/2,616-row subset (Tables 7&ndash;12 content)</td></tr>
+<tr><td>Table S4</td><td>Feature ablation results (biochemistry vs. ProtBERT vs. combined vs. pocket)</td></tr>
+<tr><td>Table S5</td><td>Within-HIV-2 drug-holdout transfer (R5, 17 sequences/drug, all shared) &mdash; labeled drug-transfer only</td></tr>
+<tr><td>Table S6</td><td>Training data scaling analysis (0.513/0.478/0.466/0.521/0.516)</td></tr>
+<tr><td>Table S7</td><td>Pocket-restricted feature optimisation: ADD-GHI (0.5014) and B1 (0.5036); pocket-19 masking (399-D; top-5 [54, 84, 28, 48, 26])</td></tr>
+<tr><td>Table S8</td><td>ONION-Net PCA sweep results (earlier pipeline revision; reported for context only)</td></tr>
+<tr><td>Table S9</td><td>Transfer-learning benchmark variants, with full per-drug values</td></tr>
+<tr><td>Figure S1</td><td>Model comparison with bootstrap confidence intervals</td></tr>
+<tr><td>Figure S2</td><td>Per-drug bar chart comparison</td></tr>
+<tr><td>Figure S3</td><td>Parity plot (predicted vs. actual &Delta;G) for the final cross-species transfer model</td></tr>
+<tr><td>Figure S4</td><td>External clinical validation &mdash; predicted &Delta;G vs. HIVDB penalty score (final transfer model, 4 drugs)</td></tr>
+<tr><td>Figure S5</td><td>Few-shot learning curves</td></tr>
+<tr><td>Figure S6</td><td>Feature ablation bar chart</td></tr>
+<tr><td>Figure S7</td><td>Leave-one-drug-out heatmap (R5 drug-transfer)</td></tr>
+<tr><td>Figure S8</td><td>Per-residue importance bar chart</td></tr>
+<tr><td>Figure S9</td><td>Training scaling curve</td></tr>
+<tr><td>Figure S10</td><td>ONION-Net PCA sweep: Pearson R vs number of components</td></tr>
+<tr><td>Figure S11</td><td>Pocket residue diagram on 3S45 structure (conserved vs divergent)</td></tr>
+<tr><td>Code S1</td><td>Pocket-restricted feature optimisation pipeline</td></tr>
+<tr><td>Code S2</td><td>Structural-contact (ONION-Net) evaluation pipeline</td></tr>
+<tr><td>Code S3</td><td>PCA-fusion experiment (documented negative result; not runnable)</td></tr>
+<tr><td>Code S4</td><td>Locked external clinical validation and known-DRM consistency layer</td></tr>
+<tr><td>Code S5</td><td>Cross-species transfer fine-tuning and rule-based head-to-head comparison</td></tr>
+</table>
+
+<p style="text-align:center; margin-top:24pt; font-size:9pt; color:#888;">&mdash; End of Manuscript &mdash;</p>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+{
+  "pipeline": "RESCUE/metrics_reruns.py",
+  "timestamp": "2026-08-16 14:01:25",
+  "input_hashes": {
+    "STANFORD_HIV1_GENUINE.csv": "692e3d2b3ffcd43bd186458a97a9b572c7b6c9f0287ff9f51f3aeb75bcca9ab0",
+    "STANFORD_HIV1_SYNTHETIC_QUARANTINED.csv": "46afba37667bb6366fc6161e09d2e99766632bf6ca918a7fb0bf25d1b52f8d40",
+    "HIV2_PROTEASE_ML_READY_DATASET.csv": "7f34b7a2b467e5eadd2e02aa3ee141a749e93aa4cd99145858b9dafded9b093d",
+    "3S45.pdb": "37cf6cbdfd6c414c7467632f803408bf84a4563aca7fb87f9cb3a6a95f87298e",
+    "hiv1_onionnet_features.npz": "6dbe1cff7ddc29bb8779ab5db532227e383855cdfa078b341266b6a13957bc24",
+    "docked_onionnet_features.npz": "55368a737e3980fc5a4c1ab3c3b0cfd3a9a4ed82234b8f6d5f07f91f86616615",
+    "sequence_to_pdb.csv": "a136c7c9608019447053a334669843b3af1e34add24f1ddd09decd4b04d190fb",
+    "config.py": "4aaf598f435bde00f8e0c4fd2cef380e67539cc086e4da41ae9800d024d229f9"
+  },
+  "reference_fix": "HIV2_WT from opencode_shared/config.py (A92, verified vs NCBI M15390.1) used throughout; S92->A92 changes 0 conservation-filter positions (48 identical either way).",
+  "sign_convention": "target = deltaG kcal/mol (negative = tighter); see RESCUE/SIGN_CONVENTION.md",
+  "reruns": [
+    {
+      "name": "R1 pocket-restricted ADD-GHI (honest, genuine-only)",
+      "status": "rerun",
+      "legacy_value": {
+        "pearson_r": 0.592,
+        "rmse": 2.1904,
+        "origin": "results.txt / PAPER_ADDITIONS_V3_REPORT.md (trained on poisoned 7,183-row corpus)"
+      },
+      "metrics": {
+        "n": 137,
+        "pearson_r": 0.5014,
+        "pearson_p": 4.333060912655938e-10,
+        "spearman_rho": 0.5752,
+        "rmse": 1.6861,
+        "mae": 1.3485
+      },
+      "bootstrap_ci_95": {
+        "ci_lower": 0.383,
+        "ci_upper": 0.6182
+      },
+      "config": {
+        "rf": "n_estimators=400, max_depth=14, min_samples_leaf=2, seed 42",
+        "features": "23D/res (5D Z-scales+Kidera+VHSE) over BASE_POSITIONS=34 pos + Delaunay 210-D",
+        "target_weights": "inverse density, bins=10, normalized",
+        "dedup": "median affinity per unique sequence (legacy rule)",
+        "identical_positions": 48
+      },
+      "note": "S92->A92 reference fix does NOT change the conservation filter: 48 identical positions either way (verified). Legacy script line 250 references an undefined RT variable; this run uses compute_ic50_to_delta_g (RT=0.593, 298K).",
+      "input_files": [
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\STANFORD_HIV1_GENUINE.csv",
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\HIV2_PROTEASE_ML_READY_DATASET.csv",
+        "D:\\desktop\\BIO PROJECT HIV-2\\advanced_feature_extraction\\3S45.pdb",
+        "D:\\desktop\\BIO PROJECT HIV-2\\opencode_shared\\config.py"
+      ]
+    },
+    {
+      "name": "R2 ONION-Net PCA downstream \u2014 B1 pocket-5D (honest)",
+      "status": "rerun",
+      "legacy_value": {
+        "pearson_r": 0.5915,
+        "origin": "POCKET_ONIONNET_PCA_REPORT.md B1 (aligned subset, poisoned corpus)"
+      },
+      "metrics": {
+        "n": 137,
+        "pearson_r": 0.5036,
+        "pearson_p": 3.5627559646428345e-10,
+        "spearman_rho": 0.5752,
+        "rmse": 1.6862,
+        "mae": 1.3489
+      },
+      "bootstrap_ci_95": {
+        "ci_lower": 0.3847,
+        "ci_upper": 0.6202
+      },
+      "config": {
+        "features": "23D/res over BASE_POSITIONS=34 (no Delaunay)",
+        "rf": "n_estimators=400, max_depth=14, seed 42",
+        "target_weights": "inverse density, bins=10"
+      },
+      "pca_fusion_documented_failed": {
+        "reason": "Legacy script run_pocket_onionnet_pca.py calls pca.fit(X1_onion).transform(X2_onion); on-disk npz dims differ (hiv1=10309, hiv2=10478) so it cannot execute. Additionally the 2026-06-22 report itself shows every PCA config HURT (best fusion PCA-20 R=0.4703 < B1 0.5915)."
+      },
+      "input_files": [
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\STANFORD_HIV1_GENUINE.csv",
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\HIV2_PROTEASE_ML_READY_DATASET.csv",
+        "D:\\desktop\\BIO PROJECT HIV-2\\advanced_feature_extraction\\3S45.pdb",
+        "D:\\desktop\\BIO PROJECT HIV-2\\opencode_shared\\config.py",
+        "D:\\desktop\\BIO PROJECT HIV-2\\advanced_feature_extraction\\onionnet_features\\hiv1_onionnet_features.npz",
+        "D:\\desktop\\BIO PROJECT HIV-2\\advanced_feature_extraction\\docked_complexes\\docked_onionnet_features.npz"
+      ]
+    },
+    {
+      "name": "R3 few-shot curve 50/100/200/500 (honest, genuine-only)",
+      "status": "rerun",
+      "legacy_value": {
+        "pearson_r": 0.5806,
+        "n": 500,
+        "origin": "Tier5_comprehensive_results.json scaling row (poisoned corpus)"
+      },
+      "curve": [
+        {
+          "n": 137,
+          "pearson_r": 0.5092,
+          "pearson_p": 2.099156470990889e-10,
+          "spearman_rho": 0.4161,
+          "rmse": 1.6195,
+          "mae": 1.3024,
+          "n_train": 50,
+          "legacy_peak_at_500": 0.5806
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.373,
+          "pearson_p": 7.141211404609202e-06,
+          "spearman_rho": 0.2812,
+          "rmse": 1.7131,
+          "mae": 1.3763,
+          "n_train": 100,
+          "legacy_peak_at_500": 0.5806
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.3222,
+          "pearson_p": 0.0001234272326084735,
+          "spearman_rho": 0.2842,
+          "rmse": 1.5662,
+          "mae": 1.2878,
+          "n_train": 200,
+          "legacy_peak_at_500": 0.5806
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.4723,
+          "pearson_p": 5.673024167986911e-09,
+          "spearman_rho": 0.3304,
+          "rmse": 1.546,
+          "mae": 1.2732,
+          "n_train": 500,
+          "legacy_peak_at_500": 0.5806
+        }
+      ],
+      "config": {
+        "rf": {
+          "n_estimators": 600,
+          "max_depth": 20,
+          "min_samples_leaf": 2,
+          "min_samples_split": 5,
+          "max_features": "sqrt",
+          "n_jobs": -1,
+          "random_state": 42
+        },
+        "features": "2079-D biochem (include_stats=False)",
+        "sampling": "fixed seed 42, without replacement"
+      },
+      "input_files": [
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\STANFORD_HIV1_GENUINE.csv",
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\HIV2_PROTEASE_ML_READY_DATASET.csv"
+      ]
+    },
+    {
+      "name": "R4 scaling curve 500..full (honest, genuine-only)",
+      "status": "rerun",
+      "legacy_value": {
+        "500": 0.5806,
+        "1000": 0.5178,
+        "2000": 0.4109,
+        "4000": 0.4472,
+        "7183": 0.5044,
+        "origin": "Tier5_comprehensive_results.json E2 (poisoned corpus)"
+      },
+      "curve": [
+        {
+          "n": 137,
+          "pearson_r": 0.5129,
+          "pearson_p": 1.481791342002595e-10,
+          "spearman_rho": 0.5733,
+          "rmse": 1.6757,
+          "mae": 1.3578,
+          "n_train": 500
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.4777,
+          "pearson_p": 3.5790751441747527e-09,
+          "spearman_rho": 0.3205,
+          "rmse": 1.5646,
+          "mae": 1.2766,
+          "n_train": 1000
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.4664,
+          "pearson_p": 9.267478709377563e-09,
+          "spearman_rho": 0.319,
+          "rmse": 1.6444,
+          "mae": 1.3222,
+          "n_train": 2000
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.5208,
+          "pearson_p": 6.882105557240311e-11,
+          "spearman_rho": 0.5107,
+          "rmse": 1.5895,
+          "mae": 1.2766,
+          "n_train": 4000
+        },
+        {
+          "n": 137,
+          "pearson_r": 0.5155,
+          "pearson_p": 1.1453981530491515e-10,
+          "spearman_rho": 0.5499,
+          "rmse": 1.6163,
+          "mae": 1.2996,
+          "n_train": 5683
+        }
+      ],
+      "config": {
+        "rf": {
+          "n_estimators": 600,
+          "max_depth": 20,
+          "min_samples_leaf": 2,
+          "min_samples_split": 5,
+          "max_features": "sqrt",
+          "n_jobs": -1,
+          "random_state": 42
+        },
+        "features": "2079-D biochem",
+        "sampling": "fixed seed 42, without replacement"
+      },
+      "note": "Legacy full-corpus point used all 7,183 (incl. 1,500 synthetic); honest full point uses 5,683 genuine.",
+      "input_files": [
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\STANFORD_HIV1_GENUINE.csv",
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\HIV2_PROTEASE_ML_READY_DATASET.csv"
+      ]
+    },
+    {
+      "name": "R5 within-HIV-2 drug-holdout (honest, per-drug)",
+      "status": "rerun",
+      "legacy_value": {
+        "origin": "No exact legacy equivalent; DeepTernary homodimer within-HIV-2 CV R=0.3709 is the closest manuscript number (different protocol)"
+      },
+      "aggregate": {
+        "mean_pearson_r": 0.851,
+        "std_pearson_r": 0.1111,
+        "median_pearson_r": 0.8942,
+        "n_drugs": 8
+      },
+      "per_drug": [
+        {
+          "n": 17,
+          "pearson_r": 0.9297,
+          "pearson_p": 6.753250565290482e-08,
+          "spearman_rho": 0.8074,
+          "rmse": 1.3615,
+          "mae": 1.2732,
+          "held_out_drug": "AMPRENAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.6771,
+          "pearson_p": 0.0028274792378903757,
+          "spearman_rho": 0.5713,
+          "rmse": 1.0424,
+          "mae": 0.8441,
+          "held_out_drug": "ATAZANAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.878,
+          "pearson_p": 3.5969685661745952e-06,
+          "spearman_rho": 0.7642,
+          "rmse": 1.3387,
+          "mae": 1.178,
+          "held_out_drug": "DARUNAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.9103,
+          "pearson_p": 3.949485793918616e-07,
+          "spearman_rho": 0.8324,
+          "rmse": 1.0256,
+          "mae": 0.9304,
+          "held_out_drug": "INDINAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.6621,
+          "pearson_p": 0.00378357481158905,
+          "spearman_rho": 0.7874,
+          "rmse": 1.2709,
+          "mae": 0.9478,
+          "held_out_drug": "LOPINAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.9441,
+          "pearson_p": 1.264390854063393e-08,
+          "spearman_rho": 0.7574,
+          "rmse": 0.7818,
+          "mae": 0.631,
+          "held_out_drug": "NELFINAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.8393,
+          "pearson_p": 2.5269693184592142e-05,
+          "spearman_rho": 0.8245,
+          "rmse": 1.3214,
+          "mae": 1.1536,
+          "held_out_drug": "SAQUINAVIR",
+          "n_train": 120,
+          "n_test": 17
+        },
+        {
+          "n": 17,
+          "pearson_r": 0.9672,
+          "pearson_p": 2.4616170968514143e-10,
+          "spearman_rho": 0.8396,
+          "rmse": 1.0053,
+          "mae": 0.8919,
+          "held_out_drug": "TIPRANAVIR",
+          "n_train": 120,
+          "n_test": 17
+        }
+      ],
+      "config": {
+        "rf": {
+          "n_estimators": 600,
+          "max_depth": 20,
+          "min_samples_leaf": 2,
+          "min_samples_split": 5,
+          "max_features": "sqrt",
+          "n_jobs": -1,
+          "random_state": 42
+        },
+        "features": "2079-D biochem",
+        "split": "train = all rows of other 7 drugs, test = held-out drug"
+      },
+      "note": "CRITICAL STRUCTURE: all 8 clean drugs share the SAME 17 unique sequences (verified pairwise intersection = 17/17). This holdout therefore measures DRUG-TRANSFER (same mutants, unseen drug) and NOT unseen-sequence generalization. High R is expected: the model has seen every test sequence under 7 other drugs and learns a per-sequence baseline + drug offset. Interpret strictly as drug-transfer, never as zero-shot. 'Experimental PI / Analogue' row excluded.",
+      "input_files": [
+        "D:\\desktop\\BIO PROJECT HIV-2\\known_info_master\\HIV2_PROTEASE_ML_READY_DATASET.csv"
+      ]
+    }
+  ],
+  "documented_failed": [
+    {
+      "name": "D1 GNN / DBPT+ (DeepTernary v2 EGNN)",
+      "legacy_values": {
+        "GNN zero-shot": {
+          "pearson_r": -0.1709,
+          "rmse": 3.5208,
+          "source": "Tier3_pocket_gnn_results.json"
+        },
+        "DBPT+ v2 zero-shot": {
+          "pearson_r": 0.2122,
+          "source": "DBPT_PLUS_V2_RESULTS.json"
+        }
+      },
+      "reason_not_rerun": "torch is CPU-only (torch 2.10.0+cpu, cuda=False). 13,528 PDB complexes x 100 epochs of equivariant EGNN is days of GPU compute \u2014 infeasible inside the Tue-night deadline. The legacy zero-shot result was already negative (R=-0.1709): a documented failure that a genuine-only (smaller) corpus cannot rescue.",
+      "decision": "documented-failed; not claimed in honest metrics."
+    },
+    {
+      "name": "D2 ONION-Net PCA fusion sweep",
+      "legacy_values": {
+        "best_fusion": {
+          "pearson_r": 0.4703,
+          "config": "PCA-20"
+        },
+        "pocket_b1": {
+          "pearson_r": 0.5915
+        },
+        "source": "POCKET_ONIONNET_PCA_REPORT.md (2026-06-22)"
+      },
+      "reason_not_rerun": "On-disk npz feature dims mismatch (hiv1 10,309 vs hiv2 10,478) so the legacy script's pca.fit(X1).transform(X2) raises today; and the legacy report itself shows every PCA fusion HURT the pocket baseline (R 0.4703 < 0.5915).",
+      "decision": "documented-failed; B1 pocket-5D (R2) is the honest number."
+    }
+  ],
+  "run_seconds": 23.7,
+  "legacy_number_dispositions": {
+    "pipeline": "RESCUE/rerun_legacy_numbers.py + RESCUE/rerun_epistasis_honest.py",
+    "timestamp": "2026-08-16 14:26:22",
+    "catalog_source": "RESCUE/manuscript_corrections.md §9 (apollo's legacy number list)",
+    "protocol": "Genuine-only 5,683-row corpus (seed 42, 95% identity grouped CV, 2079-D biochem include_stats=False, honest n=137 HIV-2 test, HIV2_WT/HIV1_WT from opencode_shared/config.py). Identical model configs to legacy scripts.",
+    "items": {
+      "1_xgboost_and_ensembles": {
+        "decision": "RERUN (honest values in legacy_rerun_results.json)",
+        "legacy_values": {
+          "xgb_cross_species": 0.449,
+          "ensemble_cross_species": 0.458,
+          "stacked_xgb": 0.4893,
+          "stacked_simple": 0.5017,
+          "stacked_ridge": 0.4853,
+          "tier1_xgb_zero_shot": 0.4006,
+          "origin": "Tier5_comprehensive_results.json / Tier5_stacked_ensemble_results.json (poisoned 7,183-row corpus, n=321 test)"
+        },
+        "honest_values": {
+          "n": 137,
+          "xgb_zero_shot": {"pearson_r": 0.5587, "rmse": 1.7626},
+          "rf_zero_shot": {"pearson_r": 0.5163, "rmse": 1.5986},
+          "simple_ensemble": {"pearson_r": 0.5467, "rmse": 1.6679},
+          "ridge_meta_ensemble": {"pearson_r": 0.5818, "rmse": 1.3794, "ridge_alpha": 10.0}
+        },
+        "note": "Legacy stacked ensembles used biochem+BERT (3103-D); honest runs use 2079-D biochem only because GENUINE corpus BERT columns are all-NULL (verified). XGB 800 trees, depth 6, lr 0.03 — mirrors run_stacked_ensemble.py."
+      },
+      "2_per_drug_zero_shot": {
+        "decision": "RERUN (honest values in legacy_rerun_results.json)",
+        "legacy_values": {
+          "per_drug_n": 40,
+          "example_AMP": {"rf": 0.4621, "xgb": 0.4462, "simple": 0.4868, "ridge": 0.4996},
+          "origin": "Tier5_per_drug_results.json / per_drug_results.csv (poisoned corpus, 321-row test)"
+        },
+        "honest_values": {
+          "n_per_drug": 17,
+          "AMPRENAVIR": {"rf": 0.7560, "xgb": 0.7986, "simple": 0.7886, "ridge": 0.8151},
+          "ATAZANAVIR": {"rf": 0.4252, "xgb": 0.5621, "simple": 0.5126, "ridge": 0.5480},
+          "DARUNAVIR": {"rf": 0.6992, "xgb": 0.7230, "simple": 0.7198, "ridge": 0.7647},
+          "INDINAVIR": {"rf": 0.6044, "xgb": 0.6329, "simple": 0.6270, "ridge": 0.6724},
+          "LOPINAVIR": {"rf": 0.5625, "xgb": 0.7117, "simple": 0.6587, "ridge": 0.6539},
+          "NELFINAVIR": {"rf": 0.6762, "xgb": 0.6975, "simple": 0.6951, "ridge": 0.7602},
+          "SAQUINAVIR": {"rf": 0.5637, "xgb": 0.6036, "simple": 0.5930, "ridge": 0.6479},
+          "TIPRANAVIR": {"rf": 0.6976, "xgb": 0.7570, "simple": 0.7400, "ridge": 0.7677}
+        },
+        "note": "All 8 drugs share the same 17 unique sequences on the honest 137-row test set (same structure as R5). RITONAVIR has no rows in the honest test set; excluded."
+      },
+      "3_protbert": {
+        "decision": "NOT_RERUN (documented D1-class infeasibility)",
+        "legacy_values": {
+          "cross_species_bert_only": 0.1632,
+          "within_species_bert_only": 0.617,
+          "combined_3103D": 0.4753,
+          "origin": "Tier5_comprehensive_results.json exp1_feature_ablation (poisoned corpus)"
+        },
+        "reason_not_rerun": "ProtBERT embeddings are unavailable on honest corpora: (1) STANFORD_HIV1_GENUINE.csv BERT_1..1024 columns are ALL-NULL (verified, 0 non-null of 5,683 rows); (2) HIV2_PROTEASE_ML_READY_DATASET.csv has NO BERT columns (verified, 0 of 3,639); (3) on-disk colab BERT_FEATURES CSVs are keyed by PDB IDs (e.g. '6B36_1|Chains') with no verified mapping to the sequence corpus; (4) honest re-extraction needs Rostlab/prot_bert model download + transformer inference, torch is CPU-only (2.10.0+cpu, cuda=False).",
+        "decision_detail": "documented-not-rerun; the BERT columns that exist on disk in the poisoned EXPANDED.csv must NOT be used (they sit in the poisoned file and their provenance/row-mapping is unverified)."
+      },
+      "4_exp3_deltadg_mutagenesis": {
+        "decision": "RERUN (honest values in legacy_rerun_results.json)",
+        "legacy_values": {
+          "K7Q_legacy": 1.4871,
+          "origin": "Tier5_comprehensive_results.json exp3_wildtype_substitution (poisoned corpus, S92-era WT references)"
+        },
+        "honest_values": {
+          "n_divergent_positions": 51,
+          "top5_by_abs_deltadg": [
+            {"position": 47, "hiv2_aa": "V", "to_hiv1_aa": "I", "delta_dg": -0.2553},
+            {"position": 71, "hiv2_aa": "V", "to_hiv1_aa": "A", "delta_dg": -0.1334},
+            {"position": 73, "hiv2_aa": "A", "to_hiv1_aa": "G", "delta_dg": -0.0850},
+            {"position": 93, "hiv2_aa": "L", "to_hiv1_aa": "I", "delta_dg": 0.0802},
+            {"position": 20, "hiv2_aa": "V", "to_hiv1_aa": "K", "delta_dg": -0.0622}
+          ],
+          "wildtype_dG_pred": -9.9851
+        },
+        "note": "Uses HIV2_WT (ROD, A92) and HIV1_WT (HXB2) from opencode_shared/config.py. All ΔΔG magnitudes are small (<0.3 kcal/mol) on the honest 2079-D protocol; the legacy K7Q 1.4871 value is not reproduced on any residue."
+      },
+      "5_epistasis_spatial_pocket_matrix": {
+        "decision": "RERUN (honest values in RESCUE/epistasis_rerun/; legacy on-disk artifacts already match)",
+        "legacy_values": {
+          "manuscript_claimed_unique_isolates": 771,
+          "manuscript_claimed_pairs": 19,
+          "manuscript_claimed_L90M_A92T_synergy": "+17.3/+27.7",
+          "manuscript_claimed_L90M_A92T_synergy_note": "2026-09-15: shorthand corrected from 27.3 to 27.7 to match the V1 submitted value (paper_submission/manuscript.html, quote: 'LPV: +17.3, SQV: +27.7') and the supersede letter defect-register row 10; L90M+A92T is impossible under the 16-residue 5A pocket-pair protocol (positions 90/92 outside POCKET_1INDEX), and the honest rerun reports L90M_A92T null",
+          "on_disk_report_unique_genotypes": 654,
+          "on_disk_report_pairs": 18,
+          "on_disk_xlsx_L90M_rows": 0
+        },
+        "honest_values": {
+          "unique_genotypes": 654,
+          "pocket_pairs_within_5A": 78,
+          "epistatic_pairs_found": 18,
+          "L90M_A92T_present": false,
+          "top_pairs": ["I82F+I84L (n=2)", "I32V+I82V (n=2)", "I32V+V47I (n=2)", "S31T+I32V (n=2)"]
+        },
+        "note": "CRITICAL: the manuscript's '771 isolates / 19 pairs / L90M+A92T +17.3/+27.7' were NEVER reproducible from on-disk artifacts. The forensic baseline report (cc630c0) already shows 654 genotypes and 18 pairs, and the xlsx has zero L90M rows. Positions 90/92 are NOT in POCKET_1INDEX (16 residues, 5A cutoff), so L90M+A92T can never appear in this pocket-pair analysis. The honest rerun (rerun_epistasis_honest.py) reproduces the on-disk numbers exactly: 654 / 18. L90M (21 genotypes) and A92T (65 genotypes) DO exist in the cohort and co-occur in 6 genotypes / 48 rows — but that co-mutation is outside the pocket-pair protocol, so no synergy value exists for it."
+      },
+      "6_remaining_sweep": {
+        "decision": "SUPERSEDED / DOCUMENTED",
+        "items": {
+          "tier2_pocket_rf_xgb": {
+            "legacy": {"pocket_rf_zero_shot": 0.3909, "origin": "Tier2_pocket_rf_xgboost_results.json (poisoned corpus)"},
+            "honest": {"pocket_rf": 0.4056, "pocket_xgb": 0.4288, "n": 137, "feature_dim": 336}
+          },
+          "tier3_gnn": "D1 documented-failed (metrics_reruns.json); torch CPU-only, R=-0.1709 legacy",
+          "tier4_dbpt_plus": "D1 documented-failed (metrics_reruns.json); R=0.2122 legacy",
+          "few_shot": "R3 done (metrics_reruns.json)",
+          "scaling": "R4 done (metrics_reruns.json)",
+          "within_species_ceiling": {"legacy_ungrouped": 0.759, "honest_grouped_rf": 0.7387, "honest_grouped_xgb": 0.7348},
+          "unified_benchmark_rows": "covered by item 1 (RF/XGB/ensemble zero-shot) + D1 (GNN/DBPT+)",
+          "ablation_gcn_configs": "D1-class; GCN family not rerun (torch CPU-only)",
+          "clinical_phenotypic": "superseded by RESCUE/clinical_validation_honest.json (canonical R=0.6235 on 5,232 rows, sign convention fixed)",
+          "integration_hybrid": "superseded by metrics_manifest.json hybrid_onionnet_stage (corrected R=0.6696) + R2"
+        }
+      }
+    }
+  }
+}

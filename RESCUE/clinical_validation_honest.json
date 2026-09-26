@@ -1,0 +1,115 @@
+{
+  "convention": "predicted dG (kcal/mol, negative = tighter binding); corr(penalty, pred_dG) expected POSITIVE; ROC-AUC score = +predicted dG",
+  "cohort": {
+    "rows": 5232,
+    "unique_sequences": 653,
+    "sequence_entries": 5232,
+    "drugs": 8,
+    "structure": "5232 rows = 654 sequence entries x 8 drugs",
+    "previous_wrong_claim": "5,232 independent isolates",
+    "correct_description": "5,232 rows = 654 sequence entries (653 unique + 1 WT duplicate) x 8 drugs",
+    "per_source": {
+      "Stanford_HIVDB": 3456,
+      "Mined_Expanded": 1776
+    },
+    "resistance_classes": {
+      "Susceptible": 5006,
+      "Intermediate": 113,
+      "Resistant": 113
+    }
+  },
+  "canonical": {
+    "n": 5232,
+    "pearson_r": 0.6235,
+    "pearson_p": 0.0,
+    "spearman_rho": 0.3864,
+    "spearman_p": 6.648819979692187e-186,
+    "roc_auc_resistant_vs_susceptible": 0.969
+  },
+  "legacy_comparison": {
+    "05_generate_figures_spearman_minus_pc": -0.343,
+    "clinical_validation_pearson_plus_pred": 0.2555,
+    "clinical_validation_spearman_plus_pred": 0.3558,
+    "clinical_validation_roc_auc_minus_pred": 0.0959,
+    "note": "Sign flip explained in RESCUE/SIGN_CONVENTION.md. ROC-AUC 0.0959 was computed with score=-dG; canonical score=+dG gives ~1-0.0959=0.904."
+  },
+  "per_drug": [
+    {
+      "drug": "ATV/r",
+      "n": 654,
+      "pearson_r": 0.6552,
+      "pearson_p": 1.9015482337081667e-81,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "DRV/r",
+      "n": 654,
+      "pearson_r": 0.5595,
+      "pearson_p": 3.818653064767194e-55,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "FPV/r",
+      "n": 654,
+      "pearson_r": 0.7131,
+      "pearson_p": 1.2427189212143425e-102,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "IDV/r",
+      "n": 654,
+      "pearson_r": 0.7095,
+      "pearson_p": 3.5614531055377656e-101,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "LPV/r",
+      "n": 654,
+      "pearson_r": 0.7742,
+      "pearson_p": 1.218284501601307e-131,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "NFV",
+      "n": 654,
+      "pearson_r": 0.6563,
+      "pearson_p": 8.278795915485107e-82,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "SQV/r",
+      "n": 654,
+      "pearson_r": 0.694,
+      "pearson_p": 4.1323127377818005e-95,
+      "bh_q": 0.0
+    },
+    {
+      "drug": "TPV/r",
+      "n": 654,
+      "pearson_r": 0.5291,
+      "pearson_p": 1.9005337879205886e-48,
+      "bh_q": 0.0
+    }
+  ],
+  "per_class": {
+    "Susceptible": {
+      "n": 5006,
+      "mean_pred_dG": -9.9532,
+      "mean_penalty": 0.23
+    },
+    "Intermediate": {
+      "n": 113,
+      "mean_pred_dG": -9.3523,
+      "mean_penalty": 18.19
+    },
+    "Resistant": {
+      "n": 113,
+      "mean_pred_dG": -9.3159,
+      "mean_penalty": 54.03
+    }
+  },
+  "input_hashes": {
+    "STANFORD_HIV1_GENUINE.csv": "692e3d2b3ffcd43bd186458a97a9b572c7b6c9f0287ff9f51f3aeb75bcca9ab0",
+    "HIV2_CLINICAL_ML_READY_FLAT.csv": "2ccbf59ebba0939a27515248ce5de755026c21c807c6b59f5f473e2a0ced35d0"
+  }
+}

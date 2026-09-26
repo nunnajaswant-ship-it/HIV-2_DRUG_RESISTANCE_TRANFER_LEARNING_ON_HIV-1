@@ -1,0 +1,45 @@
+{
+  "n_joined_rows": 1728,
+  "n_joined_sequences": 432,
+  "drugs": {
+    "ATV/r": {
+      "n": 432,
+      "model_pearson_vs_stanford": 0.3878,
+      "rule_pearson_vs_stanford": 1.0,
+      "model_vs_rule_pearson": 0.3878,
+      "rule_exact_agreement_pct": 100.0,
+      "rule_nonzero_n": 26
+    },
+    "DRV/r": {
+      "n": 432,
+      "model_pearson_vs_stanford": 0.326,
+      "rule_pearson_vs_stanford": 1.0,
+      "model_vs_rule_pearson": 0.326,
+      "rule_exact_agreement_pct": 100.0,
+      "rule_nonzero_n": 14
+    },
+    "LPV/r": {
+      "n": 432,
+      "model_pearson_vs_stanford": 0.5877,
+      "rule_pearson_vs_stanford": 1.0,
+      "model_vs_rule_pearson": 0.5877,
+      "rule_exact_agreement_pct": 100.0,
+      "rule_nonzero_n": 30
+    },
+    "SQV/r": {
+      "n": 432,
+      "model_pearson_vs_stanford": 0.4518,
+      "rule_pearson_vs_stanford": 1.0,
+      "model_vs_rule_pearson": 0.4518,
+      "rule_exact_agreement_pct": 100.0,
+      "rule_nonzero_n": 27
+    }
+  },
+  "pooled": {
+    "n": 1728,
+    "model_pearson_vs_stanford": 0.3971,
+    "zeroshot_pearson_vs_stanford": 0.1874,
+    "rule_pearson_vs_stanford": 1.0,
+    "model_vs_rule_pearson": 0.3971
+  }
+}

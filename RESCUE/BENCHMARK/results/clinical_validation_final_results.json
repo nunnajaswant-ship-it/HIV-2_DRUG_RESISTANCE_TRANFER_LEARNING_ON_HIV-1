@@ -1,0 +1,417 @@
+{
+  "version": "clinical_validation_final_v1",
+  "timestamp": "2026-09-15T21:14:58.103989",
+  "model_definition": {
+    "mechanism": "v5 Layer-1 transfer fine-tune (transfer_learning_v2.transfer_finetune_oof)",
+    "bundle": "biochem (2121-D global physchem, HIV-1 scaler)",
+    "model": "RandomForestRegressor n=600, depth=20, max_features=sqrt",
+    "hiv1_pretrain": "5,683 Stanford HIV-1 genuine rows (per drug)",
+    "hiv2_finetune": "ChEMBL rows per drug, [biochem | HIV-1 zs_pred]",
+    "locked_mean_r": 0.7018426290375417
+  },
+  "convention": "predicted dG (kcal/mol, negative = tighter binding); corr(penalty, pred_dG) expected POSITIVE; ROC-AUC score = +predicted dG (higher = more resistant)",
+  "cohort": {
+    "rows": 5232,
+    "unique_sequences": 653,
+    "drugs": 8,
+    "structure": "5232 rows = 654 sequence entries x 8 drugs",
+    "correct_description": "5,232 rows = 654 sequence entries (653 unique + 1 WT duplicate) x 8 drugs",
+    "per_source": {
+      "Stanford_HIVDB": 3456,
+      "Mined_Expanded": 1776
+    },
+    "resistance_classes": {
+      "Susceptible": 5006,
+      "Intermediate": 113,
+      "Resistant": 113
+    }
+  },
+  "data_hygiene": {
+    "clinical_unique_sequences": 653,
+    "overlap_with_hiv1_pretrain": 0,
+    "overlap_with_hiv2_chembl_finetune": 3,
+    "overlap_chembl_sequences": [
+      "PQFSLWKRPVVTAHIEGQPVEVLLDTGADDSIVAGIELGNNYSPKIVGGIGGFINTKEYKNVEIEVLNKKVRATIMTGDTPINIFGRNILTALGMSLNL",
+      "PQFSLWKRPVVTAYIEGQPVEVLLDTGADDSIVAGIELGNNYSPKIAGGIGGFINTKEYKNVEIEVLNKKVRATIMTGDTPINIFGRNILTALGMSLNL",
+      "PQFSLWKRPVVTAYIEGQPVEVLLDTGADDSIVAGIELGNNYSPKIVGGIGGFINTKEYKNVEIEVLNKKVRATIMTGDTPINIFGRNILTALGMSLNL"
+    ],
+    "note": "Clinical sequences are never-seen w.r.t. the HIV-1 pre-train (0 overlap). A small overlap with the ChEMBL fine-tune set is disclosed and re-evaluated in the pooled comparison (excluded subset reported separately). No clinical labels (Stanford penalty) enter training in any form."
+  },
+  "input_hashes": {
+    "STANFORD_HIV1_GENUINE.csv": "692e3d2b3ffcd43bd186458a97a9b572c7b6c9f0287ff9f51f3aeb75bcca9ab0",
+    "HIV2_PROTEASE_ML_READY_DATASET.csv": "7f34b7a2b467e5eadd2e02aa3ee141a749e93aa4cd99145858b9dafded9b093d",
+    "HIV2_CLINICAL_ML_READY_FLAT.csv": "2ccbf59ebba0939a27515248ce5de755026c21c807c6b59f5f473e2a0ced35d0"
+  },
+  "sanity_check_chembl_oof": {
+    "ATV/r": {
+      "n": 40,
+      "pearson_r": 0.6125,
+      "ci_pearson_lo": 0.3817,
+      "ci_pearson_hi": 0.7928
+    },
+    "DRV/r": {
+      "n": 40,
+      "pearson_r": 0.8272,
+      "ci_pearson_lo": 0.7498,
+      "ci_pearson_hi": 0.895
+    },
+    "LPV/r": {
+      "n": 40,
+      "pearson_r": 0.544,
+      "ci_pearson_lo": 0.3024,
+      "ci_pearson_hi": 0.6976
+    },
+    "SQV/r": {
+      "n": 40,
+      "pearson_r": 0.7048,
+      "ci_pearson_lo": 0.4892,
+      "ci_pearson_hi": 0.8579
+    },
+    "MEAN": {
+      "n": 160,
+      "pearson_r": 0.7018,
+      "ci_pearson_lo": 0.6246,
+      "ci_pearson_hi": 0.7887,
+      "locked_reference_4drug": 0.7018426290375417,
+      "note": "MEAN in full run = all 4 COMMON_DRUGS (should reproduce ~0.7018); smoke run = selected drugs only"
+    }
+  },
+  "per_drug": {
+    "ATV/r": {
+      "n": 654,
+      "n_binary_class": 635,
+      "n_resistant": 12,
+      "pearson_r": 0.3761,
+      "pearson_p": 2.110620786138407e-23,
+      "ci_pearson_lo": 0.2756,
+      "ci_pearson_hi": 0.4692,
+      "spearman_rho": 0.3227,
+      "rmse": 14.6331,
+      "mae": 11.8186,
+      "roc_auc_resistant_vs_susceptible": 0.8644,
+      "zeroshot_recomputed": {
+        "pearson_r": 0.7231,
+        "spearman_rho": 0.4117,
+        "roc_auc": 0.9934
+      },
+      "existing_honest_zeroshot_r": 0.6552,
+      "drm_global_corr": {
+        "n": 654,
+        "pearson_r": 0.4733,
+        "pearson_p": 8.256502215825338e-38,
+        "spearman_rho": 0.3779,
+        "spearman_p": 1.2477022865909964e-23
+      },
+      "drm_drugspecific_corr": {
+        "n": 654,
+        "pearson_r": 0.4596,
+        "pearson_p": 1.729001688519065e-35,
+        "spearman_rho": 0.3601,
+        "spearman_p": 1.887069957370453e-21
+      }
+    },
+    "DRV/r": {
+      "n": 654,
+      "n_binary_class": 635,
+      "n_resistant": 0,
+      "pearson_r": 0.3619,
+      "pearson_p": 1.1455527503845015e-21,
+      "ci_pearson_lo": 0.2475,
+      "ci_pearson_hi": 0.4631,
+      "spearman_rho": 0.2665,
+      "rmse": 11.3736,
+      "mae": 10.9956,
+      "roc_auc_resistant_vs_susceptible": null,
+      "zeroshot_recomputed": {
+        "pearson_r": 0.561,
+        "spearman_rho": 0.3056,
+        "roc_auc": null
+      },
+      "existing_honest_zeroshot_r": 0.5595,
+      "drm_global_corr": {
+        "n": 654,
+        "pearson_r": 0.6267,
+        "pearson_p": 1.2039183577546955e-72,
+        "spearman_rho": 0.4488,
+        "spearman_p": 9.928397458249003e-34
+      },
+      "drm_drugspecific_corr": {
+        "n": 654,
+        "pearson_r": 0.5117,
+        "pearson_p": 6.211547131985041e-45,
+        "spearman_rho": 0.3393,
+        "spearman_p": 4.446256025201399e-19
+      }
+    },
+    "LPV/r": {
+      "n": 654,
+      "n_binary_class": 639,
+      "n_resistant": 9,
+      "pearson_r": 0.6241,
+      "pearson_p": 6.674591462586543e-72,
+      "ci_pearson_lo": 0.5281,
+      "ci_pearson_hi": 0.704,
+      "spearman_rho": 0.4105,
+      "rmse": 12.339,
+      "mae": 11.2878,
+      "roc_auc_resistant_vs_susceptible": 0.8984,
+      "zeroshot_recomputed": {
+        "pearson_r": 0.6727,
+        "spearman_rho": 0.427,
+        "roc_auc": 0.9769
+      },
+      "existing_honest_zeroshot_r": 0.7742,
+      "drm_global_corr": {
+        "n": 654,
+        "pearson_r": 0.7719,
+        "pearson_p": 2.1006000115751565e-130,
+        "spearman_rho": 0.5252,
+        "spearman_p": 1.1937579046600495e-47
+      },
+      "drm_drugspecific_corr": {
+        "n": 654,
+        "pearson_r": 0.7898,
+        "pearson_p": 1.5610109995301605e-140,
+        "spearman_rho": 0.5515,
+        "spearman_p": 2.5720667164010902e-53
+      }
+    },
+    "SQV/r": {
+      "n": 654,
+      "n_binary_class": 641,
+      "n_resistant": 19,
+      "pearson_r": 0.544,
+      "pearson_p": 1.2017857611857488e-51,
+      "ci_pearson_lo": 0.4476,
+      "ci_pearson_hi": 0.6134,
+      "spearman_rho": 0.3737,
+      "rmse": 15.6801,
+      "mae": 12.3353,
+      "roc_auc_resistant_vs_susceptible": 0.9668,
+      "zeroshot_recomputed": {
+        "pearson_r": 0.8625,
+        "spearman_rho": 0.4068,
+        "roc_auc": 0.9985
+      },
+      "existing_honest_zeroshot_r": 0.694,
+      "drm_global_corr": {
+        "n": 654,
+        "pearson_r": 0.6172,
+        "pearson_p": 6.407263344581513e-70,
+        "spearman_rho": 0.4324,
+        "spearman_p": 3.5819219770767336e-31
+      },
+      "drm_drugspecific_corr": {
+        "n": 654,
+        "pearson_r": 0.5194,
+        "pearson_p": 1.8534669146737212e-46,
+        "spearman_rho": 0.3032,
+        "spearman_p": 2.232280687845543e-15
+      }
+    }
+  },
+  "pooled": {
+    "n": 2616,
+    "n_binary_class": 2550,
+    "n_resistant": 40,
+    "pearson_r": 0.4454,
+    "ci_pearson_lo": 0.382,
+    "ci_pearson_hi": 0.4999,
+    "spearman_rho": 0.3388,
+    "rmse": 13.6162,
+    "mae": 11.6094,
+    "roc_auc_resistant_vs_susceptible": 0.9267,
+    "excl_chembl_overlap": {
+      "n": 2600,
+      "pearson_r": 0.4507,
+      "spearman_rho": 0.3394
+    },
+    "zeroshot_recomputed": {
+      "pearson_r": 0.2468,
+      "ci_pearson_lo": 0.2089,
+      "ci_pearson_hi": 0.276,
+      "spearman_rho": 0.2557,
+      "rmse": 13.417,
+      "roc_auc": 0.9648
+    },
+    "existing_honest_zeroshot_r": 0.6235,
+    "existing_honest_zeroshot_spearman": 0.3864,
+    "existing_honest_zeroshot_auc": 0.969,
+    "existing_honest_n": 5232
+  },
+  "consistency_layer": {
+    "per_drug": {
+      "ATV/r": {
+        "drm_global_corr": {
+          "n": 654,
+          "pearson_r": 0.4733,
+          "pearson_p": 8.256502215825338e-38,
+          "spearman_rho": 0.3779,
+          "spearman_p": 1.2477022865909964e-23
+        },
+        "drm_drugspecific_corr": {
+          "n": 654,
+          "pearson_r": 0.4596,
+          "pearson_p": 1.729001688519065e-35,
+          "spearman_rho": 0.3601,
+          "spearman_p": 1.887069957370453e-21
+        }
+      },
+      "DRV/r": {
+        "drm_global_corr": {
+          "n": 654,
+          "pearson_r": 0.6267,
+          "pearson_p": 1.2039183577546955e-72,
+          "spearman_rho": 0.4488,
+          "spearman_p": 9.928397458249003e-34
+        },
+        "drm_drugspecific_corr": {
+          "n": 654,
+          "pearson_r": 0.5117,
+          "pearson_p": 6.211547131985041e-45,
+          "spearman_rho": 0.3393,
+          "spearman_p": 4.446256025201399e-19
+        }
+      },
+      "LPV/r": {
+        "drm_global_corr": {
+          "n": 654,
+          "pearson_r": 0.7719,
+          "pearson_p": 2.1006000115751565e-130,
+          "spearman_rho": 0.5252,
+          "spearman_p": 1.1937579046600495e-47
+        },
+        "drm_drugspecific_corr": {
+          "n": 654,
+          "pearson_r": 0.7898,
+          "pearson_p": 1.5610109995301605e-140,
+          "spearman_rho": 0.5515,
+          "spearman_p": 2.5720667164010902e-53
+        }
+      },
+      "SQV/r": {
+        "drm_global_corr": {
+          "n": 654,
+          "pearson_r": 0.6172,
+          "pearson_p": 6.407263344581513e-70,
+          "spearman_rho": 0.4324,
+          "spearman_p": 3.5819219770767336e-31
+        },
+        "drm_drugspecific_corr": {
+          "n": 654,
+          "pearson_r": 0.5194,
+          "pearson_p": 1.8534669146737212e-46,
+          "spearman_rho": 0.3032,
+          "spearman_p": 2.232280687845543e-15
+        }
+      }
+    },
+    "pooled": {
+      "drm_global_corr": {
+        "n": 2616,
+        "pearson_r": 0.5387,
+        "pearson_p": 8.437650856864497e-197,
+        "spearman_rho": 0.4325,
+        "spearman_p": 9.572404037835245e-120
+      },
+      "drm_drugspecific_corr": {
+        "n": 2616,
+        "pearson_r": 0.4204,
+        "pearson_p": 1.4952448251124983e-112,
+        "spearman_rho": 0.3789,
+        "spearman_p": 4.2807458115177355e-90
+      }
+    },
+    "i82f": {
+      "ATV/r": {
+        "n_rows": 654,
+        "n_i82f_any": 32,
+        "n_i82f_only": 5,
+        "mean_rank_i82f_any": 105.7,
+        "mean_rank_rest": 338.9,
+        "mean_rank_i82f_only": 110.8,
+        "mean_penalty_i82f_any": 8.44,
+        "mean_penalty_rest": 1.54
+      },
+      "DRV/r": {
+        "n_rows": 654,
+        "n_i82f_any": 32,
+        "n_i82f_only": 5,
+        "mean_rank_i82f_any": 61.1,
+        "mean_rank_rest": 341.2,
+        "mean_rank_i82f_only": 82.4,
+        "mean_penalty_i82f_any": 0.62,
+        "mean_penalty_rest": 0.55
+      },
+      "LPV/r": {
+        "n_rows": 654,
+        "n_i82f_any": 32,
+        "n_i82f_only": 5,
+        "mean_rank_i82f_any": 42.0,
+        "mean_rank_rest": 342.2,
+        "mean_rank_i82f_only": 78.2,
+        "mean_penalty_i82f_any": 6.41,
+        "mean_penalty_rest": 1.02
+      },
+      "SQV/r": {
+        "n_rows": 654,
+        "n_i82f_any": 32,
+        "n_i82f_only": 5,
+        "mean_rank_i82f_any": 58.0,
+        "mean_rank_rest": 341.4,
+        "mean_rank_i82f_only": 68.6,
+        "mean_penalty_i82f_any": 10.78,
+        "mean_penalty_rest": 1.82
+      }
+    },
+    "known_drm_sequences": 100,
+    "unique_sequences_analyzed": 653,
+    "mutation_match_agreement_pct": 100.0,
+    "notes": {
+      "i82f_drv_override": "I82F is an HIV-2-specific hypersusceptibility mutation for DRV/r (literature-verified; HIV2EU_RULES assigns I82F NO DRV/r penalty while giving it penalties to LPV/IDV/NFV/ATV/FPV). Rank-test RESULT observed in this run: the FINAL transfer model ranks I82F carriers on the RESISTANT end of the DRV/r distribution (mean rank 61.1/654 vs rest 341.2/654; I82F-only n=5 mean rank 82.4/654) -- i.e., the model does NOT spontaneously reproduce the hypersusceptibility override. Caveats: I82F carriers co-carry other known DRMs, and the clinical penalties also rate them marginally higher (0.62 vs 0.55) via co-mutations; with n=5 I82F-only rows this is a directional finding, not a conclusion. Reported as a model-vs-knowledge disagreement for the client.",
+      "natural_polymorphism_note": "Residue-only matching of HIV-1-convention rules is confounded by HIV-2 natural polymorphisms (V32I present in 645/653, I47V in 635/653, V82I in 604/653 by naive residue check). The Mutations-column match is the authoritative count because labels are relative to the clinical reference; naive residue counts are therefore NOT used for the DRM score.",
+      "no_leakage": "Known-DRM information is analysis-only. It was never a training feature and never entered any model; it is a validation/consistency asset per the client rule."
+    }
+  },
+  "comparison": {
+    "pooled_4_drugs": {
+      "model": "FINAL transfer fine-tune (v5 Layer-1, biochem + HIV-1 zs meta)",
+      "existing_honest_zeroshot_8drugs": {
+        "n": 5232,
+        "pearson_r": 0.6235,
+        "spearman_rho": 0.3864,
+        "roc_auc": 0.969,
+        "source": "RESCUE/clinical_validation_honest.json (2079-D unscaled, pooled HIV-1 model)"
+      },
+      "zeroshot_recomputed_same_space": {
+        "pearson_r": 0.2468,
+        "ci_pearson_lo": 0.2089,
+        "ci_pearson_hi": 0.276,
+        "spearman_rho": 0.2557,
+        "rmse": 13.417
+      },
+      "final_transfer": {
+        "n": 2616,
+        "pearson_r": 0.4454,
+        "ci_pearson_lo": 0.382,
+        "ci_pearson_hi": 0.4999,
+        "spearman_rho": 0.3388,
+        "rmse": 13.6162,
+        "roc_auc": 0.9267,
+        "excl_chembl_overlap": {
+          "n": 2600,
+          "pearson_r": 0.4507,
+          "spearman_rho": 0.3394
+        }
+      },
+      "final_transfer_plus_consistency_sanity": {
+        "pearson_pred_dg_vs_drm_global": 0.5387,
+        "pearson_pred_dg_vs_drm_drugspecific": 0.4204,
+        "spearman_pred_dg_vs_drm_drugspecific": 0.3789,
+        "n": 2616,
+        "note": "consistency correlation is a model-vs-knowledge agreement statistic, not a predictive-accuracy metric"
+      },
+      "delta_transfer_minus_zeroshot_recomputed": 0.1986
+    }
+  }
+}

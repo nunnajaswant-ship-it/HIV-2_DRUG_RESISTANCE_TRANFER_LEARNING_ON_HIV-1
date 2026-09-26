@@ -1,0 +1,2197 @@
+{
+  "analysis_timestamp": "2026-09-10T12:10:41.615316",
+  "pdb_structures": {
+    "1IVP": {
+      "resolution": "2.5 A",
+      "ligand": "DMP323 (peptidomimetic)",
+      "year": 1996,
+      "method": "X-ray",
+      "reference": "Rosenberg et al., Protein Sci 1996",
+      "chain_length": 99,
+      "remarks": "Early HIV-2 PR structure, closed-flap conformation"
+    },
+    "3EBZ": {
+      "resolution": "1.2 A",
+      "ligand": "Darunavir (DRV)",
+      "year": 2010,
+      "method": "X-ray",
+      "reference": "Tie et al., JMB 2010",
+      "chain_length": 99,
+      "remarks": "High-resolution DRV complex, key for understanding DRV resistance"
+    },
+    "3S45": {
+      "resolution": "1.5 A",
+      "ligand": "Amprenavir (APV)",
+      "year": 2011,
+      "method": "X-ray",
+      "reference": "Tie et al., JMB 2011",
+      "chain_length": 99,
+      "remarks": "APV/FPV binding mode in HIV-2 PR"
+    }
+  },
+  "structural_regions": {
+    "Active Site": {
+      "positions": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        48,
+        49,
+        50
+      ],
+      "function": "Catalytic dyad (D25, D27) + substrate binding",
+      "description": "Contains the catalytic Asp-Thr-Gly triad; directly contacts inhibitor P1/P1' sites"
+    },
+    "Flap Region": {
+      "positions": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "function": "Substrate/inhibitor gating",
+      "description": "Flexible beta-hairpin flaps that open/close to allow substrate entry"
+    },
+    "Flap Tip": {
+      "positions": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "function": "Tip of the flap closing over active site",
+      "description": "Directly contacts bound drug; I50 is critical in HIV-2"
+    },
+    "Substrate Envelope": {
+      "positions": [
+        32,
+        33,
+        47,
+        50,
+        54,
+        56,
+        82,
+        84,
+        88,
+        90
+      ],
+      "function": "Defines substrate specificity cavity",
+      "description": "Positions lining the S1/S2/S1'/S2' subsites; mutations here affect drug vs substrate selectivity"
+    },
+    "Dimer Interface": {
+      "positions": [
+        95,
+        96,
+        97,
+        98,
+        1,
+        2,
+        3,
+        99
+      ],
+      "function": "Inter-subunit contacts maintaining dimer stability",
+      "description": "Terminal residues that form the dimer interface; critical for PR assembly"
+    },
+    "Distal/Allosteric": {
+      "positions": [
+        10,
+        11,
+        20,
+        23,
+        24,
+        36,
+        37,
+        62,
+        63,
+        64,
+        71,
+        73,
+        76,
+        89,
+        99
+      ],
+      "function": "Indirect modulation of active site geometry",
+      "description": "Positions far from drug binding that can alter dynamics or stability"
+    },
+    "Flexibility Loop": {
+      "positions": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "function": "Flexible surface loop connecting secondary structures",
+      "description": "High B-factor region; connects flap to core; variable in HIV-2"
+    },
+    "Hydrophobic Core": {
+      "positions": [
+        5,
+        6,
+        15,
+        16,
+        34,
+        40,
+        41,
+        57,
+        58,
+        60,
+        61,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85
+      ],
+      "function": "Structural stability; packing of helices and sheets",
+      "description": "Conserved hydrophobic core; mutations here destabilize the fold"
+    }
+  },
+  "position_annotations": {
+    "1": {
+      "position": 1,
+      "wt_aa": "P",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "2": {
+      "position": 2,
+      "wt_aa": "Q",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "3": {
+      "position": 3,
+      "wt_aa": "I",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "4": {
+      "position": 4,
+      "wt_aa": "T",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "5": {
+      "position": 5,
+      "wt_aa": "L",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "6": {
+      "position": 6,
+      "wt_aa": "W",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "7": {
+      "position": 7,
+      "wt_aa": "Q",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "8": {
+      "position": 8,
+      "wt_aa": "R",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "9": {
+      "position": 9,
+      "wt_aa": "P",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "10": {
+      "position": 10,
+      "wt_aa": "L",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "11": {
+      "position": 11,
+      "wt_aa": "V",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "12": {
+      "position": 12,
+      "wt_aa": "T",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "13": {
+      "position": 13,
+      "wt_aa": "I",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "14": {
+      "position": 14,
+      "wt_aa": "R",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "15": {
+      "position": 15,
+      "wt_aa": "I",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "16": {
+      "position": 16,
+      "wt_aa": "G",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "17": {
+      "position": 17,
+      "wt_aa": "G",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "18": {
+      "position": 18,
+      "wt_aa": "Q",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "19": {
+      "position": 19,
+      "wt_aa": "L",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "20": {
+      "position": 20,
+      "wt_aa": "K",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "21": {
+      "position": 21,
+      "wt_aa": "E",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "22": {
+      "position": 22,
+      "wt_aa": "A",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "23": {
+      "position": 23,
+      "wt_aa": "L",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "24": {
+      "position": 24,
+      "wt_aa": "L",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "25": {
+      "position": 25,
+      "wt_aa": "D",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "26": {
+      "position": 26,
+      "wt_aa": "T",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "27": {
+      "position": 27,
+      "wt_aa": "G",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "28": {
+      "position": 28,
+      "wt_aa": "A",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "29": {
+      "position": 29,
+      "wt_aa": "D",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "30": {
+      "position": 30,
+      "wt_aa": "D",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "31": {
+      "position": 31,
+      "wt_aa": "T",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "32": {
+      "position": 32,
+      "wt_aa": "V",
+      "primary_region": "Substrate Envelope",
+      "all_regions": [
+        "Substrate Envelope"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": true
+    },
+    "33": {
+      "position": 33,
+      "wt_aa": "L",
+      "primary_region": "Substrate Envelope",
+      "all_regions": [
+        "Substrate Envelope"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "34": {
+      "position": 34,
+      "wt_aa": "E",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "35": {
+      "position": 35,
+      "wt_aa": "D",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Flexibility Loop"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "36": {
+      "position": 36,
+      "wt_aa": "I",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Distal/Allosteric",
+        "Flexibility Loop"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "37": {
+      "position": 37,
+      "wt_aa": "N",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Distal/Allosteric",
+        "Flexibility Loop"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "38": {
+      "position": 38,
+      "wt_aa": "L",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Flexibility Loop"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "39": {
+      "position": 39,
+      "wt_aa": "P",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Flexibility Loop"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "40": {
+      "position": 40,
+      "wt_aa": "G",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Flexibility Loop",
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "41": {
+      "position": 41,
+      "wt_aa": "K",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Flexibility Loop",
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "42": {
+      "position": 42,
+      "wt_aa": "W",
+      "primary_region": "Flexibility Loop",
+      "all_regions": [
+        "Flexibility Loop"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "43": {
+      "position": 43,
+      "wt_aa": "K",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "44": {
+      "position": 44,
+      "wt_aa": "P",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "45": {
+      "position": 45,
+      "wt_aa": "K",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "46": {
+      "position": 46,
+      "wt_aa": "M",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "47": {
+      "position": 47,
+      "wt_aa": "I",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region",
+        "Substrate Envelope"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": true
+    },
+    "48": {
+      "position": 48,
+      "wt_aa": "G",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site",
+        "Flap Region"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "49": {
+      "position": 49,
+      "wt_aa": "G",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site",
+        "Flap Region"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "50": {
+      "position": 50,
+      "wt_aa": "I",
+      "primary_region": "Active Site",
+      "all_regions": [
+        "Active Site",
+        "Flap Region",
+        "Flap Tip",
+        "Substrate Envelope"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "51": {
+      "position": 51,
+      "wt_aa": "G",
+      "primary_region": "Flap Tip",
+      "all_regions": [
+        "Flap Region",
+        "Flap Tip"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "52": {
+      "position": 52,
+      "wt_aa": "G",
+      "primary_region": "Flap Tip",
+      "all_regions": [
+        "Flap Region",
+        "Flap Tip"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "53": {
+      "position": 53,
+      "wt_aa": "F",
+      "primary_region": "Flap Tip",
+      "all_regions": [
+        "Flap Region",
+        "Flap Tip"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "54": {
+      "position": 54,
+      "wt_aa": "I",
+      "primary_region": "Flap Tip",
+      "all_regions": [
+        "Flap Region",
+        "Flap Tip",
+        "Substrate Envelope"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "55": {
+      "position": 55,
+      "wt_aa": "K",
+      "primary_region": "Flap Tip",
+      "all_regions": [
+        "Flap Region",
+        "Flap Tip"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "56": {
+      "position": 56,
+      "wt_aa": "V",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region",
+        "Substrate Envelope"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "57": {
+      "position": 57,
+      "wt_aa": "R",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region",
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "58": {
+      "position": 58,
+      "wt_aa": "Q",
+      "primary_region": "Flap Region",
+      "all_regions": [
+        "Flap Region",
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "59": {
+      "position": 59,
+      "wt_aa": "Y",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "60": {
+      "position": 60,
+      "wt_aa": "D",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "61": {
+      "position": 61,
+      "wt_aa": "Q",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "62": {
+      "position": 62,
+      "wt_aa": "I",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "63": {
+      "position": 63,
+      "wt_aa": "P",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "64": {
+      "position": 64,
+      "wt_aa": "I",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "65": {
+      "position": 65,
+      "wt_aa": "E",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "66": {
+      "position": 66,
+      "wt_aa": "I",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "67": {
+      "position": 67,
+      "wt_aa": "C",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "68": {
+      "position": 68,
+      "wt_aa": "G",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "69": {
+      "position": 69,
+      "wt_aa": "H",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "70": {
+      "position": 70,
+      "wt_aa": "K",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "71": {
+      "position": 71,
+      "wt_aa": "V",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "72": {
+      "position": 72,
+      "wt_aa": "I",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "73": {
+      "position": 73,
+      "wt_aa": "G",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "74": {
+      "position": 74,
+      "wt_aa": "T",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "75": {
+      "position": 75,
+      "wt_aa": "V",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "76": {
+      "position": 76,
+      "wt_aa": "L",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": true
+    },
+    "77": {
+      "position": 77,
+      "wt_aa": "V",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "78": {
+      "position": 78,
+      "wt_aa": "G",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "79": {
+      "position": 79,
+      "wt_aa": "P",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "80": {
+      "position": 80,
+      "wt_aa": "T",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "81": {
+      "position": 81,
+      "wt_aa": "P",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "82": {
+      "position": 82,
+      "wt_aa": "V",
+      "primary_region": "Substrate Envelope",
+      "all_regions": [
+        "Substrate Envelope",
+        "Hydrophobic Core"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": true
+    },
+    "83": {
+      "position": 83,
+      "wt_aa": "N",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "84": {
+      "position": 84,
+      "wt_aa": "I",
+      "primary_region": "Substrate Envelope",
+      "all_regions": [
+        "Substrate Envelope",
+        "Hydrophobic Core"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "85": {
+      "position": 85,
+      "wt_aa": "I",
+      "primary_region": "Hydrophobic Core",
+      "all_regions": [
+        "Hydrophobic Core"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "86": {
+      "position": 86,
+      "wt_aa": "G",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "87": {
+      "position": 87,
+      "wt_aa": "R",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "88": {
+      "position": 88,
+      "wt_aa": "N",
+      "primary_region": "Substrate Envelope",
+      "all_regions": [
+        "Substrate Envelope"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "89": {
+      "position": 89,
+      "wt_aa": "L",
+      "primary_region": "Distal/Allosteric",
+      "all_regions": [
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "90": {
+      "position": 90,
+      "wt_aa": "L",
+      "primary_region": "Substrate Envelope",
+      "all_regions": [
+        "Substrate Envelope"
+      ],
+      "drug_contact": true,
+      "hiv2_specific": false
+    },
+    "91": {
+      "position": 91,
+      "wt_aa": "T",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "92": {
+      "position": 92,
+      "wt_aa": "Q",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "93": {
+      "position": 93,
+      "wt_aa": "I",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "94": {
+      "position": 94,
+      "wt_aa": "G",
+      "primary_region": "Uncharacterized",
+      "all_regions": [],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "95": {
+      "position": 95,
+      "wt_aa": "C",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "96": {
+      "position": 96,
+      "wt_aa": "T",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "97": {
+      "position": 97,
+      "wt_aa": "L",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "98": {
+      "position": 98,
+      "wt_aa": "N",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    },
+    "99": {
+      "position": 99,
+      "wt_aa": "F",
+      "primary_region": "Dimer Interface",
+      "all_regions": [
+        "Dimer Interface",
+        "Distal/Allosteric"
+      ],
+      "drug_contact": false,
+      "hiv2_specific": false
+    }
+  },
+  "known_resistance_mutations": {
+    "D30N": {
+      "region": "Active Site",
+      "mechanism": "Disrupts H-bond to NFV P2 amide",
+      "drugs_affected": {
+        "NFV/r": 3
+      },
+      "hiv2_rule": true
+    },
+    "V32I": {
+      "region": "Active Site",
+      "mechanism": "Alters S1 subsite shape; hydrophobic expansion",
+      "drugs_affected": {
+        "DRV/r": 1,
+        "FPV/r": 1,
+        "IDV/r": 1,
+        "LPV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true,
+      "hiv2_specific": true
+    },
+    "I47V": {
+      "region": "Active Site/Flap Tip",
+      "mechanism": "Reduces DRV binding affinity at flap",
+      "drugs_affected": {
+        "DRV/r": 1,
+        "LPV/r": 2
+      },
+      "hiv2_rule": true
+    },
+    "I50L": {
+      "region": "Active Site/Flap Tip",
+      "mechanism": "Expands S2 subsite, preferential ATV resistance",
+      "drugs_affected": {
+        "ATV/r": 3
+      },
+      "hiv2_rule": true
+    },
+    "I50V": {
+      "region": "Active Site/Flap Tip",
+      "mechanism": "Alters flap drug contacts",
+      "drugs_affected": {
+        "ATV/r": 2,
+        "DRV/r": 1,
+        "FPV/r": 1,
+        "IDV/r": 1,
+        "LPV/r": 1,
+        "SQV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "I54M": {
+      "region": "Active Site/Flap Tip",
+      "mechanism": "Disrupts flap-water network",
+      "drugs_affected": {
+        "DRV/r": 1,
+        "LPV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "I54V": {
+      "region": "Active Site/Flap Tip",
+      "mechanism": "Alters S2' pocket geometry",
+      "drugs_affected": {
+        "DRV/r": 1,
+        "LPV/r": 2,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "I53V": {
+      "region": "Flap Region",
+      "mechanism": "Reduces flap rigidity, lowers drug binding",
+      "drugs_affected": {
+        "DRV/r": 1,
+        "LPV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "T56V": {
+      "region": "Flap Region",
+      "mechanism": "Alters flap tip hydrogen bonding",
+      "drugs_affected": {
+        "LPV/r": 2
+      },
+      "hiv2_rule": true
+    },
+    "I82F": {
+      "region": "Substrate Envelope",
+      "mechanism": "Reduces S1/S1' pocket volume",
+      "drugs_affected": {
+        "LPV/r": 1,
+        "IDV/r": 2,
+        "NFV/r": 2,
+        "ATV/r": 1,
+        "FPV/r": 2
+      },
+      "hiv2_rule": true,
+      "hiv2_specific": true
+    },
+    "I84V": {
+      "region": "Substrate Envelope",
+      "mechanism": "Expands S2/S2' hydrophobic contact",
+      "drugs_affected": {
+        "ATV/r": 2,
+        "DRV/r": 1,
+        "FPV/r": 2,
+        "IDV/r": 2,
+        "LPV/r": 2,
+        "SQV/r": 2,
+        "NFV/r": 2
+      },
+      "hiv2_rule": true
+    },
+    "V82A": {
+      "region": "Substrate Envelope",
+      "mechanism": "Reduces S1 pocket volume, excludes bulky P1 groups",
+      "drugs_affected": {
+        "IDV/r": 2,
+        "NFV/r": 2,
+        "LPV/r": 1,
+        "FPV/r": 2
+      },
+      "hiv2_rule": true
+    },
+    "V82F": {
+      "region": "Substrate Envelope",
+      "mechanism": "Aromatic ring alters hydrophobic packing",
+      "drugs_affected": {
+        "IDV/r": 2,
+        "NFV/r": 2,
+        "FPV/r": 2,
+        "LPV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "V82I": {
+      "region": "Substrate Envelope",
+      "mechanism": "Moderate S1 pocket alteration",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "V82L": {
+      "region": "Substrate Envelope",
+      "mechanism": "Branched aliphatic in S1 pocket",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "V82T": {
+      "region": "Substrate Envelope",
+      "mechanism": "Polar substitution in hydrophobic pocket",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "N88D": {
+      "region": "Substrate Envelope",
+      "mechanism": "Alters NFV P2' binding network",
+      "drugs_affected": {
+        "NFV/r": 2
+      },
+      "hiv2_rule": true
+    },
+    "N88S": {
+      "region": "Substrate Envelope",
+      "mechanism": "Hydroxyl-containing sidechain at NFV binding site",
+      "drugs_affected": {
+        "NFV/r": 3
+      },
+      "hiv2_rule": true
+    },
+    "L90M": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Allosteric; alters S1/S1' pocket via beta-sheet repositioning",
+      "drugs_affected": {
+        "SQV/r": 3,
+        "LPV/r": 1,
+        "ATV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L10F": {
+      "region": "Distal/Allosteric",
+      "mechanism": "N-terminal packing affects overall PR stability",
+      "drugs_affected": {
+        "DRV/r": 1,
+        "FPV/r": 1,
+        "IDV/r": 1,
+        "LPV/r": 1,
+        "NFV/r": 1,
+        "SQV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L10I": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Mild destabilization of N-terminus",
+      "drugs_affected": {
+        "ATV/r": 1,
+        "DRV/r": 1,
+        "FPV/r": 1,
+        "IDV/r": 1,
+        "LPV/r": 1,
+        "NFV/r": 1,
+        "SQV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "K20R": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Surface charge redistribution",
+      "drugs_affected": {
+        "ATV/r": 1,
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L23I": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Alters core hydrophobic packing",
+      "drugs_affected": {
+        "ATV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L24I": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Modifies subsite topology indirectly",
+      "drugs_affected": {
+        "ATV/r": 1,
+        "FPV/r": 1,
+        "IDV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "V47A": {
+      "region": "Flap Region",
+      "mechanism": "Reduces flap-S1 subsite contacts",
+      "drugs_affected": {
+        "LPV/r": 2
+      },
+      "hiv2_rule": true,
+      "hiv2_specific": true
+    },
+    "G48V": {
+      "region": "Flap Tip",
+      "mechanism": "Restrains flap tip flexibility, reduces SQV binding",
+      "drugs_affected": {
+        "SQV/r": 2
+      },
+      "hiv2_rule": true
+    },
+    "I62V": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Alters S2 subsite packing",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "LPV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "A71V": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Modifies dimer interface packing",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "LPV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "G73S": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Introduces polar group in surface loop",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L76V": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Alters surface topology near dimer interface",
+      "drugs_affected": {
+        "DRV/r": 2,
+        "LPV/r": 2
+      },
+      "hiv2_rule": true,
+      "hiv2_specific": true
+    },
+    "N83D": {
+      "region": "Substrate Envelope",
+      "mechanism": "Disrupts inter-subunit H-bond to DRV",
+      "drugs_affected": {
+        "DRV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L89V": {
+      "region": "Distal/Allosteric",
+      "mechanism": "C-terminal modification affects dimer stability",
+      "drugs_affected": {
+        "ATV/r": 1,
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "V62A": {
+      "region": "Distal/Allosteric",
+      "mechanism": "Alters core packing near S2",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "NFV/r": 1
+      },
+      "hiv2_rule": true
+    },
+    "L99F": {
+      "region": "Dimer Interface",
+      "mechanism": "Disrupts C-terminal dimer contacts",
+      "drugs_affected": {
+        "IDV/r": 1,
+        "LPV/r": 1
+      },
+      "hiv2_rule": true
+    }
+  },
+  "drug_binding_analysis": {
+    "ATV/r": {
+      "full_name": "Atazanavir/r",
+      "binding_site": "S1/S2/S1'/S2' subsites",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            50,
+            27
+          ],
+          "detail": "Flap I50 backbone NH -> drug P2/P1' carbonyl; D25 Odelta -> drug P1 NH"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            47,
+            50,
+            54,
+            82
+          ],
+          "detail": "S1 pocket (V32, V82); S2 pocket (I54); flap contacts (I50)"
+        },
+        {
+          "type": "Water-mediated",
+          "residues": [
+            50,
+            48
+          ],
+          "detail": "Structural water bridging flap tip to inhibitor"
+        }
+      ],
+      "mutations_disrupting": {
+        "I50V": "Alters flap H-bond pattern; moderate resistance",
+        "I50L": "Preferential ATV escape; expands active site",
+        "I82F": "Reduces S1 pocket volume",
+        "L90M": "Allosteric reshaping of S1/S1'",
+        "K20R": "Surface charge affects overall dynamics"
+      },
+      "hiv1_vs_hiv2": "HIV-2 PR has I32 (vs V32 in HIV-1), changing S1 pocket hydrophobicity. ATV retains activity in HIV-2 due to better S1 complementarity."
+    },
+    "DRV/r": {
+      "full_name": "Darunavir/r",
+      "binding_site": "S1/S2/S1'/S2' subsites (extensive contacts)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            50,
+            53,
+            30
+          ],
+          "detail": "D25, D30 backbone NHs; S53 backbone; bis-THF oxygens -> Asp backbone"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            47,
+            50,
+            54,
+            82,
+            84
+          ],
+          "detail": "extensive S1/S2 contacts"
+        },
+        {
+          "type": "Water-mediated",
+          "residues": [
+            50,
+            48,
+            30
+          ],
+          "detail": "Conserved water molecule network at flap-core interface"
+        }
+      ],
+      "mutations_disrupting": {
+        "V32I": "Expands S1 pocket, reduces DRV complementarity",
+        "I47V": "Alters flap-drug contacts",
+        "I50V": "Disrupts flap H-bonds to DRV",
+        "I54V": "Alters S2 pocket geometry",
+        "I84V": "Reduces S2 hydrophobic contact",
+        "N83D": "Disrupts inter-subunit H-bond network",
+        "L76V": "Alters surface topology"
+      },
+      "hiv1_vs_hiv2": "DRV was co-crystallized with HIV-2 PR (3EBZ). Key difference: I32 in HIV-2 vs V32 in HIV-1 alters S1 pocket. DRV's bis-THF group compensates through backbone H-bonds."
+    },
+    "FPV/r": {
+      "full_name": "Fosamprenavir/r",
+      "binding_site": "S1/S2 subsites (amprenavir pharmacophore)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            48,
+            50
+          ],
+          "detail": "D25 Odelta; flap backbone; tetrahydrofuranyl oxygen network"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            50,
+            54,
+            82,
+            84
+          ],
+          "detail": "S1 (V82/V32); S2 (I50, I54)"
+        }
+      ],
+      "mutations_disrupting": {
+        "V32I": "Reduces S1 complementarity",
+        "I50V": "Alters flap-drug interface",
+        "I82F/A": "Excludes FPV P1 benzyl group",
+        "I84V": "Reduces S2 packing"
+      },
+      "hiv1_vs_hiv2": "FPV shares amprenavir scaffold. I50V in HIV-2 is primary resistance; S1 pocket differences between HIV-1/2 partially explain cross-reactivity."
+    },
+    "IDV/r": {
+      "full_name": "Indinavir/r",
+      "binding_site": "S1/S2/S1'/S2' (classic peptidomimetic)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            48,
+            50
+          ],
+          "detail": "Classic D25/D27 catalytic H-bonds; flap I50 backbone"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            47,
+            50,
+            54,
+            82,
+            84
+          ],
+          "detail": "S1 (V82), S2 (I50, I54), S2' (I84)"
+        }
+      ],
+      "mutations_disrupting": {
+        "I50V": "Primary IDV resistance",
+        "I82F/A": "Alters S1 pocket volume",
+        "I84V": "Reduces S2/S2' contacts",
+        "V82A": "Excludes IDV P1 group",
+        "V32I": "S1 pocket shape change",
+        "I62V": "Secondary S2 modification"
+      },
+      "hiv1_vs_hiv2": "IDV is less effective in HIV-2 due to natural I32 and I50 positions. HIV-2 PR has inherently higher IDV resistance thresholds."
+    },
+    "LPV/r": {
+      "full_name": "Lopinavir/r",
+      "binding_site": "S1/S2/S1'/S2' (ritonavir analog)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            48,
+            50
+          ],
+          "detail": "D25 aspartate; flap backbone; P2 pyrimidinyl oxygen"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            47,
+            50,
+            54,
+            82,
+            84
+          ],
+          "detail": "Extensive van der Waals across all subsites"
+        }
+      ],
+      "mutations_disrupting": {
+        "I50V": "Reduces flap contacts",
+        "I54V": "Primary LPV resistance in HIV-2",
+        "I82F/A/V": "S1 pocket alteration",
+        "I84V": "Broad cross-resistance",
+        "V47A": "HIV-2-specific flap modification",
+        "T56V": "Alters flap hydrogen bonding",
+        "L76V": "HIV-2-specific surface change"
+      },
+      "hiv1_vs_hiv2": "LPV has the broadest cross-resistance profile in HIV-2. V47A and L76V are HIV-2-specific mutations not commonly seen in HIV-1."
+    },
+    "SQV/r": {
+      "full_name": "Saquinavir/r",
+      "binding_site": "S1/S2 (naphthyl group in S1)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            48,
+            50
+          ],
+          "detail": "Standard aspartyl protease H-bonds; quinoline N -> flap backbone"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            50,
+            54,
+            82
+          ],
+          "detail": "Naphthyl in S1 (V82); P2 tert-butyl in S2"
+        }
+      ],
+      "mutations_disrupting": {
+        "G48V": "Primary SQV resistance — restricts flap opening",
+        "L90M": "Major resistance mutation — allosteric S1 reshaping",
+        "I50V": "Reduces flap contact",
+        "I84V": "S2 subsite alteration"
+      },
+      "hiv1_vs_hiv2": "SQV was the first PI; L90M is a hallmark SQV resistance mutation conserved across HIV-1/2. G48V specifically impacts SQV's quinoline access."
+    },
+    "TPV/r": {
+      "full_name": "Tipranavir/r",
+      "binding_site": "S1/S2 (non-peptidic coumarin scaffold)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            50,
+            53
+          ],
+          "detail": "Coumarin carbonyl -> D25; pyridyl N -> backbone NH"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            47,
+            50,
+            82
+          ],
+          "detail": "Coumarin ring in S1/S1'; ethyl in S2"
+        },
+        {
+          "type": "Pi-stacking",
+          "residues": [
+            50,
+            82
+          ],
+          "detail": "Aromatic contacts with flap and S1 pocket"
+        }
+      ],
+      "mutations_disrupting": {
+        "I50V": "Primary TPV resistance",
+        "I82F": "Alters aromatic stacking",
+        "V32I": "S1 pocket expansion"
+      },
+      "hiv1_vs_hiv2": "TPV has a unique non-peptidic scaffold. Less data available for HIV-2; I50V is predicted as primary resistance based on structural overlap."
+    },
+    "NFV/r": {
+      "full_name": "Nelfinavir/r",
+      "binding_site": "S1/S2 (cyclic P2 group)",
+      "key_interactions": [
+        {
+          "type": "H-bond",
+          "residues": [
+            27,
+            48,
+            50
+          ],
+          "detail": "Standard catalytic H-bonds; D30 N -> NFV P2 amide (unique)"
+        },
+        {
+          "type": "Hydrophobic",
+          "residues": [
+            32,
+            47,
+            50,
+            82,
+            84,
+            88
+          ],
+          "detail": "S1 (V82); S2 (D30 sidechain contact, I50)"
+        }
+      ],
+      "mutations_disrupting": {
+        "D30N": "Hallmark NFV resistance — eliminates unique D30 interaction",
+        "N88D/S": "Alters P2' binding network",
+        "I50V": "Flap modification",
+        "I82F/A/V": "S1 pocket change",
+        "L90M": "Allosteric resistance",
+        "I84V": "S2 pocket change"
+      },
+      "hiv1_vs_hiv2": "D30N is NFV-specific across HIV-1/2. N88S is HIV-2-enriched (vs N88D in HIV-1), reflecting subtle S2' subsite differences."
+    }
+  },
+  "hiv1_vs_hiv2_key_positions": {
+    "10": {
+      "hiv1": "L",
+      "hiv2": "L",
+      "diff": false,
+      "note": "Conserved N-terminal leucine"
+    },
+    "20": {
+      "hiv1": "K",
+      "hiv2": "K",
+      "diff": false,
+      "note": "Surface lysine, conserved"
+    },
+    "23": {
+      "hiv1": "I",
+      "hiv2": "L",
+      "diff": true,
+      "note": "HIV-2 has Leu — altered core packing"
+    },
+    "24": {
+      "hiv1": "I",
+      "hiv2": "L",
+      "diff": true,
+      "note": "HIV-2 has Leu — core modification"
+    },
+    "25": {
+      "hiv1": "D",
+      "hiv2": "D",
+      "diff": false,
+      "note": "Catalytic Asp25, universally conserved"
+    },
+    "26": {
+      "hiv1": "T",
+      "hiv2": "T",
+      "diff": false,
+      "note": "Catalytic triad Thr26"
+    },
+    "27": {
+      "hiv1": "D",
+      "hiv2": "D",
+      "diff": false,
+      "note": "Catalytic Asp27"
+    },
+    "30": {
+      "hiv1": "D",
+      "hiv2": "D",
+      "diff": false,
+      "note": "NFV contact; D30N primary resistance"
+    },
+    "32": {
+      "hiv1": "V",
+      "hiv2": "I",
+      "diff": true,
+      "note": "HIV-2 has Ile — smaller S1 pocket; critical for PI binding differences"
+    },
+    "36": {
+      "hiv1": "I",
+      "hiv2": "L",
+      "diff": true,
+      "note": "Core modification"
+    },
+    "47": {
+      "hiv1": "I",
+      "hiv2": "I",
+      "diff": false,
+      "note": "Conserved flap residue; V47A is HIV-2-specific resistance"
+    },
+    "48": {
+      "hiv1": "G",
+      "hiv2": "G",
+      "diff": false,
+      "note": "Glycine at flap hinge — conserved"
+    },
+    "50": {
+      "hiv1": "I",
+      "hiv2": "I",
+      "diff": false,
+      "note": "Flap tip; I50V/L primary resistance"
+    },
+    "53": {
+      "hiv1": "I",
+      "hiv2": "I",
+      "diff": false,
+      "note": "Flap core; I53V alters flap stability"
+    },
+    "54": {
+      "hiv1": "I",
+      "hiv2": "I",
+      "diff": false,
+      "note": "S2 pocket; I54M/V common in HIV-2"
+    },
+    "56": {
+      "hiv1": "T",
+      "hiv2": "T",
+      "diff": false,
+      "note": "Flap base; T56V LPV resistance"
+    },
+    "62": {
+      "hiv1": "V",
+      "hiv2": "V",
+      "diff": false,
+      "note": "Conserved core valine"
+    },
+    "76": {
+      "hiv1": "L",
+      "hiv2": "L",
+      "diff": false,
+      "note": "Surface; L76V is HIV-2-specific resistance"
+    },
+    "82": {
+      "hiv1": "V",
+      "hiv2": "V",
+      "diff": false,
+      "note": "S1 pocket; V82A/F major resistance"
+    },
+    "84": {
+      "hiv1": "I",
+      "hiv2": "I",
+      "diff": false,
+      "note": "S2/S2' pocket; I84V broad cross-resistance"
+    },
+    "88": {
+      "hiv1": "N",
+      "hiv2": "N",
+      "diff": false,
+      "note": "NFV P2' contact; N88D/S NFV resistance"
+    },
+    "89": {
+      "hiv1": "L",
+      "hiv2": "L",
+      "diff": false,
+      "note": "C-terminal; L89V mild resistance"
+    },
+    "90": {
+      "hiv1": "L",
+      "hiv2": "L",
+      "diff": false,
+      "note": "S1 reshaping; L90M major SQV resistance"
+    }
+  },
+  "hiv2_specific_positions": {
+    "32": {
+      "hiv1": "V",
+      "hiv2": "I",
+      "significance": "S1 pocket size difference"
+    },
+    "47": {
+      "hiv1": "I",
+      "hiv2": "I (WT same), V47A is HIV-2-specific resistance"
+    },
+    "76": {
+      "hiv1": "L",
+      "hiv2": "L (WT same), L76V is HIV-2-specific resistance"
+    },
+    "82": {
+      "hiv1": "V",
+      "hiv2": "V (WT same), V82 mutations affect S1 pocket"
+    }
+  },
+  "shap_importance": {
+    "1": 0.6154704870922225,
+    "2": 0.3785279073885509,
+    "3": 0.2803268666778292,
+    "6": 0.07993635322366442,
+    "11": 0.016389452187078338,
+    "7": 0.015927635465881655,
+    "10": 0.007881307625211775,
+    "9": 0.0065350817250353944,
+    "8": 0.004677851318514773,
+    "39": 0.0,
+    "32": 0.0,
+    "31": 0.0,
+    "33": 0.0,
+    "34": 0.0,
+    "35": 0.0,
+    "36": 0.0,
+    "37": 0.0,
+    "38": 0.0,
+    "43": 0.0,
+    "40": 0.0,
+    "41": 0.0,
+    "42": 0.0,
+    "29": 0.0,
+    "44": 0.0,
+    "45": 0.0,
+    "46": 0.0,
+    "47": 0.0,
+    "30": 0.0,
+    "24": 0.0,
+    "28": 0.0
+  },
+  "conservation_scores": {
+    "2": 1.0,
+    "5": 1.0,
+    "3": 0.9893,
+    "1": 0.9823,
+    "6": 0.9795,
+    "4": 0.978,
+    "9": 0.9726,
+    "23": 0.9705,
+    "48": 0.9646,
+    "8": 0.9628,
+    "65": 0.5712,
+    "14": 0.594,
+    "40": 0.6081,
+    "70": 0.6221,
+    "43": 0.6242,
+    "92": 0.633,
+    "68": 0.648,
+    "41": 0.664,
+    "91": 0.6764,
+    "89": 0.6906,
+    "25": 0.9188,
+    "27": 0.9188,
+    "45": 0.8715,
+    "46": 0.8715,
+    "47": 0.8715,
+    "49": 0.8715,
+    "50": 0.8715,
+    "51": 0.8715,
+    "52": 0.8715,
+    "53": 0.8715,
+    "54": 0.8715,
+    "55": 0.8715,
+    "95": 0.8814,
+    "96": 0.8814,
+    "97": 0.8814,
+    "98": 0.8814,
+    "28": 0.9049,
+    "29": 0.9049,
+    "30": 0.9049,
+    "31": 0.9049,
+    "32": 0.9049,
+    "81": 0.9049,
+    "82": 0.9049,
+    "84": 0.9049,
+    "76": 0.8512,
+    "10": 0.8544,
+    "20": 0.8544,
+    "24": 0.8544,
+    "56": 0.8544,
+    "62": 0.8544,
+    "71": 0.8544,
+    "73": 0.8544,
+    "83": 0.8544,
+    "88": 0.8544,
+    "90": 0.8544,
+    "99": 0.8544,
+    "7": 0.8446,
+    "11": 0.8446,
+    "12": 0.8446,
+    "13": 0.8446,
+    "15": 0.8446,
+    "16": 0.8446,
+    "17": 0.8446,
+    "18": 0.8446,
+    "19": 0.8446,
+    "21": 0.8446,
+    "22": 0.8446,
+    "26": 0.8446,
+    "33": 0.8446,
+    "34": 0.8446,
+    "35": 0.8446,
+    "36": 0.8446,
+    "37": 0.8446,
+    "38": 0.8446,
+    "39": 0.8446,
+    "42": 0.8446,
+    "44": 0.8446,
+    "57": 0.8446,
+    "58": 0.8446,
+    "59": 0.8446,
+    "60": 0.8446,
+    "61": 0.8446,
+    "63": 0.8446,
+    "64": 0.8446,
+    "66": 0.8446,
+    "67": 0.8446,
+    "69": 0.8446,
+    "72": 0.8446,
+    "74": 0.8446,
+    "75": 0.8446,
+    "77": 0.8446,
+    "78": 0.8446,
+    "79": 0.8446,
+    "80": 0.8446,
+    "85": 0.8446,
+    "86": 0.8446,
+    "87": 0.8446,
+    "93": 0.8446,
+    "94": 0.8446
+  },
+  "resistance_hypotheses": [
+    {
+      "rank": 1,
+      "position": 1,
+      "wt_aa": "P",
+      "shap_importance": 0.61547,
+      "conservation": 0.9823,
+      "structural_region": "Dimer Interface",
+      "hypothesis_type": "Dimer Stability Modifier",
+      "rationale": "Position 1 (P) is at the dimer interface (region: Dimer Interface) with importance 0.6155. HIV-2 protease is active only as a homodimer. Mutations at the dimer interface could destabilize the active dimer, raising the effective concentration needed for drug inhibition. This could manifest as apparent resistance through reduced PR activity rather than altered drug binding. Conservation: 0.98.",
+      "experimental_prediction": "Size-exclusion chromatography (SEC) or analytical ultracentrifugation (AUC) to measure dimer/monomer equilibrium for {wt}{pos}X variants. Determine dimer dissociation constant (Kd). Viral fitness assays expected to show reduced replication due to impaired PR assembly.",
+      "known_resistance_mutation": false,
+      "priority": "MEDIUM"
+    },
+    {
+      "rank": 2,
+      "position": 2,
+      "wt_aa": "Q",
+      "shap_importance": 0.378528,
+      "conservation": 1.0,
+      "structural_region": "Dimer Interface",
+      "hypothesis_type": "Dimer Stability Modifier",
+      "rationale": "Position 2 (Q) is at the dimer interface (region: Dimer Interface) with importance 0.3785. HIV-2 protease is active only as a homodimer. Mutations at the dimer interface could destabilize the active dimer, raising the effective concentration needed for drug inhibition. This could manifest as apparent resistance through reduced PR activity rather than altered drug binding. Conservation: 1.00.",
+      "experimental_prediction": "Size-exclusion chromatography (SEC) or analytical ultracentrifugation (AUC) to measure dimer/monomer equilibrium for {wt}{pos}X variants. Determine dimer dissociation constant (Kd). Viral fitness assays expected to show reduced replication due to impaired PR assembly.",
+      "known_resistance_mutation": false,
+      "priority": "MEDIUM"
+    },
+    {
+      "rank": 3,
+      "position": 3,
+      "wt_aa": "I",
+      "shap_importance": 0.280327,
+      "conservation": 0.9893,
+      "structural_region": "Dimer Interface",
+      "hypothesis_type": "Dimer Stability Modifier",
+      "rationale": "Position 3 (I) is at the dimer interface (region: Dimer Interface) with importance 0.2803. HIV-2 protease is active only as a homodimer. Mutations at the dimer interface could destabilize the active dimer, raising the effective concentration needed for drug inhibition. This could manifest as apparent resistance through reduced PR activity rather than altered drug binding. Conservation: 0.99.",
+      "experimental_prediction": "Size-exclusion chromatography (SEC) or analytical ultracentrifugation (AUC) to measure dimer/monomer equilibrium for {wt}{pos}X variants. Determine dimer dissociation constant (Kd). Viral fitness assays expected to show reduced replication due to impaired PR assembly.",
+      "known_resistance_mutation": false,
+      "priority": "MEDIUM"
+    },
+    {
+      "rank": 4,
+      "position": 6,
+      "wt_aa": "W",
+      "shap_importance": 0.079936,
+      "conservation": 0.9795,
+      "structural_region": "Hydrophobic Core",
+      "hypothesis_type": "Structural Stability Modulator",
+      "rationale": "Position 6 (W) is in the hydrophobic core (region: Hydrophobic Core) with importance 0.0799. The core maintains the overall fold of the protease. Mutations here could alter the conformational ensemble, shifting the equilibrium between active and inactive states. Even small changes in core packing can propagate to the active site through correlated motions in the protein matrix. Conservation: 0.98.",
+      "experimental_prediction": "Differential scanning calorimetry (DSC) or circular dichroism (CD) to measure thermal stability. Molecular dynamics simulations to assess conformational changes. X-ray crystallography to detect subtle structural rearrangements at the active site.",
+      "known_resistance_mutation": false,
+      "priority": "MEDIUM"
+    },
+    {
+      "rank": 5,
+      "position": 11,
+      "wt_aa": "V",
+      "shap_importance": 0.016389,
+      "conservation": 0.8446,
+      "structural_region": "Distal/Allosteric",
+      "hypothesis_type": "Allosteric Network Modifier",
+      "rationale": "Position 11 (V) is distal from the active site (region: Distal/Allosteric) with importance 0.0164. Allosteric communication pathways connect distal positions to the active site through correlated motions. Mutations here may propagate structural changes through the protein matrix.",
+      "experimental_prediction": "Hydrogen-deuterium exchange mass spectrometry (HDX-MS) comparing WT vs {wt}{pos}X variants. Expect altered exchange rates at the active site despite the mutation being distal. NMR relaxation dispersion may also detect changes in millisecond dynamics.",
+      "known_resistance_mutation": false,
+      "priority": "LOW"
+    },
+    {
+      "rank": 6,
+      "position": 7,
+      "wt_aa": "Q",
+      "shap_importance": 0.015928,
+      "conservation": 0.8446,
+      "structural_region": "Uncharacterized",
+      "hypothesis_type": "Uncharacterized Structural Role",
+      "rationale": "Position 7 (Q) has high ML importance (0.0159) in region 'Uncharacterized' but is not a known resistance mutation. Its structural role requires further investigation. Conservation: 0.84.",
+      "experimental_prediction": "X-ray crystallography of {wt}{pos}X HIV-2 PR variants. Phenotypic resistance testing and viral fitness assessment.",
+      "known_resistance_mutation": false,
+      "priority": "LOW"
+    }
+  ],
+  "summary": {
+    "total_known_resistance_mutations": 34,
+    "hiv2_specific_mutations": 4,
+    "mutations_by_region": {
+      "Active Site": 2,
+      "Active Site/Flap Tip": 5,
+      "Flap Region": 3,
+      "Substrate Envelope": 10,
+      "Distal/Allosteric": 12,
+      "Flap Tip": 1,
+      "Dimer Interface": 1
+    },
+    "cross_resistance_hotspots": [
+      {
+        "mutation": "I50V",
+        "n_drugs_affected": 7,
+        "max_penalty": 2
+      },
+      {
+        "mutation": "I84V",
+        "n_drugs_affected": 7,
+        "max_penalty": 2
+      },
+      {
+        "mutation": "L10I",
+        "n_drugs_affected": 7,
+        "max_penalty": 1
+      },
+      {
+        "mutation": "L10F",
+        "n_drugs_affected": 6,
+        "max_penalty": 1
+      },
+      {
+        "mutation": "I82F",
+        "n_drugs_affected": 5,
+        "max_penalty": 2
+      },
+      {
+        "mutation": "V32I",
+        "n_drugs_affected": 5,
+        "max_penalty": 1
+      },
+      {
+        "mutation": "L90M",
+        "n_drugs_affected": 4,
+        "max_penalty": 3
+      },
+      {
+        "mutation": "V82A",
+        "n_drugs_affected": 4,
+        "max_penalty": 2
+      },
+      {
+        "mutation": "V82F",
+        "n_drugs_affected": 4,
+        "max_penalty": 2
+      }
+    ],
+    "novel_candidate_positions": []
+  }
+}

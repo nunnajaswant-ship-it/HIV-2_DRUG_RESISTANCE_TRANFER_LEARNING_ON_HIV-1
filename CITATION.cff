@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite the manuscript below."
+title: "Cross-species transfer learning from HIV-1 to HIV-2 for protease inhibitor resistance prediction: biophysical features and external clinical validation"
+type: software
+authors:
+  - family-names: "Nunna"
+    given-names: "Jaswanth Sriram"
+    affiliation: "Department of Artificial Intelligence & Engineering, Amrita Vishwa Vidyapeetham, Bengaluru, India"
+    email: "bl.sc.u4aie24029@bl.students.amrita.edu"
+year: 2026
+license: MIT
+keywords:
+  - HIV-2
+  - protease inhibitor resistance
+  - cross-species transfer learning
+  - drug resistance prediction
+  - machine learning
+  - biophysical features
+  - clinical validation
+repository-code: "https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1"
+abstract: >-
+  A machine-learning framework for HIV-2 protease-inhibitor resistance prediction built by
+  cross-species transfer learning from HIV-1. The model is pre-trained on 5,683 curated HIV-1
+  phenotypic assays, applied zero-shot to HIV-2, and fine-tuned on a 160-row HIV-2 ChEMBL panel.
+  On measured HIV-2 binding affinities it significantly outperforms a Stanford-derived rule-based
+  interpretation (R = 0.7018 vs 0.4724; delta-R = +0.229; P <= 0.001), and it recovers a positive,
+  drug-dependent signal on 2,616 never-seen HIV-2 clinical rows without any clinical label
+  entering training.

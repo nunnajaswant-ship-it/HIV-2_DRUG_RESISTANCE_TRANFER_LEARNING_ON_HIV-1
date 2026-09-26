@@ -1,0 +1,286 @@
+{
+  "rule_vocabulary_positions": 25,
+  "rule_single_rules": 61,
+  "rule_combination_rules": 20,
+  "Q1_clinical_label_coverage": {
+    "n_rows": 5232,
+    "overall_zero_pct": 93.08,
+    "per_drug": {
+      "ATV/r": {
+        "n": 654,
+        "zero_pct": 92.4,
+        "nonzero_n": 50
+      },
+      "DRV/r": {
+        "n": 654,
+        "zero_pct": 96.0,
+        "nonzero_n": 26
+      },
+      "FPV/r": {
+        "n": 654,
+        "zero_pct": 91.9,
+        "nonzero_n": 53
+      },
+      "IDV/r": {
+        "n": 654,
+        "zero_pct": 91.9,
+        "nonzero_n": 53
+      },
+      "LPV/r": {
+        "n": 654,
+        "zero_pct": 92.0,
+        "nonzero_n": 52
+      },
+      "NFV": {
+        "n": 654,
+        "zero_pct": 91.3,
+        "nonzero_n": 57
+      },
+      "SQV/r": {
+        "n": 654,
+        "zero_pct": 92.2,
+        "nonzero_n": 51
+      },
+      "TPV/r": {
+        "n": 654,
+        "zero_pct": 96.9,
+        "nonzero_n": 20
+      }
+    }
+  },
+  "Q2_measured_rule_coverage": {
+    "n_rows": 160,
+    "n_sequences": 19,
+    "zero_rule_pct": 72.5,
+    "per_drug": {
+      "ATV/r": {
+        "n": 40,
+        "zero_rule_pct": 70.0,
+        "nonzero_n": 12
+      },
+      "DRV/r": {
+        "n": 40,
+        "zero_rule_pct": 80.0,
+        "nonzero_n": 8
+      },
+      "LPV/r": {
+        "n": 40,
+        "zero_rule_pct": 70.0,
+        "nonzero_n": 12
+      },
+      "SQV/r": {
+        "n": 40,
+        "zero_rule_pct": 70.0,
+        "nonzero_n": 12
+      }
+    }
+  },
+  "Q3_rule_blind_vs_covered": {
+    "n_rule_blind": 116,
+    "n_rule_covered": 44,
+    "blind_model_r": 0.5853,
+    "blind_model_rho": 0.5956,
+    "blind_dG_span": 8.388,
+    "blind_rule_r": null,
+    "blind_model_r_ci": [
+      0.2956,
+      0.7877
+    ],
+    "blind_model_r_p_le_0": 0.0,
+    "n_boot": 2000,
+    "covered_model_r": 0.4977,
+    "covered_rule_r": 0.3889
+  },
+  "Q4_mutation_coverage": {
+    "distinct_observed_mutations": 37,
+    "mutations_with_explicit_rule": 3,
+    "coverage_pct": 8.1,
+    "observed_mutations": [
+      {
+        "mutation": "L90M",
+        "n_seqs": 6,
+        "has_explicit_rule": true
+      },
+      {
+        "mutation": "V10I",
+        "n_seqs": 5,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "N40D",
+        "n_seqs": 5,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "V71I",
+        "n_seqs": 4,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "S43I",
+        "n_seqs": 4,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I82F",
+        "n_seqs": 3,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "G17D",
+        "n_seqs": 3,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "Y14H",
+        "n_seqs": 3,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I84V",
+        "n_seqs": 3,
+        "has_explicit_rule": true
+      },
+      {
+        "mutation": "K70T",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "E63N",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "N41Y",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "N40P",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "A73G",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "A92E",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I89L",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "K60H",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "S43T",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "K70R",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I54M",
+        "n_seqs": 2,
+        "has_explicit_rule": true
+      },
+      {
+        "mutation": "I46V",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I89V",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "V62I",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "N41D",
+        "n_seqs": 2,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "G17N",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "V47A",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "A34E",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "T74N",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "F85L",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "T56V",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I75M",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "V33I",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "M95I",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "I64V",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "A92S",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "Y14R",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      },
+      {
+        "mutation": "T12Q",
+        "n_seqs": 1,
+        "has_explicit_rule": false
+      }
+    ]
+  }
+}

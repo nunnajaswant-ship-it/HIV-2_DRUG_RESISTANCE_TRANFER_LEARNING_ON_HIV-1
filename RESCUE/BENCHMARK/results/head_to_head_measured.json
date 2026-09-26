@@ -1,0 +1,38 @@
+{
+  "n_rows": 160,
+  "per_drug": {
+    "ATV/r": {
+      "n": 40,
+      "rule_pearson_vs_measured_dG": 0.3907,
+      "rule_spearman": 0.4903,
+      "rule_nonzero": 12
+    },
+    "DRV/r": {
+      "n": 40,
+      "rule_pearson_vs_measured_dG": 0.5406,
+      "rule_spearman": 0.5129,
+      "rule_nonzero": 8
+    },
+    "LPV/r": {
+      "n": 40,
+      "rule_pearson_vs_measured_dG": 0.3929,
+      "rule_spearman": 0.5196,
+      "rule_nonzero": 12
+    },
+    "SQV/r": {
+      "n": 40,
+      "rule_pearson_vs_measured_dG": 0.5624,
+      "rule_spearman": 0.5937,
+      "rule_nonzero": 12
+    }
+  },
+  "pooled": {
+    "n": 160,
+    "rule_pearson_vs_measured_dG": 0.4724,
+    "rule_spearman": 0.5468
+  },
+  "model_benchmark": {
+    "note": "locked transfer fine-tune OOF on the 160-row 4-drug panel",
+    "mean_pearson_r": 0.7018
+  }
+}

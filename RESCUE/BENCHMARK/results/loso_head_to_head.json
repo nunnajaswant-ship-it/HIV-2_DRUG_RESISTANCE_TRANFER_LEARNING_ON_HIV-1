@@ -1,0 +1,31 @@
+{
+  "n_rows": 160,
+  "n_sequences": 19,
+  "full": {
+    "model_r": 0.7018,
+    "rule_r": 0.4724,
+    "diff": 0.2293
+  },
+  "loso_full": {
+    "n_folds": 19,
+    "model_r_mean": 0.7018,
+    "model_r_min": 0.686,
+    "model_r_max": 0.7619,
+    "rule_r_mean": 0.4725,
+    "rule_r_min": 0.4236,
+    "rule_r_max": 0.5267,
+    "diff_mean": 0.2293,
+    "diff_min": 0.1596,
+    "diff_max": 0.264,
+    "frac_folds_model_wins": 1.0
+  },
+  "rule_blind": {
+    "n_rows": 116,
+    "n_sequences": 15,
+    "model_r": 0.5853,
+    "loso_model_r_mean": 0.585,
+    "loso_model_r_min": 0.4831,
+    "loso_model_r_max": 0.7038,
+    "loso_frac_positive": 1.0
+  }
+}

@@ -1,0 +1,383 @@
+{
+  "suitability_definition": {
+    "ic50_cutoff_nm": 100.0,
+    "dg_cutoff_kcal_mol": -9.5439,
+    "note": "IC50 recovered by inverting RT*ln(IC50*1e-9)"
+  },
+  "inputs": {
+    "HIV2_WT_ROD": {
+      "classification": "HIV-2",
+      "hiv1_identity": 0.4747,
+      "hiv2_identity": 1.0,
+      "drugs": [
+        {
+          "drug": "AMPRENAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -8.4228,
+          "pred_ic50_nm": 664.18,
+          "suitable": false,
+          "p_suitable": 0.005,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "ATAZANAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -9.8159,
+          "pred_ic50_nm": 63.17,
+          "suitable": true,
+          "p_suitable": 0.8317,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "DARUNAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -11.1301,
+          "pred_ic50_nm": 6.86,
+          "suitable": true,
+          "p_suitable": 0.9317,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "INDINAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -9.9583,
+          "pred_ic50_nm": 49.67,
+          "suitable": true,
+          "p_suitable": 0.7983,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "LOPINAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -10.1312,
+          "pred_ic50_nm": 37.09,
+          "suitable": true,
+          "p_suitable": 0.9733,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "NELFINAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -9.2377,
+          "pred_ic50_nm": 167.72,
+          "suitable": false,
+          "p_suitable": 0.2767,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "RITONAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -9.4011,
+          "pred_ic50_nm": 127.28,
+          "suitable": false,
+          "p_suitable": 0.5417,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "SAQUINAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -8.7161,
+          "pred_ic50_nm": 404.74,
+          "suitable": false,
+          "p_suitable": 0.3233,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        },
+        {
+          "drug": "TIPRANAVIR",
+          "mapped": true,
+          "base_dG": -9.9851,
+          "corrected_dG": -8.7078,
+          "pred_ic50_nm": 410.49,
+          "suitable": false,
+          "p_suitable": 0.005,
+          "nearest_hash": "5d514c04653b",
+          "identity": 1.0,
+          "input": "HIV2_WT_ROD"
+        }
+      ],
+      "suitable_drugs": [
+        "ATAZANAVIR",
+        "DARUNAVIR",
+        "INDINAVIR",
+        "LOPINAVIR"
+      ],
+      "best_drug": "DARUNAVIR"
+    },
+    "clinical_resistant_example": {
+      "classification": "HIV-2",
+      "hiv1_identity": 0.4343,
+      "hiv2_identity": 0.9091,
+      "drugs": [
+        {
+          "drug": "AMPRENAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -7.2096,
+          "pred_ic50_nm": 5153.47,
+          "suitable": false,
+          "p_suitable": 0.01,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "ATAZANAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -8.6119,
+          "pred_ic50_nm": 482.6,
+          "suitable": false,
+          "p_suitable": 0.0433,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "DARUNAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -8.8113,
+          "pred_ic50_nm": 344.66,
+          "suitable": false,
+          "p_suitable": 0.2467,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "INDINAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -7.7162,
+          "pred_ic50_nm": 2190.4,
+          "suitable": false,
+          "p_suitable": 0.2133,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "LOPINAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -9.446,
+          "pred_ic50_nm": 117.99,
+          "suitable": false,
+          "p_suitable": 0.4483,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "NELFINAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -7.2612,
+          "pred_ic50_nm": 4723.91,
+          "suitable": false,
+          "p_suitable": 0.0283,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "RITONAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -8.8147,
+          "pred_ic50_nm": 342.65,
+          "suitable": false,
+          "p_suitable": 0.3033,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "SAQUINAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -7.5487,
+          "pred_ic50_nm": 2906.7,
+          "suitable": false,
+          "p_suitable": 0.1583,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        },
+        {
+          "drug": "TIPRANAVIR",
+          "mapped": true,
+          "base_dG": -9.411,
+          "corrected_dG": -7.2179,
+          "pred_ic50_nm": 5081.63,
+          "suitable": false,
+          "p_suitable": 0.0,
+          "nearest_hash": "e4a34a217f7d",
+          "identity": 0.9293,
+          "input": "clinical_resistant_example"
+        }
+      ],
+      "suitable_drugs": [],
+      "best_drug": "LOPINAVIR"
+    },
+    "clinical_susceptible_example": {
+      "classification": "HIV-2",
+      "hiv1_identity": 0.4444,
+      "hiv2_identity": 0.9192,
+      "drugs": [
+        {
+          "drug": "AMPRENAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -8.4304,
+          "pred_ic50_nm": 655.71,
+          "suitable": false,
+          "p_suitable": 0.005,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "ATAZANAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -9.8235,
+          "pred_ic50_nm": 62.37,
+          "suitable": true,
+          "p_suitable": 0.8333,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "DARUNAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -11.1377,
+          "pred_ic50_nm": 6.78,
+          "suitable": true,
+          "p_suitable": 0.9333,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "INDINAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -9.9659,
+          "pred_ic50_nm": 49.04,
+          "suitable": true,
+          "p_suitable": 0.8017,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "LOPINAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -10.1388,
+          "pred_ic50_nm": 36.62,
+          "suitable": true,
+          "p_suitable": 0.9733,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "NELFINAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -9.2453,
+          "pred_ic50_nm": 165.59,
+          "suitable": false,
+          "p_suitable": 0.2783,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "RITONAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -9.4087,
+          "pred_ic50_nm": 125.66,
+          "suitable": false,
+          "p_suitable": 0.5433,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "SAQUINAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -8.7237,
+          "pred_ic50_nm": 399.59,
+          "suitable": false,
+          "p_suitable": 0.3233,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        },
+        {
+          "drug": "TIPRANAVIR",
+          "mapped": true,
+          "base_dG": -9.9927,
+          "corrected_dG": -8.7153,
+          "pred_ic50_nm": 405.26,
+          "suitable": false,
+          "p_suitable": 0.005,
+          "nearest_hash": "5d514c04653b",
+          "identity": 0.9192,
+          "input": "clinical_susceptible_example"
+        }
+      ],
+      "suitable_drugs": [
+        "ATAZANAVIR",
+        "DARUNAVIR",
+        "INDINAVIR",
+        "LOPINAVIR"
+      ],
+      "best_drug": "DARUNAVIR"
+    },
+    "HIV1_control": {
+      "classification": "HIV-1",
+      "hiv1_identity": 1.0,
+      "hiv2_identity": 0.4747,
+      "drugs": null,
+      "note": "Non-HIV-2 input: contract pipeline routes non-HIV-2 sequences to the classifier output only; no drug prediction is made."
+    }
+  },
+  "model_hashes": {
+    "genuine_csv": "692e3d2b3ffcd43bd186458a97a9b572c7b6c9f0287ff9f51f3aeb75bcca9ab0",
+    "assay_csv": "7f34b7a2b467e5eadd2e02aa3ee141a749e93aa4cd99145858b9dafded9b093d",
+    "sequence_to_pdb": "a136c7c9608019447053a334669843b3af1e34add24f1ddd09decd4b04d190fb",
+    "onion_npz": "55368a737e3980fc5a4c1ab3c3b0cfd3a9a4ed82234b8f6d5f07f91f86616615"
+  }
+}

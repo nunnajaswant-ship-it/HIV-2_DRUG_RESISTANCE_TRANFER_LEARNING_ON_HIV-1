@@ -1,0 +1,234 @@
+{
+  "pipeline": "RESCUE/retrain_honest.py",
+  "timestamp": "2026-08-16 13:27:50",
+  "input_hashes": {
+    "STANFORD_HIV1_GENUINE.csv": "692e3d2b3ffcd43bd186458a97a9b572c7b6c9f0287ff9f51f3aeb75bcca9ab0",
+    "STANFORD_HIV1_SYNTHETIC_QUARANTINED.csv": "46afba37667bb6366fc6161e09d2e99766632bf6ca918a7fb0bf25d1b52f8d40",
+    "HIV2_PROTEASE_ML_READY_DATASET.csv": "7f34b7a2b467e5eadd2e02aa3ee141a749e93aa4cd99145858b9dafded9b093d",
+    "HIV2_CLINICAL_ML_READY_FLAT.csv": "2ccbf59ebba0939a27515248ce5de755026c21c807c6b59f5f473e2a0ced35d0",
+    "sequence_to_pdb.csv": "a136c7c9608019447053a334669843b3af1e34add24f1ddd09decd4b04d190fb",
+    "docked_onionnet_features.npz": "55368a737e3980fc5a4c1ab3c3b0cfd3a9a4ed82234b8f6d5f07f91f86616615"
+  },
+  "model_config": {
+    "n_estimators": 600,
+    "max_depth": 20,
+    "min_samples_leaf": 2,
+    "min_samples_split": 5,
+    "max_features": "sqrt",
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "seed": 42,
+  "feature_space": "2079-D biochem (Z3+K10+VHSE8 per residue x99, include_stats=False)",
+  "legacy_discrepancy_note": "Legacy Tier5 script used extract_global_features default (2121-D, include_stats=True) while manuscript documents 2079-D. This run uses the documented 2079-D space.",
+  "cluster_threshold": 0.95,
+  "cv": "GroupKFold(5) on 95% identity clusters",
+  "corpus": {
+    "genuine_rows_trained": 5683,
+    "genuine_unique_sequences": 1882,
+    "synthetic_rows_excluded": 1500,
+    "synthetic_quarantine_file": "STANFORD_HIV1_SYNTHETIC_QUARANTINED.csv",
+    "feature_matrix": [
+      5683,
+      2079
+    ],
+    "drugs_present": [
+      "Atazanavir",
+      "Darunavir",
+      "Lopinavir",
+      "Saquinavir"
+    ]
+  },
+  "clustering": {
+    "unique_sequences": 1882,
+    "n_clusters": 882,
+    "singletons": 714,
+    "max_cluster_size": 282,
+    "median_cluster_size": 1.0
+  },
+  "within_species_grouped_cv": {
+    "mean_pearson_r": 0.7387,
+    "std_pearson_r": 0.0472,
+    "per_fold": [
+      {
+        "n": 1137,
+        "pearson_r": 0.8181,
+        "pearson_p": 5.471361218086308e-275,
+        "spearman_rho": 0.6834,
+        "rmse": 0.7267,
+        "mae": 0.559,
+        "r2": 0.6618,
+        "fold": 1,
+        "n_train": 4546,
+        "n_test": 1137
+      },
+      {
+        "n": 1137,
+        "pearson_r": 0.7371,
+        "pearson_p": 2.3213764687596292e-195,
+        "spearman_rho": 0.7186,
+        "rmse": 0.8989,
+        "mae": 0.6753,
+        "r2": 0.5413,
+        "fold": 2,
+        "n_train": 4546,
+        "n_test": 1137
+      },
+      {
+        "n": 1137,
+        "pearson_r": 0.7498,
+        "pearson_p": 8.285770823199023e-206,
+        "spearman_rho": 0.7352,
+        "rmse": 0.9051,
+        "mae": 0.6951,
+        "r2": 0.5617,
+        "fold": 3,
+        "n_train": 4546,
+        "n_test": 1137
+      },
+      {
+        "n": 1136,
+        "pearson_r": 0.7138,
+        "pearson_p": 1.268627485953123e-177,
+        "spearman_rho": 0.7117,
+        "rmse": 0.9201,
+        "mae": 0.7072,
+        "r2": 0.5086,
+        "fold": 4,
+        "n_train": 4547,
+        "n_test": 1136
+      },
+      {
+        "n": 1136,
+        "pearson_r": 0.6749,
+        "pearson_p": 7.699069496435114e-152,
+        "spearman_rho": 0.6736,
+        "rmse": 1.0012,
+        "mae": 0.7488,
+        "r2": 0.4512,
+        "fold": 5,
+        "n_train": 4547,
+        "n_test": 1136
+      }
+    ],
+    "note": "Grouped CV at 95% sequence-identity clusters. Legacy ungrouped KFold(5) on poisoned 7,183-row corpus produced 0.759 +- 0.017; that corpus contained 1,500 synthetic rows and its split was not leakage-free."
+  },
+  "zero_shot_cross_species": {
+    "n_hiv2_assay_rows": 137,
+    "metrics": {
+      "n": 137,
+      "pearson_r": 0.5163,
+      "pearson_p": 1.0655435727247488e-10,
+      "spearman_rho": 0.5247,
+      "rmse": 1.5986,
+      "mae": 1.2872,
+      "r2": -0.1096
+    },
+    "bootstrap_ci_95": {
+      "ci_lower": 0.3999,
+      "ci_upper": 0.6272,
+      "mean": 0.5154
+    },
+    "transfer_ratio_vs_within_species": 0.699,
+    "assay_filter": "Assay_Type in {IC50,KI,KD}; Standard_Value>0; dG in [-20,0]",
+    "note": "Legacy value R=0.5044 (p=1.5e-19) came from the same configuration on the POISONED 7,183-row corpus; this run uses genuine-only 5,683 rows."
+  },
+  "hybrid_onionnet_stage": {
+    "n_hiv2_docked_rows": 136,
+    "onion_feature_dim": 10478,
+    "residual_metrics": {
+      "n": 136,
+      "pearson_r": 0.5475,
+      "pearson_p": 5.283080148457992e-12,
+      "spearman_rho": 0.572,
+      "rmse": 1.1412,
+      "mae": 0.8777,
+      "r2": 0.2963
+    },
+    "residual_variance_explained_pct": 30.0,
+    "baseline_rmse": 1.6025,
+    "corrected_metrics": {
+      "n": 136,
+      "pearson_r": 0.6694,
+      "pearson_p": 5.155142492116728e-19,
+      "spearman_rho": 0.6717,
+      "rmse": 1.1412,
+      "mae": 0.8777,
+      "r2": 0.4385
+    },
+    "note": "Manuscript claimed residual R=0.667 / 44.5% variance and hybrid R=0.734. On-disk honest values from the legacy poisoned-corpus run: residual R=0.5153, variance 26.6%, corrected R=0.6696, R2=0.448. This run: see numbers above, genuine-only corpus."
+  },
+  "hivdb_baseline_audit": {
+    "manuscript_claim": "R=0.722 (n=1500) \u2014 hardcoded in _final_summary.py:15, n=1500 == synthetic rows",
+    "genuine_corpus_stanford_score_nonnull": 0,
+    "forensic_reconstruction_on_synthetic_rows": {
+      "n": 1500,
+      "pearson_r": 0.7216,
+      "pearson_p": 1.7976498583708187e-241,
+      "origin": "Synthetic rows were generated by expand_training_database.py with BANDED uniform noise: score>=30 -> uniform(-6.5,-4.5), else uniform(-12.0,-9.5). R=0.7216 is a self-fulfilling artifact of that banded generator, NOT a measured relationship."
+    },
+    "legacy_pvalue_forensic_check": {
+      "claimed": "p=1.5e-19 for n=137, r=0.5044",
+      "actual_p_for_n137_r05044": 3.2940904515459146e-10,
+      "n_required_for_p15e19": 282,
+      "verdict": "p=1.5e-19 is IMPOSSIBLE for n=137, r=0.5044 (requires n>=550). The legacy p-value was inflated."
+    },
+    "synthetic_stanford_score_unique_values": [
+      -15.0,
+      -10.0,
+      -5.0,
+      0.0,
+      5.0,
+      10.0,
+      15.0,
+      20.0,
+      25.0,
+      30.0,
+      35.0,
+      40.0,
+      45.0,
+      50.0,
+      55.0,
+      60.0,
+      65.0,
+      70.0,
+      75.0,
+      80.0,
+      85.0,
+      90.0,
+      95.0,
+      100.0,
+      105.0,
+      110.0,
+      115.0,
+      120.0,
+      125.0,
+      130.0,
+      135.0,
+      140.0,
+      145.0,
+      150.0,
+      155.0,
+      160.0,
+      165.0,
+      170.0,
+      175.0,
+      180.0,
+      185.0,
+      190.0,
+      195.0,
+      200.0,
+      205.0,
+      210.0,
+      215.0,
+      220.0,
+      225.0,
+      230.0,
+      240.0,
+      255.0
+    ],
+    "correlation_with_constant_undefined": true,
+    "verdict": "R=0.722 is UNREPRODUCIBLE as an honest baseline. Stanford_Score is NULL in every genuine row. The n=1500 value is a construction artifact of the synthetic generator's banded noise, not real data."
+  },
+  "run_seconds": 19.7
+}
