@@ -9,6 +9,11 @@ Code, curated data, and verified result manifests for the manuscript:
 
 ---
 
+## Manuscript
+
+- **PDF (read this first):** [`submission/HIV2_cross_species_transfer_manuscript.pdf`](submission/HIV2_cross_species_transfer_manuscript.pdf)
+- **Source (HTML):** [`RESCUE/manuscript_corrected.html`](RESCUE/manuscript_corrected.html) — open in a browser and print to PDF to regenerate
+
 ## Overview
 
 HIV-2 is intrinsically resistant to several protease inhibitors, yet resistance-interpretation
