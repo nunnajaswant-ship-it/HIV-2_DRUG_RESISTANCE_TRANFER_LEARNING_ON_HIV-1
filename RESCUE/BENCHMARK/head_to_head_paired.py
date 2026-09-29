@@ -155,6 +155,33 @@ for drug in DRUGS:
                              "rule_r": round(float(rr), 4)}
     print(f"{drug:7} {len(g):>4} {rm:>9.4f} {rr:>9.4f} {rm-rr:>11.4f}")
 
+# ---- reconcile with the locked manifest ---------------------------------
+# This script re-executes the pipeline; RandomForest + BLAS threading are not
+# bit-reproducible across environments, so per-drug values can drift in the
+# 4th decimal from the locked manifest. The manuscript quotes the LOCKED values
+# as canonical (identical to Tables 12/13); we record the drift here so the
+# artefact cannot silently disagree with the paper.
+try:
+    _lock = json.load(open(BENCH / "results" /
+                           "clinical_validation_final_results.json",
+                           encoding="utf-8"))["sanity_check_chembl_oof"]
+    drift = {}
+    for drug, v in out["per_drug"].items():
+        if drug in _lock:
+            locked = round(float(_lock[drug]["pearson_r"]), 4)
+            drift[drug] = {"rerun": v["model_r"], "locked": locked,
+                           "abs_diff": round(abs(v["model_r"] - locked), 6)}
+    out["locked_reconciliation"] = {
+        "note": ("Manuscript quotes the locked values; re-run values are shown "
+                 "to document reproducibility tolerance."),
+        "per_drug": drift,
+        "max_abs_diff": max((d["abs_diff"] for d in drift.values()), default=0.0),
+    }
+    print(f"\nlocked-manifest reconciliation: max |drift| = "
+          f"{out['locked_reconciliation']['max_abs_diff']}")
+except Exception as exc:  # pragma: no cover
+    print(f"(reconciliation skipped: {exc})")
+
 rm_p, rr_p = pooled_r(df)
 print(f"\nPOOLED (n={len(df)}): model R={rm_p:.4f}  rule R={rr_p:.4f}  "
       f"diff={rm_p-rr_p:.4f}")

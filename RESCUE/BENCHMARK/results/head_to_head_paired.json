@@ -23,6 +23,32 @@
       "rule_r": 0.5624
     }
   },
+  "locked_reconciliation": {
+    "note": "Manuscript quotes the locked values; re-run values are shown to document reproducibility tolerance.",
+    "per_drug": {
+      "ATV/r": {
+        "rerun": 0.6123,
+        "locked": 0.6125,
+        "abs_diff": 0.0002
+      },
+      "DRV/r": {
+        "rerun": 0.8273,
+        "locked": 0.8272,
+        "abs_diff": 0.0001
+      },
+      "LPV/r": {
+        "rerun": 0.544,
+        "locked": 0.544,
+        "abs_diff": 0.0
+      },
+      "SQV/r": {
+        "rerun": 0.7046,
+        "locked": 0.7048,
+        "abs_diff": 0.0002
+      }
+    },
+    "max_abs_diff": 0.0002
+  },
   "pooled": {
     "n": 160,
     "model_r": 0.7018,
