@@ -1,0 +1,151 @@
+{
+  "multiseed": {
+    "seeds": [
+      42,
+      1,
+      7,
+      13,
+      21,
+      99,
+      123,
+      2024,
+      5,
+      17
+    ],
+    "per_seed": [
+      {
+        "seed": 42,
+        "transfer_r": 0.7018,
+        "no_hiv1_r": 0.7012
+      },
+      {
+        "seed": 1,
+        "transfer_r": 0.6897,
+        "no_hiv1_r": 0.6903
+      },
+      {
+        "seed": 7,
+        "transfer_r": 0.6138,
+        "no_hiv1_r": 0.6119
+      },
+      {
+        "seed": 13,
+        "transfer_r": 0.5167,
+        "no_hiv1_r": 0.517
+      },
+      {
+        "seed": 21,
+        "transfer_r": 0.7145,
+        "no_hiv1_r": 0.7157
+      },
+      {
+        "seed": 99,
+        "transfer_r": 0.6049,
+        "no_hiv1_r": 0.6029
+      },
+      {
+        "seed": 123,
+        "transfer_r": 0.5163,
+        "no_hiv1_r": 0.5158
+      },
+      {
+        "seed": 2024,
+        "transfer_r": 0.5744,
+        "no_hiv1_r": 0.5741
+      },
+      {
+        "seed": 5,
+        "transfer_r": 0.6696,
+        "no_hiv1_r": 0.6716
+      },
+      {
+        "seed": 17,
+        "transfer_r": 0.6746,
+        "no_hiv1_r": 0.6681
+      }
+    ],
+    "transfer_mean": 0.6276,
+    "transfer_sd": 0.0739,
+    "transfer_min": 0.5163,
+    "transfer_max": 0.7145,
+    "no_hiv1_mean": 0.6269,
+    "no_hiv1_sd": 0.0739
+  },
+  "fine_tune_size_sweep": {
+    "n_repeats": 20,
+    "rows": [
+      {
+        "k_per_drug": 1,
+        "n_train_total": 4,
+        "transfer_r_mean": 0.0172,
+        "transfer_r_sd": 0.0521,
+        "no_hiv1_r_mean": 0.0172,
+        "no_hiv1_r_sd": 0.0521,
+        "gap_mean": 0.0,
+        "gap_sd": 0.0
+      },
+      {
+        "k_per_drug": 2,
+        "n_train_total": 8,
+        "transfer_r_mean": 0.1017,
+        "transfer_r_sd": 0.149,
+        "no_hiv1_r_mean": 0.0999,
+        "no_hiv1_r_sd": 0.1394,
+        "gap_mean": 0.0018,
+        "gap_sd": 0.0168
+      },
+      {
+        "k_per_drug": 5,
+        "n_train_total": 20,
+        "transfer_r_mean": 0.33,
+        "transfer_r_sd": 0.1448,
+        "no_hiv1_r_mean": 0.3148,
+        "no_hiv1_r_sd": 0.1418,
+        "gap_mean": 0.0151,
+        "gap_sd": 0.0155
+      },
+      {
+        "k_per_drug": 10,
+        "n_train_total": 40,
+        "transfer_r_mean": 0.4916,
+        "transfer_r_sd": 0.1275,
+        "no_hiv1_r_mean": 0.4902,
+        "no_hiv1_r_sd": 0.1251,
+        "gap_mean": 0.0014,
+        "gap_sd": 0.0102
+      },
+      {
+        "k_per_drug": 20,
+        "n_train_total": 80,
+        "transfer_r_mean": 0.6056,
+        "transfer_r_sd": 0.0799,
+        "no_hiv1_r_mean": 0.6072,
+        "no_hiv1_r_sd": 0.0802,
+        "gap_mean": -0.0016,
+        "gap_sd": 0.0066
+      },
+      {
+        "k_per_drug": 30,
+        "n_train_total": 120,
+        "transfer_r_mean": 0.6405,
+        "transfer_r_sd": 0.1498,
+        "no_hiv1_r_mean": 0.6406,
+        "no_hiv1_r_sd": 0.15,
+        "gap_mean": -0.0001,
+        "gap_sd": 0.0047
+      }
+    ]
+  },
+  "pooled_math_test": {
+    "per_drug_no_hiv1_r": {
+      "ATV/r": 0.6119,
+      "DRV/r": 0.8263,
+      "LPV/r": 0.5387,
+      "SQV/r": 0.7049
+    },
+    "lowest_per_drug_r": 0.5387,
+    "pooled_raw_r": 0.7012,
+    "pooled_after_per_drug_zscore_r": 0.6528,
+    "explanation_supported": false
+  }
+}
