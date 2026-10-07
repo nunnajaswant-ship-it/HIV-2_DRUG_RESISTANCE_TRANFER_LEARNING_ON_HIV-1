@@ -14,6 +14,15 @@ Code, curated data, and verified result manifests for the manuscript:
 - **PDF (read this first):** [`submission/HIV2_cross_species_transfer_manuscript.pdf`](submission/HIV2_cross_species_transfer_manuscript.pdf)
 - **Source (HTML):** [`RESCUE/manuscript_corrected.html`](RESCUE/manuscript_corrected.html) — open in a browser and print to PDF to regenerate
 
+## Project flowchart
+
+[`RESCUE/PROJECT_FLOWCHART.html`](RESCUE/PROJECT_FLOWCHART.html) — a complete, pin-to-pin record of the
+whole project in eight phases, from problem definition through data acquisition, curation, feature
+engineering, modelling, the transfer protocol, evaluation, the data-integrity findings, the public
+release, and the review-driven revisions. It states plainly which claims are upheld, which are
+qualified, and which failed. A printable version is at
+[`submission/PROJECT_FLOWCHART.pdf`](submission/PROJECT_FLOWCHART.pdf).
+
 ## Overview
 
 HIV-2 is intrinsically resistant to several protease inhibitors, yet resistance-interpretation
