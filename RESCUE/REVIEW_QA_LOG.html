@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HIV-2 Project — Review Q&amp;A Master Log</title>
+<style>
+  :root{--ink:#14222e;--muted:#5d6d7c;--line:#c8d2db;--ok:#1e6b4c;--warn:#8a5a12;
+        --bad:#8f2f2f;--info:#2f6f9f;--bg:#f4f6f8;}
+  *{box-sizing:border-box}
+  body{margin:0;padding:34px 26px 70px;font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.52;}
+  .wrap{max-width:1200px;margin:0 auto}
+  h1{font-size:25px;margin:0 0 6px;letter-spacing:-.3px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 3px}
+  .meta{color:var(--muted);font-size:12.5px;margin-bottom:22px}
+  h2{font-size:18px;margin:34px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--line)}
+  h3{font-size:14.5px;margin:22px 0 8px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;
+        padding:15px 18px;margin:0 0 12px}
+  .q{font-weight:650;font-size:14px;margin:0 0 7px;display:flex;gap:10px;align-items:baseline}
+  .qid{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--muted);
+       flex:0 0 auto;padding-top:1px}
+  .a{font-size:13.2px;color:#26343f;margin:0 0 6px}
+  .a:last-child{margin-bottom:0}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:#eef2f6;
+       padding:1px 5px;border-radius:4px}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;
+        white-space:nowrap;border:1px solid transparent}
+  .pill.ok{background:#e7f4ee;color:var(--ok);border-color:#c6e5d6}
+  .pill.warn{background:#fbf2e2;color:var(--warn);border-color:#eeddba}
+  .pill.bad{background:#fbecec;color:var(--bad);border-color:#eecaca}
+  .pill.na{background:#eef2f6;color:#4a5b6a;border-color:#dde4ea}
+  .where{font-size:11.8px;color:var(--muted);margin-top:7px}
+  .where b{color:#3b4a57}
+  .warnbox{background:#fff8e8;border:1px solid #eddcb8;border-radius:10px;
+           padding:14px 17px;margin:0 0 20px;font-size:13.2px;color:#6c5215}
+  .warnbox b{color:#5a4210}
+  .badbox{background:#fbecec;border:1px solid #eecaca;border-radius:10px;
+          padding:14px 17px;margin:0 0 20px;font-size:13.2px;color:#7d2b2b}
+  .badbox b{color:#6a2222}
+  table{border-collapse:collapse;width:100%;font-size:12.9px;margin:8px 0}
+  th,td{border:1px solid #e3e9ee;padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#f4f7f9;font-weight:640}
+  .foot{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);
+        font-size:12px;color:var(--muted)}
+  @media print{body{background:#fff;padding:0}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>HIV-2 Cross-Species Transfer Learning — Review Q&amp;A Master Log</h1>
+  <p class="sub">Every question raised during review, with the answer and where it is addressed.</p>
+  <p class="meta">Living document — update as new questions arrive. Paper: <code>manuscript_corrected.html</code>.
+     Repo: <code>github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1</code>.</p>
+
+  <div class="badbox">
+    <b>Scope warning.</b> A set of reviewer comments was recently supplied (gated fusion, HGFN,
+    multimodal fusion, ESM-2 on HIV-1, fold-change thresholds, ECE calibration, DRV/TPV datasets).
+    <b>Those comments do not describe this manuscript.</b> This paper has no gated fusion, no HGFN,
+    no multimodal fusion, no fold-change classification and no ECE calibration; it is a
+    <em>cross-species transfer</em> regression study (HIV-1 → HIV-2) using RandomForest/XGBoost on
+    physicochemical descriptors. Items that genuinely apply are logged in Section&nbsp;C; items that
+    belong to a different submission are listed in Section&nbsp;D and must not be applied here.
+  </div>
+
+  <!-- ================= A ================= -->
+  <h2>A. Questions raised during internal review</h2>
+
+  <div class="card">
+    <div class="q"><span class="qid">A1</span>Do we have wet-lab results for HIV-1 and HIV-2?</div>
+    <div class="a"><b>Yes, for both.</b> HIV-1: 5,683 measured Stanford HIVDB phenotypic assays
+      (fold-resistance/IC50, 1,882 unique sequences). HIV-2: 321 measured ChEMBL assay rows
+      (137 IC50; 160-row fine-tune panel) with real ChEMBL activity IDs. We did not <em>run</em>
+      any experiments ourselves, and there is no prospective validation.</div>
+    <div class="where"><b>Where:</b> §2.1 Datasets; Table 1; Data Availability.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A2</span>Why these features? Relation to mutation and resistance?</div>
+    <div class="a">Each residue is encoded by <b>21 physicochemical descriptors</b> — Hellberg Z-scales (3),
+      Kidera factors (10) and VHSE scales (8). They are <em>properties of the amino acid</em>, hence
+      identical in both species, which is what makes transfer possible. Each family maps to a physical
+      resistance mechanism: steric terms → clash with the inhibitor (I50V, I54M, I84V); hydrophobic terms
+      → packing changes; electronic terms → loss of polar contact; structural-preference factors → flap
+      flexibility.</div>
+    <div class="where"><b>Where:</b> §2.3 Feature Engineering; <b>Table 3</b> (descriptor→mechanism map).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A3</span>Are the features sequence-only, structural, or both?</div>
+    <div class="a"><b>Sequence-only.</b> They are derived entirely from the amino-acid sequence; no
+      experimental structure enters the feature vector. Structural analysis (ONION-Net, PDB superposition)
+      appears only as a separate explanatory analysis and as a comparator — and HIV-1-derived structural
+      features are shown <em>not</em> to transfer (R = −0.14).</div>
+    <div class="where"><b>Where:</b> §2.3; §4.4; Table 6.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A4</span>What is the sequence-similarity cutoff, and the split ratio?</div>
+    <div class="a"><b>Cutoff: 95% identity.</b> Sequences are clustered at 95% identity → 882 clusters +
+      714 singletons for HIV-1. <b>Split:</b> GroupKFold cross-validation using those clusters as groups,
+      so no near-duplicate sequence is split across train and test. The HIV-2 fine-tune uses 5-fold
+      out-of-fold pooling. The effective HIV-2 sample size is <b>19 unique sequences</b>, not 160 rows.</div>
+    <div class="where"><b>Where:</b> §2.2 step 6; §2.4; Table 5; §4.2.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A5</span>How was redundancy removed, and why?</div>
+    <div class="a">5,683 HIV-1 rows collapse to 1,882 unique sequences (same sequence measured against
+      several drugs). Rows are de-duplicated per (sequence, drug); sequences are then clustered at 95%
+      identity. <b>Why:</b> if near-identical sequences appeared in both train and test, the model would
+      memorise isolates and inflate every correlation. Clustering is what makes the cross-validation honest.</div>
+    <div class="where"><b>Where:</b> §2.2 step 6.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A6</span>Why Random Forest and XGBoost? What happened with deep learning?</div>
+    <div class="a"><b>Sample size, not biological privilege.</b> With 19 unique HIV-2 sequences, tree
+      ensembles suit the regime: greedy feature selection over 2,121 descriptors, no scaling, reproducible
+      from a seed, robust to uninformative inputs, and interpretable. <b>Deep learning was tested and
+      failed</b> — PocketGNN R = −0.17, DBPT+ R = 0.21 — because 19 sequences cannot train a GNN. ESM-2
+      works only because it arrives pre-trained.</div>
+    <div class="where"><b>Where:</b> §2.4; §4.5 limitation (h).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A7</span>Which positions are masked, and what does masking mean?</div>
+    <div class="a"><b>Masking = selecting positions, not weighting them.</b> Three nested sets, all from
+      HIV-2 structure 3S45: <b>core pocket, 16 residues within 5.0 Å</b> —
+      <code>8 23 25 27 28 29 30 31 32 47 48 49 50 81 82 84</code>; <b>Pocket-19</b> adds
+      <code>26 45 46 54 76 80</code>; extended 8.0 Å shell; and <b>BASE-A</b> = 16 core + 18 conserved
+      neighbours = 34 residues. Masking does <em>not</em> improve over the global representation
+      (0.5014–0.5036 vs 0.5163), so it is a mechanistic probe, not the deployment setting.</div>
+    <div class="where"><b>Where:</b> §2.4 (pocket definitions and masking); Table 2.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A8</span>What does the model predict — IC50 or something else?</div>
+    <div class="a"><b>Binding free energy ΔG in kcal/mol</b>, not IC50. IC50 (nM) is converted thermodynamically:
+      <code>ΔG = RT·ln(IC50×10⁻⁹)</code>, RT = 0.593 kcal/mol at 298 K. For IC50 this is an approximation
+      (Cheng-Prusoff correction unavailable without enzyme kinetics); for Ki/Kd it is exact.</div>
+    <div class="where"><b>Where:</b> §2.2 step 5; §2.6 Sign Convention.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A9</span>What did we do to the HIV-1 model to apply it to HIV-2 — weights or masking?</div>
+    <div class="a"><b>Neither weights nor masking — feature augmentation with a frozen model.</b>
+      (i) HIV-1 model trained then <b>frozen</b>; (ii) its ΔG prediction becomes a single appended
+      <b>meta-feature</b> column; (iii) a <b>new</b> per-drug Random Forest is trained on
+      <code>[2,121-D | meta-feature]</code>. No weights are modified, averaged or re-initialised.</div>
+    <div class="where"><b>Where:</b> §2.4 (transfer protocol).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A10</span>How different is the rule-based approach from our model?</div>
+    <div class="a">The rule systems (Stanford penalty tables; HIV-2EU v4) are expert-curated
+      <em>lookup tables</em>: they score only mutations they explicitly list, and return zero otherwise.
+      We quantify this: the clinical benchmark is zero for <b>93.1%</b> of isolates; the official
+      HIV-2EU v4 rules leave <b>83.1%</b> of the measured panel unscored, define no protease rules for
+      <b>6 of 8</b> drugs, and cover <b>5 of 37</b> observed mutations. Our model is continuous, covers
+      any substitution, and retains R = 0.585 on rows the rule leaves unranked.</div>
+    <div class="where"><b>Where:</b> §3.6 head-to-head; §3.7 rule coverage; Table 9.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A11</span>Is the transfer learning actually doing the work?</div>
+    <div class="a"><b>Not measurably, and we say so.</b> The augmented model beats the same fine-tune
+      without the meta-feature by 0.7018 vs 0.7015 (within noise), and a fine-tuning-size sweep
+      (k = 1–30 rows/drug, 20 splits each) shows the HIV-1 contribution <b>never exceeds 0.015</b> and
+      does not grow as HIV-2 data is removed. HIV-2 data volume drives performance.</div>
+    <div class="where"><b>Where:</b> §3.2; §4.5 limitation (p).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A12</span>Is the headline number stable?</div>
+    <div class="a"><b>No — it is seed-sensitive and we report it.</b> The locked R = 0.7018 uses one seed;
+      across 10 seeds the benchmark is <b>0.628 ± 0.074</b> (range 0.516–0.715), so 0.7018 sits at the
+      upper end. Comparisons are made only within a seed.</div>
+    <div class="where"><b>Where:</b> §3.2; abstract; conclusion; §4.5 limitation (o).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A13</span>Why does the pooled correlation look odd?</div>
+    <div class="a">Pooling mixes within-drug signal with between-drug score scale, so pooled R is not an
+      average of per-drug accuracy. Tested directly: raw pooled R = 0.701, and 0.653 after per-drug
+      standardisation. Every clinical claim is therefore stated per drug.</div>
+    <div class="where"><b>Where:</b> §3.2; §3.8; §4.5 limitation (d).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A14</span>What is <code>Mined_Expanded</code>?</div>
+    <div class="a">HIV-2 protease sequences retrieved from <b>NCBI GenBank</b> by automated Entrez query
+      <code>(db="protein", term="HIV-2 protease")</code>, trimmed and aligned to the 99-residue frame, then
+      assigned Stanford HIVDB penalty scores so they are comparable to the registry rows. 1,776 rows.</div>
+    <div class="where"><b>Where:</b> §2.1 Datasets.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A15</span>What is the sanity check that the HIV-1 and European datasets differ?</div>
+    <div class="a">A rule engine reproducing the published Stanford HIV-2 penalty tables was applied to
+      the clinical sequences and reproduced the HIVDB penalty <b>exactly</b> (R = 1.0000; 1,728/1,728 rows).
+      That confirms (a) the rule engine is faithful and (b) the clinical target is a deterministic function
+      of the mutation list — i.e. it is not an independent measurement, which is why the
+      <em>measured</em> head-to-head is treated as primary.</div>
+    <div class="where"><b>Where:</b> §3.6.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A16</span>Zero-shot vs one-shot — what did we do?</div>
+    <div class="a"><b>Zero-shot (k = 0) and few-shot (k = 40 rows/drug, n = 160).</b> Zero-shot: HIV-1 model
+      applied directly to HIV-2, R = 0.5163, transfer ratio 0.699. Few-shot: fine-tune → R = 0.7018.
+      <b>No literal one-shot (k = 1) experiment is in the paper.</b> Archived k = 1/5/10/20 runs exist
+      only from the discarded deep-learning tiers and should not be quoted.</div>
+    <div class="where"><b>Where:</b> §3.2; Table 4; Table 5.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A17</span>Meta-learning — did we implement it?</div>
+    <div class="a"><b>No.</b> What we use is <b>stacked generalization</b> (stacking): a level-2
+      "meta-model" fitted on level-1 out-of-fold predictions. Meta-<em>learning</em> is learning across
+      <em>tasks</em> (MAML, prototypical networks) and is a different concept that shares the prefix.
+      Our stack: base = Ridge, SVR, RandomForest, XGBoost, DANN; meta = Ridge(α = 5). The deployment model
+      similarly uses the HIV-1 prediction as a single <em>meta-feature</em>. DANN is domain adaptation,
+      not meta-learning.</div>
+    <div class="where"><b>Where:</b> §2.4; Table 4 (ridge meta-ensemble).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A18</span>Why is stacking needed at all?</div>
+    <div class="a">Because no single base model dominates across all four drugs and all feature sets.
+      Stacking lets a regularised linear meta-learner weight the base models per problem instead of
+      committing to one. It was the strongest zero-shot configuration (R = 0.5818, vs 0.5587 XGBoost and
+      0.5163 global RF). The meta-learner is fitted on <b>out-of-fold</b> predictions so it cannot
+      over-trust models on data they have seen.</div>
+    <div class="where"><b>Where:</b> §3.2; Table 4.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">A19</span>Do we clash with any published work?</div>
+    <div class="a"><b>No.</b> Literature sweep found no ML/DL resistance predictor for HIV-2 and no
+      HIV-1→HIV-2 cross-species transfer for resistance. All ML resistance work found is HIV-1 only.
+      Nearest same-corpus work (Farquhar 2026, <i>Bioinformatics</i>) uses the same Stanford PI dataset but
+      stays within HIV-1.</div>
+    <div class="where"><b>Where:</b> §1 Introduction; §4.1.</div>
+  </div>
+
+  <!-- ================= B ================= -->
+  <h2>B. Anticipated reviewer questions and current status</h2>
+
+  <table>
+    <tr><th style="width:38%">Likely reviewer question</th><th style="width:52%">Answer / status</th><th style="width:10%">Status</th></tr>
+    <tr>
+      <td>Dataset sizes, class balance, samples per drug</td>
+      <td>5,683 HIV-1 rows / 1,882 sequences / 4 drugs; HIV-2 137 zero-shot, 160 fine-tune (40/drug);
+          clinical 5,232 rows (8 PIs), 2,616 headline (4 PIs), 654 sequences. Classes:
+          Susceptible 5,006 / Intermediate 113 / Resistant 113. Per-drug counts in Table 1 and Table 11.</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+    <tr>
+      <td>How were resistance-associated mutations selected / vocabulary built?</td>
+      <td>We do <em>not</em> build a mutation vocabulary — the model consumes 21 physicochemical
+          descriptors per position and never sees a mutation list. The rule comparator's vocabulary
+          (61 single + 20 combination rules) is analysed in §3.7, which is precisely how its sparsity is
+          quantified.</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+    <tr>
+      <td>Train/holdout split; confirm no duplicate or related sequences leak</td>
+      <td>GroupKFold at 95% identity; 5-fold OOF; clinical cohort shares 0 sequences with HIV-1 pre-training
+          and 3 with the ChEMBL panel. Leakage is the explicit subject of §2.2 step 6 and §4.5(c).</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+    <tr>
+      <td>Moderate interpretability and clinical-usefulness claims</td>
+      <td>Already moderated: no per-drug clinical superiority claimed; clinical results marked secondary
+          because the target is rule-derived; the coverage finding is presented as the main contribution.</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+    <tr>
+      <td>Implementation details (optimizer, dropout, early stopping, latent dims)</td>
+      <td>Not applicable — no neural network is deployed. Tree hyperparameters are fully specified
+          (RF: 600 trees, depth 20, sqrt features; XGBoost: 800 trees, depth 6, lr 0.03) and seeds are fixed.</td>
+      <td><span class="pill na">n/a here</span></td>
+    </tr>
+    <tr>
+      <td>Threshold selection and threshold-dependent metrics</td>
+      <td>Not applicable in the same form: the primary task is ΔG regression. For the binary view we report
+          ROC-AUC = 0.927 with the class definition stated (Resistant vs Susceptible, 40 resistant of 2,550).</td>
+      <td><span class="pill na">n/a here</span></td>
+    </tr>
+    <tr>
+      <td>Ablation experiments</td>
+      <td>Present: feature-representation ablation (Table 2/6) and the fine-tuning-size sweep plus
+          meta-feature on/off comparison (§3.2).</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+    <tr>
+      <td>Interpretability evidence</td>
+      <td>Pocket-importance analysis: top-5 positions [54, 84, 28, 48, 26] carry 72.4% of importance mass,
+          recovering I54M and I84V unaided.</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+    <tr>
+      <td>Compare against recent literature</td>
+      <td>Introduction and §4.1 position against Steiner, Shen, Pawar, Parbhoo, Dampier, Farquhar and
+          Aggarwal. <b>Gap:</b> Dampier 2022 (HIV-BERT) and Aggarwal &amp; Periwal 2026 are not yet cited.</td>
+      <td><span class="pill warn">action</span></td>
+    </tr>
+    <tr>
+      <td>Limitations paragraph including external/prospective validation</td>
+      <td>Present and extensive — limitations (a)–(p) including no prospective validation and no new
+          wet-lab work.</td>
+      <td><span class="pill ok">covered</span></td>
+    </tr>
+  </table>
+
+  <!-- ================= C ================= -->
+  <h2>C. Points supplied recently that DO apply to this manuscript</h2>
+
+  <div class="card">
+    <div class="q"><span class="qid">C1</span>Sequence-similarity cutoff</div>
+    <div class="a">95% identity for clustering; 99-residue exact-length filter for framing. Report the
+      HIV-2 identity distribution too: 88.9–99.0% to ROD wild-type, mean 95.0%, none 100% wild-type.</div>
+    <div class="where"><b>Where:</b> §2.2; add the identity distribution if requested.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">C2</span>Physicochemical features are sequence-only, not sequence+structure</div>
+    <div class="a">Correct, and stated. This should be made unmissable in §2.3 so no reviewer assumes a
+      structural component enters the model.</div>
+    <div class="where"><b>Where:</b> §2.3; §4.4.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">C3</span>19 residues + 5 Å, other residues masked</div>
+    <div class="a">Documented with exact positions: 16 core (5.0 Å), Pocket-19, extended 8.0 Å, BASE-A 34.
+      Masking = selection, not weighting.</div>
+    <div class="where"><b>Where:</b> §2.4.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">C4</span>How the rule-based approach differs from our model</div>
+    <div class="a">Add a short explicit contrast paragraph: lookup table vs continuous model; fixed
+      vocabulary vs any substitution; zero-by-default vs calibrated signal; and the quantified
+      consequences (§3.7).</div>
+    <div class="where"><b>Where:</b> partially in §3.6/§3.7; a dedicated contrast paragraph would help.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">C5</span>Meta-learning / stack generalization — what is the need?</div>
+    <div class="a">State plainly that this is <b>stacked generalization</b>, not meta-learning, and give
+      the rationale (no single base model dominates; a regularised meta-learner weights them per problem;
+      fitted on out-of-fold predictions to avoid over-trusting).</div>
+    <div class="where"><b>Where:</b> §2.4 and §3.2 — currently the mechanism is described but not named.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">C6</span>Title</div>
+    <div class="a">The instruction received was to remove "cross-species" from the title. <b>Flagged as
+      conflicting:</b> this manuscript's entire contribution is cross-species transfer, and the title,
+      abstract, and repository name all state it. Removing "cross-species" would misdescribe the paper.
+      Needs clarification before acting.</div>
+    <div class="where"><b>Where:</b> title, §1, abstract.</div>
+  </div>
+
+  <!-- ================= D ================= -->
+  <h2>D. Points that belong to a DIFFERENT manuscript</h2>
+
+  <div class="warnbox">
+    The following items were supplied but describe an architecture and experiment set absent from this
+    paper. <b>They must not be answered here</b> — doing so would require describing experiments we never
+    ran.
+  </div>
+
+  <table>
+    <tr><th style="width:42%">Item</th><th>Why it does not apply here</th></tr>
+    <tr><td>Gated fusion / HGFN architecture</td><td>This paper uses RandomForest and XGBoost. The terms "gated fusion" and "HGFN" appear zero times in the manuscript.</td></tr>
+    <tr><td>Multimodal fusion; seq / STR / STR-ligand / seq+STR+STR-ligand comparison</td><td>Features here are sequence-only physicochemical descriptors. No structure or structure–ligand channels are fused.</td></tr>
+    <tr><td>ESM-2 applied to HIV-1 as the core method</td><td>ESM-2 appears here only as a comparator feature view; the deployed model is a tree ensemble.</td></tr>
+    <tr><td>Fold-change thresholds per drug and borderline handling</td><td>The target is ΔG (kcal/mol) regression; no fold-change thresholding is used.</td></tr>
+    <tr><td>Calibration / ECE description</td><td>This paper implements split conformal prediction (not evaluated, and now documented as such after the length revision); ECE is not computed.</td></tr>
+    <tr><td>Dropout rates, latent dimensions, optimizer settings, early stopping</td><td>No neural network is deployed, so these hyperparameters do not exist.</td></tr>
+    <tr><td>Insertions, deletions, ambiguous residues in mutation mapping</td><td>Sequences are filtered to exactly 99 residues; no indel or ambiguity handling is performed in the model.</td></tr>
+    <tr><td>DRV and TPV dataset counts as separate small sets</td><td>The modelling drugs here are ATV, DRV, LPV, SQV (40 rows each). Tipranavir appears only as a context row in the clinical cohort, not as a modelling target.</td></tr>
+    <tr><td>Table 1 showing ties or lower AUC than XGBoost for HGFN</td><td>There is no HGFN and no such Table 1 in this manuscript.</td></tr>
+    <tr><td>ICMLDE submission framing</td><td>This manuscript's target venue and its review correspondence are separate from the ICMLDE submission.</td></tr>
+  </table>
+
+  <div class="foot">
+    Living document. When a new question arrives, append it to the appropriate section with its answer and
+    the location in the paper where it is addressed. Items in Section D should be redirected to the
+    manuscript they actually belong to.
+  </div>
+
+</div>
+</body>
+</html>
