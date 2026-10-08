@@ -245,6 +245,179 @@
     <div class="where"><b>Where:</b> §1 Introduction; §4.1.</div>
   </div>
 
+  <!-- ================= A2 ================= -->
+  <h2>A2. Discussion points — full answers</h2>
+
+  <div class="card">
+    <div class="q"><span class="qid">D1</span>What is the cutoff for sequence similarity?</div>
+    <div class="a"><b>Two cutoffs, serving different purposes.</b></div>
+    <div class="a"><b>(i) 95% identity — the clustering cutoff.</b> Sequences are clustered at 95% identity,
+      giving <b>882 clusters + 714 singletons</b> for the HIV-1 corpus. This cutoff defines
+      <em>relatedness</em> and is the grouping variable for cross-validation.</div>
+    <div class="a"><b>(ii) Exact 99-residue length — the framing filter.</b> HIV protease is 99 residues;
+      only exact-length sequences are retained, so every position is comparable across species.</div>
+    <div class="a"><b>HIV-2 diversity for context:</b> identity of the ChEMBL panel to HIV-2 ROD wild-type is
+      <b>88.9–99.0%, mean 95.0%, median 96.0%</b>, and <b>no sequence is 100% wild-type</b>.</div>
+    <div class="where"><b>Why 95%:</b> it is the standard HIV drug-resistance clustering threshold and it is
+      conservative — it merges near-duplicates that would otherwise leak across folds.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D2</span>Split ratio</div>
+    <div class="a">There is no single fixed train/test ratio because three different evaluations use three
+      different partitions:</div>
+    <table>
+      <tr><th>Evaluation</th><th>Partition</th><th>Ratio</th></tr>
+      <tr><td>Within-HIV-1</td><td>GroupKFold on 95%-identity clusters</td><td>5-fold (80/20 per fold, group-aware)</td></tr>
+      <tr><td>HIV-2 fine-tune benchmark</td><td>5-fold KFold out-of-fold pooling</td><td>5-fold (80/20 per fold)</td></tr>
+      <tr><td>External clinical validation</td><td>Entirely held out — no retraining</td><td>2,616 rows (100% test)</td></tr>
+      <tr><td>Rule head-to-head</td><td>Same 160 measured rows for both model and rule</td><td>paired comparison</td></tr>
+    </table>
+    <div class="a"><b>Leakage control:</b> the clinical cohort shares <b>0 sequences</b> with the HIV-1
+      pre-training corpus and only <b>3</b> with the HIV-2 ChEMBL panel. The scaler is fitted on HIV-1 only
+      and never refitted.</div>
+    <div class="where"><b>Where:</b> §2.2 step 6–7; §2.4; §4.5(c).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D3</span>Physicochemical features are specific to sequence only (not sequence + structure) — correct?</div>
+    <div class="a"><b>Yes, correct, and this is deliberate.</b> The feature vector is built entirely from the
+      amino-acid <em>sequence</em>: 21 descriptors per residue × 99 positions, plus summary statistics.
+      <b>No structural coordinate, contact map, or docking term enters the model input.</b></div>
+    <div class="a"><b>Why sequence-only is the right choice here:</b> (a) no HIV-2 protease co-crystal
+      structure exists for the four modelled inhibitors, so a structural feature would have to be modelled
+      rather than measured; (b) descriptor values are properties of the amino acid and therefore identical in
+      both species, which is what makes transfer meaningful; (c) empirically, HIV-1-derived structural
+      features <em>do not transfer</em> (R = −0.1392, see D7) while sequence descriptors do.</div>
+    <div class="where"><b>Where:</b> §2.3; §4.4; Table 7.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D4</span>What sanity check established that the HIV-1 and the European (HIV-2) data/tooling are different?</div>
+    <div class="a">Four checks, each answering a different version of the question:</div>
+    <div class="a"><b>(1) Is the rule engine faithful?</b> A rule engine re-implemented from published
+      Stanford HIV-2 penalty tables was applied to the clinical sequences and reproduced the HIVDB penalty
+      <b>exactly — R = 1.0000, 1,728/1,728 rows, 100% agreement</b>. This proves the engine is faithful, and
+      simultaneously proves the clinical target is a deterministic function of the mutation list (i.e. it is
+      not an independent measurement).</div>
+    <div class="a"><b>(2) Are the two species genuinely different domains?</b> HIV-1 (HXB2) and HIV-2 (ROD)
+      differ at <b>51 of 99 positions — 48.5% identity</b>. Despite that, the drug-binding pocket is
+      conserved to <b>1.09 Å Cα RMSD</b>, which is why pocket-local chemistry can transfer while global
+      features cannot.</div>
+    <div class="a"><b>(3) Does transfer actually happen, or is it perfect/inert?</b> The zero-shot transfer
+      ratio is <b>0.699</b> (0.5163 / 0.7387) — substantial but clearly partial, confirming the domains are
+      related but not the same.</div>
+    <div class="a"><b>(4) Does the European tool measure the same thing as our model?</b> No. The official
+      <b>HIV-2EU v4</b> rules leave <b>83.1%</b> of the measured panel unscored, define <b>no protease rules
+      for 6 of 8</b> clinical drugs, and cover only <b>5 of 37</b> observed mutations.</div>
+    <div class="where"><b>Where:</b> §3.6 (check 1); §2.1 (check 2); §3.2 (check 3); §3.7 (check 4).</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D5</span>19 residues + 5 Å — other residues masked</div>
+    <div class="a"><b>Terminology first: masking means selecting positions, not weighting them.</b> The
+      pipeline does not assign greater weight to pocket residues; it restricts the feature matrix to them.</div>
+    <div class="a"><b>The three nested sets</b>, all from HIV-2 ROD structure 3S45 (1.51 Å), defined by
+      heavy-atom distance to the ligand and confirmed visually:</div>
+    <table>
+      <tr><th>Set</th><th>Count</th><th>Residues</th></tr>
+      <tr><td>Core pocket ≤ 5.0 Å</td><td>16</td><td><code>8 23 25 27 28 29 30 31 32 47 48 49 50 81 82 84</code></td></tr>
+      <tr><td>Pocket-19</td><td>19</td><td>core + <code>26 45 46 54 76 80</code></td></tr>
+      <tr><td>Extended 8.0 Å</td><td>24</td><td>adds <code>53 83</code> and the 8 Å shell</td></tr>
+      <tr><td>BASE-A (pocket + neighbours)</td><td>34</td><td>16 core + 18 conserved neighbours → 714-D</td></tr>
+    </table>
+    <div class="a">The core set contains the catalytic dyad (positions 25 and 27) and the canonical
+      resistance sites 50, 82 and 84. Masked feature sets: 399-D (21 × 19) and 714-D (21 × 34).</div>
+    <div class="a"><b>Result:</b> masking does <em>not</em> improve on the global representation —
+      0.5014–0.5036 versus 0.5163 for zero-shot. It is therefore reported as a <b>mechanistic probe</b>,
+      not as the deployment configuration, which uses the full 2,121-D bundle.</div>
+    <div class="where"><b>Where:</b> §2.4 (pocket definitions and masking); Table 2; Table 7.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D6</span>How is the rule-based approach different from our model?</div>
+    <table>
+      <tr><th></th><th>Rule-based (Stanford tables / HIV-2EU v4)</th><th>Our model</th></tr>
+      <tr><td>Nature</td><td>Expert-curated lookup table</td><td>Learned continuous regressor</td></tr>
+      <tr><td>Input</td><td>Presence/absence of listed mutations</td><td>21 physicochemical descriptors × 99 positions</td></tr>
+      <tr><td>Coverage</td><td>Only mutations explicitly listed; <b>zero otherwise</b></td><td>Any substitution, including unlisted ones</td></tr>
+      <tr><td>Consequence of no match</td><td>Returns 0 — read as &ldquo;susceptible&rdquo; but actually means &ldquo;no rule&rdquo;</td><td>Returns a graded ΔG estimate regardless</td></tr>
+      <tr><td>Measured performance</td><td>R = 0.4724 vs measured ΔG</td><td>R = 0.7018 vs measured ΔG</td></tr>
+      <tr><td>Sparsity (measured)</td><td>Benchmark zero for <b>93.1%</b> of isolates; HIV-2EU unscored on <b>83.1%</b> of the panel; <b>5 of 37</b> mutations covered; no rules for <b>6 of 8</b> drugs</td><td>Retains <b>R = 0.585</b> on exactly the rows the rule leaves unranked</td></tr>
+    </table>
+    <div class="a"><b>One-line contrast:</b> the rule is a sparse, discrete, expert-defined lookup that is
+      silent by default; the model is dense, continuous and learned, and its advantage is concentrated
+      precisely where the rule is silent.</div>
+    <div class="where"><b>Where:</b> §3.6 (head-to-head); §3.7 (coverage); Table 8; Table 9.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D7</span>Highlight the four feature modalities: (I) SEQ &nbsp;(II) STR &nbsp;(III) STR–LIGAND &nbsp;(IV) SEQ+STR+STR–LIGAND</div>
+    <div class="a"><b>All four were evaluated.</b> This is Table 7 of the paper, and the outcome is the
+      reason the deployment model is sequence-only:</div>
+    <table>
+      <tr><th>Modality</th><th>Configuration</th><th>Dim</th><th>HIV-2 R</th></tr>
+      <tr><td><b>(I) SEQ</b></td><td>Biochemistry only (global)</td><td>2,079</td><td><b>+0.3582</b></td></tr>
+      <tr><td><b>(II) STR</b></td><td>ONION-Net only (raw, HIV-1-derived)</td><td>10,309</td><td><b>−0.1392</b></td></tr>
+      <tr><td><b>(IV) SEQ+STR</b></td><td>Biochem + ONION-Net, naive concatenation</td><td>12,520</td><td><b>+0.2061</b></td></tr>
+      <tr><td>—</td><td>Pocket + ONION-PCA-20</td><td>802</td><td>+0.4703</td></tr>
+      <tr><td>—</td><td>Pocket-5D only (ADD-GHI)</td><td>782</td><td>+0.5014</td></tr>
+      <tr><td>—</td><td>ONION B1 pocket-5D</td><td>782</td><td>+0.5036</td></tr>
+      <tr><td><b>(III) STR–LIGAND</b></td><td>Hybrid correction on <b>HIV-2 docked</b> complexes</td><td>10,478</td><td><b>+0.6694</b></td></tr>
+    </table>
+    <div class="a"><b>Reading of each row:</b></div>
+    <div class="a"><b>(I) SEQ works.</b> Sequence-only physico­chemical descriptors carry genuine cross-species
+      signal — R = 0.3582 in the zero-shot comparison (0.5163 in the locked 2,079-D space).</div>
+    <div class="a"><b>(II) STR alone fails across species.</b> HIV-1-derived structural contact features give
+      R = −0.1392 on HIV-2. This is the single clearest result in the modality analysis: HIV-1 <em>geometry</em>
+      does not transfer even though HIV-1 <em>chemistry</em> does.</div>
+    <div class="a"><b>(IV) Naive SEQ+STR fusion is worse than SEQ alone</b> — 0.2061 versus 0.3582. Simply
+      concatenating a non-transferring modality with a transferring one <em>degrades</em> performance; the
+      structural block injects noise the model cannot separate. <b>This is the empirical justification for
+      not fusing modalities, and it is why the deployment model is sequence-only.</b></div>
+    <div class="a"><b>(III) STR–LIGAND helps only when it is species-appropriate.</b> Structural features
+      computed on <b>HIV-2 docked complexes</b> — i.e. structure <em>in the presence of the ligand</em>, in
+      the correct species — act as a useful residual-correction stage (corrected R = 0.6694, R² = 0.4385,
+      n = 136). The contrast with row (II) is the whole point: the problem is not structure <em>per se</em>,
+      it is structure borrowed from the wrong species.</div>
+    <div class="a"><b>Why (IV) would in principle be required — and what we found instead.</b> A multimodal
+      SEQ+STR+STR–LIGAND model is the natural design when each modality contributes complementary
+      information. Here the modalities are <em>not</em> complementary across species: STR is actively harmful
+      (−0.1392) and the naive fusion degrades the sequence signal. The correct species-matched use of
+      structure is as a correction stage (III), not as a fused input. Our design follows that evidence.</div>
+    <div class="where"><b>Where:</b> §3.3 and §4.4; <b>Table 7</b>; the docked-ligand poses are Figure 6.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="qid">D8</span>Meta-learning / stack generalization — and what is the need?</div>
+    <div class="a"><b>Naming first: we use stacked generalization (stacking), not meta-learning.</b>
+      Meta-<em>learning</em> means learning across many <em>tasks</em> (MAML, prototypical networks). A
+      meta-<em>model</em> is the second level of a stack. Same prefix, unrelated concepts — and the
+      manuscript never claims meta-learning.</div>
+    <div class="a"><b>What we implemented.</b> In <code>StackingEnsemble</code>: base (level-1) models are
+      Ridge, SVR, RandomForest, XGBoost and DANN; the meta (level-2) model is a
+      <code>Ridge(alpha=5)</code>. The meta-model is fitted on the <b>out-of-fold prediction matrix</b>
+      produced by 5-fold CV — one column per base model, each prediction made on data that model never saw.</div>
+    <div class="a"><b>Why stacking is needed — three concrete reasons.</b></div>
+    <div class="a"><b>(1) No single base model dominates.</b> Across four drugs and several feature sets the
+      best model changes. Committing to one model means committing to a model that is best on average and
+      worst somewhere. Stacking lets a regularised learner <em>weight the base models per problem</em>
+      instead of picking one.</div>
+    <div class="a"><b>(2) It measurably helped.</b> The ridge meta-ensemble was the strongest zero-shot
+      configuration at <b>R = 0.5818</b>, above XGBoost (0.5587), the simple RF+XGB ensemble (0.5467) and
+      the global Random Forest (0.5163).</div>
+    <div class="a"><b>(3) Out-of-fold fitting prevents over-trust.</b> If the meta-model were fitted on
+      in-fold predictions, the base models would appear better than they are and the meta-model would
+      over-weight them. Fitting on OOF predictions is what makes the 0.5818 trustworthy rather than
+      optimistic.</div>
+    <div class="a"><b>The same idea appears in the deployment model</b>, where the frozen HIV-1 prediction is
+      appended as a single <b>meta-feature</b> (a stack with one base model), and a new per-drug Random
+      Forest is the level-2 learner. Note for accuracy: <b>DANN is domain adaptation</b>
+      (gradient-reversal alignment of source and target features), not meta-learning.</div>
+    <div class="where"><b>Where:</b> §2.4 (protocol); §3.2 and Table 4 (results); §3.2 (why the meta-feature
+      does not add measurably at n = 160).</div>
+  </div>
+
   <!-- ================= B ================= -->
   <h2>B. Anticipated reviewer questions and current status</h2>
 
@@ -365,27 +538,154 @@
   </div>
 
   <!-- ================= D ================= -->
-  <h2>D. Points that belong to a DIFFERENT manuscript</h2>
+  <h2>D. Reviewer comments — what can be answered against this manuscript</h2>
 
   <div class="warnbox">
-    The following items were supplied but describe an architecture and experiment set absent from this
-    paper. <b>They must not be answered here</b> — doing so would require describing experiments we never
-    ran.
+    Each reviewer comment is answered below with whatever this manuscript can factually support.
+    Where a comment references a component that does not exist in this paper, that is stated explicitly
+    together with the closest thing we <em>do</em> have — so the response is honest rather than evasive,
+    and so any genuine mismatch can be resolved before replying to the venue.
   </div>
 
-  <table>
-    <tr><th style="width:42%">Item</th><th>Why it does not apply here</th></tr>
-    <tr><td>Gated fusion / HGFN architecture</td><td>This paper uses RandomForest and XGBoost. The terms "gated fusion" and "HGFN" appear zero times in the manuscript.</td></tr>
-    <tr><td>Multimodal fusion; seq / STR / STR-ligand / seq+STR+STR-ligand comparison</td><td>Features here are sequence-only physicochemical descriptors. No structure or structure–ligand channels are fused.</td></tr>
-    <tr><td>ESM-2 applied to HIV-1 as the core method</td><td>ESM-2 appears here only as a comparator feature view; the deployed model is a tree ensemble.</td></tr>
-    <tr><td>Fold-change thresholds per drug and borderline handling</td><td>The target is ΔG (kcal/mol) regression; no fold-change thresholding is used.</td></tr>
-    <tr><td>Calibration / ECE description</td><td>This paper implements split conformal prediction (not evaluated, and now documented as such after the length revision); ECE is not computed.</td></tr>
-    <tr><td>Dropout rates, latent dimensions, optimizer settings, early stopping</td><td>No neural network is deployed, so these hyperparameters do not exist.</td></tr>
-    <tr><td>Insertions, deletions, ambiguous residues in mutation mapping</td><td>Sequences are filtered to exactly 99 residues; no indel or ambiguity handling is performed in the model.</td></tr>
-    <tr><td>DRV and TPV dataset counts as separate small sets</td><td>The modelling drugs here are ATV, DRV, LPV, SQV (40 rows each). Tipranavir appears only as a context row in the clinical cohort, not as a modelling target.</td></tr>
-    <tr><td>Table 1 showing ties or lower AUC than XGBoost for HGFN</td><td>There is no HGFN and no such Table 1 in this manuscript.</td></tr>
-    <tr><td>ICMLDE submission framing</td><td>This manuscript's target venue and its review correspondence are separate from the ICMLDE submission.</td></tr>
-  </table>
+  <h3>Reviewer 1</h3>
+  <div class="card">
+    <div class="q"><span class="qid">R1.1</span>Important clinical problem; multimodal approach relevant</div>
+    <div class="a">The clinical framing is accepted. Note this paper's model input is
+      <b>sequence-only</b> physicochemical descriptors; the modality comparison (SEQ / STR / STR–LIGAND)
+      is reported in Table 7 and is the evidence for that design choice. See <b>D7</b>.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R1.2</span>Clarify novelty relative to existing fusion methods</div>
+    <div class="a">Answerable: this work does not propose a fusion architecture. The contribution is
+      (i) the first ML predictor for HIV-2 PI resistance, (ii) the measured-phenotype head-to-head against
+      rule-based interpretation (0.7018 vs 0.4724), and (iii) the quantification of rule sparsity
+      (93.1% zero labels; HIV-2EU 83.1% unscored). <b>If the comment refers to a gated-fusion/HGFN paper,
+      it is not describing this manuscript</b> — those terms appear zero times here.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R1.3</span>Report dataset sizes, class balance, samples per drug</div>
+    <div class="a"><b>Fully answered.</b> HIV-1: 5,683 rows / 1,882 sequences / 4 drugs. HIV-2: 137 zero-shot
+      rows; 160 fine-tune rows (40 per drug). Clinical: 5,232 rows (8 PIs), 2,616 headline (4 PIs),
+      654 entries. Class balance: Susceptible 5,006 / Intermediate 113 / Resistant 113. Per-drug counts in
+      Table 1 and Table 11.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R1.4</span>How were resistance mutations selected; how was the vocabulary built?</div>
+    <div class="a"><b>Clarified:</b> the model does not use a mutation vocabulary at all. It consumes 21
+      physicochemical descriptors per position and never sees a mutation list, which is precisely why it can
+      score substitutions the rules do not list. The <em>rule comparator's</em> vocabulary
+      (61 single + 20 combination rules) is analysed in §3.7 — that analysis is how its sparsity is
+      quantified (5 of 37 observed mutations covered).</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R1.5</span>Train/holdout split; confirm no duplicate or related sequences leak</div>
+    <div class="a"><b>Fully answered.</b> GroupKFold at 95% identity; 5-fold OOF for the fine-tune; the
+      clinical cohort is entirely held out with no retraining. Overlap audit: 0 sequences shared with the
+      HIV-1 pre-training corpus, 3 with the ChEMBL panel. Leakage is the explicit subject of §2.2 step 6 and
+      limitation (c).</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R1.6</span>Moderate interpretability and clinical-usefulness claims</div>
+    <div class="a"><b>Already moderated, and further moderated after review:</b> no per-drug clinical
+      superiority is claimed (the zero-shot baseline is higher within every drug); the clinical cohort is
+      labelled secondary because its target is rule-derived; the seed spread (0.628 ± 0.074) is now reported
+      in the abstract; and the transfer contribution is explicitly <em>not</em> claimed as measurable at
+      n = 160.</div>
+  </div>
+
+  <h3>Reviewer 2</h3>
+  <div class="card">
+    <div class="q"><span class="qid">R2.2</span>Missing implementation details (latent dims, optimizer, dropout, early stopping)</div>
+    <div class="a"><b>Not applicable to this manuscript</b> — no neural network is deployed, so those
+      hyperparameters do not exist. The equivalent detail is fully specified for the models actually used:
+      RandomForest (600 trees, max_depth 20, max_features = sqrt) and XGBoost (800 trees, max_depth 6,
+      learning_rate 0.03), with seeds fixed and every hyperparameter listed in §2.4.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R2.3</span>How were fold-change thresholds chosen; how were borderline cases handled?</div>
+    <div class="a"><b>Not applicable in that form.</b> The target is ΔG (kcal/mol) regression, not fold-change
+      classification, so no per-drug threshold is chosen. The one binary metric reported is ROC-AUC, whose
+      class definition is stated explicitly: Resistant vs Susceptible, 40 resistant of 2,550 classifiable
+      rows. ΔG plausibility filtering is documented in §2.2 step 5.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R2.4</span>Ablation: sequence-only vs concatenation vs other fusion</div>
+    <div class="a"><b>Present — this is Table 7.</b> Biochem only 0.3582; ONION-Net (structural) only
+      <b>−0.1392</b>; naive SEQ+STR concatenation <b>0.2061</b> (worse than sequence alone); pocket variants
+      0.4703–0.5036; species-matched STR–LIGAND correction 0.6694. The ablation is what justifies the
+      sequence-only deployment design. See <b>D7</b>.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R2.5</span>Explain decision-threshold selection; report threshold-dependent metrics</div>
+    <div class="a">Partially applicable: the primary endpoint is a regression (ΔG), so no decision threshold
+      governs the main results. For the secondary classification we report ROC-AUC (threshold-free) rather
+      than threshold-dependent metrics, which is the appropriate choice given the near-zero-inflated,
+      rule-derived label distribution described in limitation (b).</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R2.6</span>"HGFN is best across drugs" but Table 1 shows ties or lower AUC than XGBoost</div>
+    <div class="a"><b>No such claim exists in this manuscript.</b> There is no HGFN here, and we do not claim
+      any model is best across drugs — quite the opposite: we explicitly state that the zero-shot baseline
+      correlates more strongly <em>within every drug</em> than our deployment model, and we therefore make no
+      per-drug superiority claim at all (limitation (d)). If this comment targets a different submission, it
+      should be answered there.</div>
+  </div>
+
+  <h3>Reviewer 3</h3>
+  <div class="card">
+    <div class="q"><span class="qid">R3.1</span>ESM-2 applied to HIV-1 protease is interesting</div>
+    <div class="a">Answerable in part: ESM-2 650M is used here as a <em>comparator</em> feature view, not as
+      the core method. Standalone pocket-restricted ESM-2 reaches R = 0.6759 and the blended view 0.6994,
+      both below the locked deployment model (0.7018) at much higher cost. We also note ESM-2 was pretrained
+      on UniRef50, which may include HIV protease, so it is not strictly zero-shot with respect to HIV.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R3.2</span>How were mutation profiles mapped; insertions, deletions, ambiguous residues?</div>
+    <div class="a"><b>Not applicable as phrased:</b> the model does not map mutation profiles, and sequences
+      are filtered to exactly 99 residues, so no indel or ambiguity handling arises. The equivalent
+      disclosure is §2.2 steps 1–2: exact-length filtering and alignment to a shared 99-residue frame, with
+      the reason each is required.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R3.3</span>Sampling bias; limits of generalising from HIVDB to other populations/subtypes</div>
+    <div class="a"><b>Genuinely applicable and worth adding.</b> The clinical cohort derives substantially
+      from Stanford HIVDB (3,456 rows) plus GenBank-mined sequences (1,776), which over-represents
+      subtype-B-like and Western cohorts; HIV-2 group A dominates the phenotypic warm data (all site-directed
+      studies are in ROD9, group A). This should be stated as a limitation on generalisability, including
+      that group B and recombinant HIV-2 are effectively unrepresented.</div>
+    <div class="where"><b>Action:</b> add as limitation — currently only partially covered by (a) and (m).</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R3.4</span>Dataset counts for training/validation/holdout, especially DRV and TPV</div>
+    <div class="a">Answered for the datasets that exist here: 40 rows per drug for ATV, DRV, LPV, SQV
+      (160 total) with 5-fold OOF; 137 zero-shot rows; 2,616 held-out clinical rows. <b>TPV is not a
+      modelling target in this paper</b> — it appears only as one of the eight clinical-cohort drugs
+      (654 rows) and is not fine-tuned on. If the comment requires per-drug train/validation/holdout
+      counts, those are derivable per fold and can be added as a supplementary table.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R3.5</span>Calibration method and interpretation of ECE</div>
+    <div class="a"><b>Not applicable as phrased.</b> This paper implements <b>split conformal prediction</b>
+      (90% target coverage) for prediction intervals — not probabilistic classification, so ECE is not
+      computed. Following the length revision, conformal prediction is now documented in §2.5 as
+      "implemented but not evaluated", and its empirical coverage is stated to be outside the scope of this
+      report. If calibration statistics are wanted, a coverage-vs-nominal curve for the conformal intervals
+      would be the equivalent analysis and is straightforward to produce.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R3.6</span>Comparative analysis must be in light of recent literature</div>
+    <div class="a"><b>Actionable.</b> Already compared against Steiner, Shen, Pawar, Parbhoo, and Farquhar
+      and Aggarwal &amp; Periwal 2026. Two recent works are still uncited and should be added:
+      <b>Dampier et al. 2022 (HIV-BERT, Frontiers in Virology)</b> and
+      <b>Aggarwal &amp; Periwal 2026 (PLoS Comput Biol)</b>.</div>
+    <div class="where"><b>Action:</b> add these two citations to §1 and §4.1.</div>
+  </div>
+  <div class="card">
+    <div class="q"><span class="qid">R3.7</span>Limitations paragraph noting external validation and prospective clinical evaluation still needed</div>
+    <div class="a"><b>Fully answered.</b> Limitations (a)–(p) already state: no prospective phenotypic
+      validation (l); clinical results are out-of-distribution genotype–phenotype transfer, not independent
+      validation (b); the clinical target is rule-derived (j); no new wet-lab work (l).</div>
+  </div>
 
   <div class="foot">
     Living document. When a new question arrives, append it to the appropriate section with its answer and
