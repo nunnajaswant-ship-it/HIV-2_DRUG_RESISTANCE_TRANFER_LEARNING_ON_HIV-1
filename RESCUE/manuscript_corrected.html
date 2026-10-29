@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cross-species transfer learning from HIV-1 to HIV-2 for protease inhibitor resistance prediction: biophysical features and external clinical validation</title>
+<title>Cross-species transfer learning from HIV-1 to HIV-2 for protease-inhibitor resistance prediction: feasibility, limits, and a coverage audit of rule-based interpretation</title>
 <style>
 @page { size: A4; margin: 2.5cm 2cm 2.5cm 2cm; }
 body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.45; color: #000; counter-reset: section figure table; }
@@ -32,7 +32,7 @@ sup { font-size: 7.5pt; }
 </head>
 <body>
 
-<h1>Cross-species transfer learning from HIV-1 to HIV-2 for protease inhibitor resistance prediction: biophysical features and external clinical validation</h1>
+<h1>Cross-species transfer learning from HIV-1 to HIV-2 for protease-inhibitor resistance prediction: feasibility, limits, and a coverage audit of rule-based interpretation</h1>
 
 <div class="author-block">
 <p><strong>Nunna Jaswanth Sriram</strong><sup>1,*</sup></p>
@@ -107,6 +107,14 @@ overstate the evidence. The composition is reported instead so that the reader c
 spans HIV-2 diversity, and the corresponding generalisation limit is stated as limitation (q).</p>
 <p><strong>Within-corpus sequence diversity.</strong> We quantified how far the modelling sequences sit from their species reference, because this bounds how much of the problem is interpolation rather than extrapolation. HIV-1 (HXB2) and HIV-2 (ROD) differ at <strong>51 of 99 positions (48.5% identity)</strong>. Within HIV-2, the ChEMBL panel spans <strong>88.9&ndash;99.0% identity to the ROD wild-type (mean 95.0%, median 96.0%)</strong>, and <em>no</em> panel sequence is 100% wild-type &mdash; every measured entry carries at least one substitution. The HIV-1 corpus is likewise entirely mutant sequences. Both panels therefore test the model on genuine variants rather than on wild-type reconstruction.</p>
 Every result reported here is computed on the 5,683 genuinely measured HIV-1 assays that remain, and the quarantined file is released with the code so that the exclusion is fully auditable.</p>
+<p><strong>Snapshot pinning.</strong> The Stanford HIVDB and ChEMBL resources are both updated
+continuously, so a database version label alone would not identify the exact data used. The corpora are
+therefore pinned by content: the SHA-256 of every input file is recorded inside each result manifest, and
+the manifests carry the generation timestamps (16&nbsp;August&nbsp;2026 for the curated-corpus manifest and
+15&nbsp;September&nbsp;2026 for the locked clinical-validation manifest). Any reader can verify that their
+copy of an input file is byte-identical to the one used here, which is a stronger guarantee than a version
+string; if a file has been updated upstream, the hash mismatch will be immediate and explicit.</p>
+
 <p>Finally, an overlap audit confirms the integrity of the split: the HIV-2 clinical cohort shares <strong>zero sequences</strong> with the HIV-1 pre-training corpus, and only three sequences with the HIV-2 ChEMBL fine-tune panel; no clinical label enters training in any form.</p>
 <h3>2.3 Feature Engineering</h3>
 <p>We evaluated multiple feature representations (Table 2). The <strong>cross-species feature bundle</strong> used by the transfer fine-tune and the final clinical model is the <strong>2,121-D global physicochemical representation</strong>, scaled with the HIV-1 scaler. Its exact composition (relative to the 2,079-D set) is the 2,079-D per-residue physico-chemical block (21 descriptors &times; 99 protease positions &mdash; Hellberg 3D Z-scales [8], Kidera factors [9] and VHSE scales [10] per residue) augmented with 42 sequence-level summary statistics: the mean and standard deviation of each of the 21 descriptors across the 99 positions (<code>extract_global_features</code>, <code>include_stats=True</code>; 2,079 + 21 + 21 = 2,121). The 2,079-D space (<code>include_stats=False</code>) appears as a zero-shot baseline reference (Table 5) and in the structural feature comparison (Table 7).</p>
