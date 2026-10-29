@@ -17,7 +17,7 @@ keywords:
   - machine learning
   - biophysical features
   - clinical validation
-repository-code: "https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANFER_LEARNING_ON_HIV-1"
+repository-code: "https://github.com/nunnajaswant-ship-it/HIV-2_DRUG_RESISTANCE_TRANSFER_LEARNING_ON_HIV-1"
 abstract: >-
   A machine-learning framework for HIV-2 protease-inhibitor resistance prediction built by
   cross-species transfer learning from HIV-1. The model is pre-trained on 5,683 curated HIV-1
