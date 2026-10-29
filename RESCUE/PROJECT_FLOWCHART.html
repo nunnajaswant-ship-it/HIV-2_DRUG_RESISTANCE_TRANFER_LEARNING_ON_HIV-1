@@ -285,7 +285,7 @@
   <summary>
     <span class="pnum">Phase 2</span>
     <span class="ptitle">Feature engineering</span>
-    <span class="pcount">4 steps</span>
+    <span class="pcount">8 steps</span>
   </summary>
   <div class="body">
 
@@ -347,6 +347,62 @@
       <div class="note"><b>Terminology fixed.</b> Masking means <em>selecting positions</em>, not weighting
         residues. The pipeline does not assign greater weight to pocket positions; it simply restricts the
         feature matrix to them. Masking is used as a mechanistic probe, not as the deployment configuration.</div>
+    </div>
+
+    <div class="step">
+      <div class="stitle"><span class="sn">2.5</span>Predict structures with ESMFold <span class="pill warn">structural branch</span></div>
+      <p>Because no HIV-2 protease co-crystal exists with atazanavir, darunavir, lopinavir or saquinavir,
+         structures were <em>predicted</em> rather than measured.</p>
+      <ul>
+        <li><b>ESMFold</b> folded <span class="k">23 HIV-2 unique sequences</span>; per-residue
+            <b>pLDDT</b> confidence recorded for every model.</li>
+        <li>The same procedure was applied at scale to the HIV-1 unique-sequence corpus.</li>
+        <li>Experimental structures kept for validation only: <b>3S45</b> (1.51 Å, HIV-2) and the HIV-1
+            co-crystals <b>4LL3, 2AQU, 3OXC, 1MUI</b>. All superposition and pocket analysis uses these
+            measured coordinates, never the predicted ones.</li>
+      </ul>
+      <div class="note"><b>Naming note.</b> These are <b>ESMFold</b> models, not AlphaFold. Separately,
+        <b>ESM-2 650M embeddings</b> were used as a feature view and as a comparator (standalone
+        R = 0.6759; blended 0.6994) — a different use of the same protein-language-model family.</div>
+    </div>
+
+    <div class="step">
+      <div class="stitle"><span class="sn">2.6</span>Build protease–drug complexes by docking</div>
+      <p>To get a <em>structure–ligand</em> representation rather than a structure-only one, each protease
+         was docked with each inhibitor using <b>AutoDock Vina</b> (exhaustiveness 16).</p>
+      <ul>
+        <li>HIV-2: <span class="k">19 mutants × 9 inhibitors = 171 docked complexes</span>, of which
+            <b>136</b> matched to measured ChEMBL rows</li>
+        <li>HIV-1: <span class="k">3,382 sequences × 4 inhibitors = 13,528 holo complexes</span></li>
+        <li>Three docking campaigns run (physics-based, refined, final Vina); Vina treated as authoritative</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="stitle"><span class="sn">2.7</span>Extract ONION-Net features from every structure</div>
+      <p>Each apo and holo structure was passed to the <b>ONION-Net</b> protocol — 62 distance shells
+         (0–31 Å) × 167 atom-type pairs describing each atom's local environment.</p>
+      <ul>
+        <li>apo form: <span class="k">10,309-D</span></li>
+        <li>docked (ligand-embedded) form: <span class="k">10,478-D</span></li>
+        <li>Extracted separately for HIV-1-derived and HIV-2-docked structures — the distinction that
+            determines whether the features transfer</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="stitle"><span class="sn">2.8</span>What the structural branch showed <span class="pill bad">negative result</span></div>
+      <p>All three structural results are negative for structure as a <em>deployed</em> representation:
+         HIV-1-derived ONION-Net does not transfer (<span class="k">R = −0.1392</span>); naive sequence+structure
+         concatenation is <em>worse</em> than sequence alone (<b>0.2061 vs 0.3582</b>); and structure–ligand
+         features help only when computed on <em>species-matched</em> HIV-2 docked complexes
+         (corrected <span class="k">R = 0.6694</span>), as a correction stage rather than a replacement.</p>
+      <div class="note"><b>Two cautions recorded.</b> (1) <b>The evaluation partition matters more than the
+        docking method</b>: the same 136 entries give R ≈ 0.79 under naive KFold but ≈ 0.67 under
+        GroupKFold — the higher figure is a <b>leakage artefact</b> and is used nowhere in the paper.
+        (2) ONION-Net features computed from <em>literature</em> structures map to <b>zero</b> ChEMBL
+        entries, so every structural number rests on predicted, docked complexes, not experimental holo
+        structures.</div>
     </div>
 
   </div>
